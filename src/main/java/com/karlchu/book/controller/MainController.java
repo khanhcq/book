@@ -11,7 +11,9 @@ import com.karlchu.book.domain.EmployeeRepositoryCustom;
 import com.karlchu.book.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -90,6 +92,13 @@ public class MainController {
 
         this.employeeRepository.deleteAll();
         return "Deleted!";
+    }
+
+    @RequestMapping(value = { "/employeeList" }, method = RequestMethod.GET)
+    public String viewPersonList(Model model) {
+        List<Employee> employees = this.employeeRepository.findAll();
+        model.addAttribute("employees", employees);
+        return "employeeList";
     }
 
 }
