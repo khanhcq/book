@@ -12,9 +12,13 @@ import com.karlchu.book.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class MainController {
@@ -95,10 +99,11 @@ public class MainController {
     }
 
     @RequestMapping(value = { "/employeeList" }, method = RequestMethod.GET)
-    public String viewPersonList(Model model) {
+    public ModelAndView list(){
+        ModelAndView mav = new ModelAndView("employeeList");
         List<Employee> employees = this.employeeRepository.findAll();
-        model.addAttribute("employees", employees);
-        return "employeeList";
+        mav.addObject("employees", employees);
+        return mav;
     }
 
 }

@@ -18,6 +18,7 @@ public class WebSiteMeshFilter extends ConfigurableSiteMeshFilter {
                 .addExcludedPath("/ajax/*")
                 .addExcludedPath("/scripts/*")
                 .addExcludedPath("/ckeditor442/*")
-                .addExcludedPath("/api/*");
+                .addExcludedPath("/api/*")
+                .addExcludedPath("/viewer");
     }
 }
