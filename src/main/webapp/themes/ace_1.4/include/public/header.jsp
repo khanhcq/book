@@ -16,7 +16,7 @@
             <a href="#" class="navbar-brand">
                 <small>
                     <i class="fa fa-newspaper-o"></i>
-                    Tips & Tricks
+                    <fmt:message key="app.name"/>
                 </small>
             </a>
         </div>
@@ -24,7 +24,7 @@
         <div class="navbar-buttons navbar-header pull-right" role="navigation">
             <ul class="nav ace-nav">
                 <li class="light-blue">
-                    <a href="<c:url value="/login.html"/>">
+                    <a href="<c:url value="/login"/>">
                         <i class="ace-icon fa fa-sign-in"></i><fmt:message key="label.login"/>
                     </a>
                 </li>
