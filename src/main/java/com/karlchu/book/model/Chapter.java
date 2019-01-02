@@ -30,8 +30,16 @@ public class Chapter {
     @Field(value = "Content")
     private String content;
 
-    @Field(value = "Book")
-    private Book book;
+    @Field(value = "BookId")
+    private Long bookId;
+
+    public Long getBookId() {
+        return bookId;
+    }
+
+    public void setBookId(Long bookId) {
+        this.bookId = bookId;
+    }
 
     public Long getId() {
         return id;
@@ -71,13 +79,5 @@ public class Chapter {
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public Book getBook() {
-        return book;
-    }
-
-    public void setBook(Book book) {
-        this.book = book;
     }
 }
