@@ -10,20 +10,22 @@
     <ul class="breadcrumb">
         <li>
             <i class="ace-icon fa fa-home home-icon"></i>
-            <a href="#"><fmt:message key="label.home"/></a>
+            <a href="<c:url value="/"/>"><fmt:message key="label.home"/></a>
         </li>
         <li>
-            <a href="#"><fmt:message key="label.product.title"/></a>
+            <%--<a href="<c:url value="/bookCategory.html?code="/>">${bookCategory.title}</a>--%>
         </li>
-        <li class="active"><fmt:message key="edit.product.title"/></li>
+        <li>
+            <%--<a href="<c:url value="/book.html?code="/>">${book.title}</a>--%>
+        </li>
+        <li class="active">${chapter.chapterTitle}</li>
     </ul>
 </div>
 
-<div class="page-content">
+<div class="page-content chapter-content">
     <c:if test="${not empty messageResponse}">
         <div class="row">
             <div class="col-xs-12">
-
                 <div class="alert alert-${alert} alert-dismissible fade in" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -36,22 +38,39 @@
 
     <div class="page-header">
         <div class="row">
-            <h1 class="col-sm-8"><fmt:message key="edit.product.title"/> </h1>
             <div class="col-sm-3">
-                <a href="${backUrl}" class="btn btn-grey">
+                <a href="${prevUrl}" class="btn btn-success">
                     <i class="ace-icon fa fa-arrow-left"></i>
-                    <fmt:message key="label.back"/>
+                    <fmt:message key="label.prev.chapter"/>
                 </a>
-                <button class="btn btn-success btnSave">
-                    <i class="ace-icon fa fa-save"></i>
-                    <fmt:message key="label.save"/>
-                </button>
+            </div>
+            <div class="col-sm-6">
+            </div>
+            <div class="col-sm-3">
+                <a  href="${nextUrl}"class="btn btn-success">
+                    <fmt:message key="label.next.chapter"/> &nbsp; <i class="ace-icon fa fa-arrow-right"></i>
+                </a>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-xs-12">
-            ${content}
+            ${chapter.content}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <a href="${prevUrl}" class="btn btn-success">
+                <i class="ace-icon fa fa-arrow-left"></i>
+                <fmt:message key="label.prev.chapter"/>
+            </a>
+        </div>
+        <div class="col-sm-6">
+        </div>
+        <div class="col-sm-3">
+            <a  href="${nextUrl}"class="btn btn-success">
+                <fmt:message key="label.next.chapter"/> &nbsp; <i class="ace-icon fa fa-arrow-right"></i>
+            </a>
         </div>
     </div>
 </div>

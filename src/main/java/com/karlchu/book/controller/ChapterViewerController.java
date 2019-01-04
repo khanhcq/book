@@ -117,13 +117,15 @@ public class ChapterViewerController {
         return stringBuilder.toString().toLowerCase();
     }
 
-    @RequestMapping(value = "/html-viewer.html")
+    @RequestMapping(value = "/chapter.html")
     public ModelAndView htmlViewer(
             @RequestParam(value = "bookId", required = false) Long bookId,
             @RequestParam(value = "chapterId", required = false) Long chapterId) {
         ModelAndView mav = new ModelAndView("/viewer/html");
         Chapter chapter = chapterRepository.findAll().get(0);
         mav.addObject("content", chapter.getContent());
+        mav.addObject("chapter", chapter);
+
         return mav;
     }
 }

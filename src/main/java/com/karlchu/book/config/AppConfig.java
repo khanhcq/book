@@ -41,7 +41,7 @@ public class AppConfig implements WebMvcConfigurer {
 //        sessionLocaleResolver.setDefaultLocale(Locale.ENGLISH);
 
         CookieLocaleResolver cookieLocaleResolver = new CookieLocaleResolver();
-        cookieLocaleResolver.setDefaultLocale(Locale.ENGLISH);
+        cookieLocaleResolver.setDefaultLocale(new Locale("vi", "VI"));
         return cookieLocaleResolver;
     }
 

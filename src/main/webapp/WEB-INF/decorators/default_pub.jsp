@@ -31,7 +31,7 @@
         <%--popup detele--%>
         <link href="<c:url value="/themes/plugins/sweetalert/lib/sweet-alert.css"/>" rel="stylesheet">
 
-        <link rel="stylesheet" href="<c:url value="/themes/tat/css/global.css"/>">
+        <link rel="stylesheet" href="<c:url value="/themes/book/css/global.css"/>">
 
 
 
@@ -45,7 +45,7 @@
         <!--[if IE]>
         <script src="<c:url value="/themes/ace_1.4/jquery/1.11.3/jquery.min.js"/>"></script>
         <![endif]-->
-        <script src="<c:url value='/themes/tat/js/global.js'/>"></script>
+        <%--<script src="<c:url value='/themes/book/js/global.js'/>"></script>--%>
         <sitemesh:write property="head" />
 </head>
 
