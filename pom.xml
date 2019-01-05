@@ -12,6 +12,7 @@
 	<artifactId>book</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>book</name>
+	<packaging>war</packaging>
 	<description>Book project for Spring Boot and MongoDB</description>
 
 	<properties>
@@ -71,6 +72,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>${artifactId}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
