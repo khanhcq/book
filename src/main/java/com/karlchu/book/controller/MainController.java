@@ -23,11 +23,6 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class MainController {
 
-    private static final String[] NAMES = { "Tom", "Jerry", "Donald" };
-
-    @Autowired
-    private EmployeeRepositoryCustom employeeRepositoryCustom;
-
     @Autowired
     private EmployeeRepository employeeRepository;
 
