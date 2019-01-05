@@ -12,7 +12,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class BookCategoryRepositoryCustomImpl implements BookRepositoryCustom {
+public class BookCategoryRepositoryCustomImpl implements BookCategoryRepositoryCustom {
 
     @Autowired
     MongoTemplate mongoTemplate;
