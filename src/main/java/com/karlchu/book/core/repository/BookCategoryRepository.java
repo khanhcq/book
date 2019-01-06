@@ -1,4 +1,4 @@
-package com.karlchu.book.domain;
+package com.karlchu.book.core.repository;
 
 import com.karlchu.book.model.BookCategory;
 import org.springframework.data.mongodb.repository.MongoRepository;

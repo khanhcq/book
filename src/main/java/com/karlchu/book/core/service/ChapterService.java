@@ -1,6 +1,6 @@
-package com.karlchu.book.service;
+package com.karlchu.book.core.service;
 
-import com.karlchu.book.domain.ChapterRepository;
+import com.karlchu.book.core.repository.ChapterRepository;
 import com.karlchu.book.model.Chapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

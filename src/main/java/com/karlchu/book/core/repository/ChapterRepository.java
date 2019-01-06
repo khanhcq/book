@@ -1,6 +1,5 @@
-package com.karlchu.book.domain;
+package com.karlchu.book.core.repository;
 
-import com.karlchu.book.model.Book;
 import com.karlchu.book.model.Chapter;
 import org.springframework.data.mongodb.repository.MongoRepository;
 

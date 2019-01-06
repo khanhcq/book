@@ -1,19 +1,18 @@
-package com.karlchu.book.domain;
+package com.karlchu.book.core.repository.custom;
 
 /**
  * Created by Khanh Chu on 12/27/2018.
  */
 
 import com.karlchu.book.model.Book;
-import com.karlchu.book.model.Chapter;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class ChapterRepositoryCustomImpl implements ChapterRepositoryCustom {
+public class BookRepositoryCustomImpl implements BookRepositoryCustom {
 
     @Autowired
     MongoTemplate mongoTemplate;
@@ -22,7 +21,7 @@ public class ChapterRepositoryCustomImpl implements ChapterRepositoryCustom {
         Query query = new Query();
         query.with(new Sort(Sort.Direction.DESC, "id"));
         query.limit(1);
-        Chapter maxObject = mongoTemplate.findOne(query, Chapter.class);
+        Book maxObject = mongoTemplate.findOne(query, Book.class);
         if (maxObject == null) {
             return 0L;
         }

@@ -1,4 +1,4 @@
-package com.karlchu.book.domain;
+package com.karlchu.book.core.repository;
 
 /**
  * Created by Khanh Chu on 12/27/2018.
