@@ -44,6 +44,36 @@ public class Book {
     private Timestamp createdDate;
     @Field(value = "ModifiedDate")
     private Timestamp modifiedDate;
+    @Field(value = "Status")
+    private Integer status;
+    @Field(value = "Author")
+    private String author;
+    @Field(value = "Category")
+    private String category;
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
 
     public Long getId() {
         return id;

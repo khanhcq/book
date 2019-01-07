@@ -1,6 +1,7 @@
 package com.karlchu.book.config;
 
 import com.karlchu.book.common.WebSiteMeshFilter;
+import org.displaytag.filter.ResponseOverrideFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletContextInitializer;
 import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
@@ -28,11 +29,21 @@ import java.util.Locale;
 @Configuration
 public class AppConfig implements WebMvcConfigurer {
     @Bean
-    public FilterRegistrationBean siteMeshFilter(){
-        FilterRegistrationBean filter = new FilterRegistrationBean();
+    public FilterRegistrationBean<WebSiteMeshFilter> siteMeshFilter(){
+        FilterRegistrationBean<WebSiteMeshFilter> filter = new FilterRegistrationBean<>();
         filter.setFilter(new WebSiteMeshFilter());
         filter.addUrlPatterns("/*");
         return filter;
+    }
+
+    @Bean
+    public FilterRegistrationBean<ResponseOverrideFilter> loggingFilter(){
+        FilterRegistrationBean<ResponseOverrideFilter> registrationBean
+                = new FilterRegistrationBean<>();
+        registrationBean.setFilter(new ResponseOverrideFilter());
+        registrationBean.addUrlPatterns("*.html");
+
+        return registrationBean;
     }
 
     @Bean

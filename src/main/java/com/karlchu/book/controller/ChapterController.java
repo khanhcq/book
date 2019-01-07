@@ -7,7 +7,7 @@ package com.karlchu.book.controller;
 import com.karlchu.book.command.ChapterCommand;
 import com.karlchu.book.core.repository.BookRepository;
 import com.karlchu.book.core.repository.EmployeeRepository;
-import com.karlchu.book.core.service.BookService;
+import com.karlchu.book.core.service.ChapterService;
 import com.karlchu.book.dto.ChapterDTO;
 import com.karlchu.book.model.Employee;
 import com.karlchu.book.utility.Constants;
@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-public class MainController extends ApplicationObjectSupport {
+public class ChapterController extends ApplicationObjectSupport {
     private transient final Log log = LogFactory.getLog(this.getClass());
 
     @Autowired
@@ -40,22 +40,16 @@ public class MainController extends ApplicationObjectSupport {
     private BookRepository bookRepository;
 
     @Autowired
-    private BookService bookService;
-
-    @ResponseBody
-    @RequestMapping("/")
-    public String home() {
-        return "";
-    }
+    private ChapterService chapterService;
 
     @InitBinder
     public void initBinder(WebDataBinder binder){
     }
 
-    @RequestMapping(value = "/books.html")
+    @RequestMapping(value = "/chapter/list.html")
     public ModelAndView list(ChapterCommand command,
                              HttpServletRequest request){
-        ModelAndView mav = new ModelAndView("/public/books");
+        ModelAndView mav = new ModelAndView("/admin/chapter/list");
         executeSearch(command, request);
         mav.addObject(Constants.LIST_MODEL_KEY, command);
         return mav;
@@ -64,7 +58,7 @@ public class MainController extends ApplicationObjectSupport {
     private void executeSearch(ChapterCommand command, HttpServletRequest request) {
         RequestUtil.initSearchBean(request, command);
         Map<String, Object> properties = buildPropertites(command);
-        Object[] results = bookService.searchByProperties(properties, command.getSortExpression(), command.getSortDirection(), command.getPage(), command.getMaxPageItems());
+        Object[] results = chapterService.searchByProperties(properties, command.getSortExpression(), command.getSortDirection(), command.getPage(), command.getMaxPageItems());
         command.setListResult((List<ChapterDTO>) results[1]);
         command.setTotalItems(Integer.valueOf(results[0].toString()));
     }

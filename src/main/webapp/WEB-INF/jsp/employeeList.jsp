@@ -12,18 +12,18 @@
 
 <br/><br/>
 <div>
-    <table border="1">
-        <tr>
-            <th>Full Name</th>
-            <th>Hire Name</th>
-        </tr>
-        <c:forEach  items="${employees}" var ="employee">
-            <tr>
-                <td>${employee.fullName}</td>
-                <td>${employee.hireDate}</td>
-            </tr>
-        </c:forEach>
-    </table>
+    <%--<table border="1">--%>
+        <%--<tr>--%>
+            <%--<th>Full Name</th>--%>
+            <%--<th>Hire Name</th>--%>
+        <%--</tr>--%>
+        <%--<c:forEach  items="${employees}" var ="employee">--%>
+            <%--<tr>--%>
+                <%--<td>${employee.fullName}</td>--%>
+                <%--<td>${employee.hireDate}</td>--%>
+            <%--</tr>--%>
+        <%--</c:forEach>--%>
+    <%--</table>--%>
 </div>
 </body>
 

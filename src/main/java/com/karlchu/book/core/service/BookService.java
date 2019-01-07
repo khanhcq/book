@@ -1,7 +1,7 @@
 package com.karlchu.book.core.service;
 
-import com.karlchu.book.core.repository.ChapterRepository;
-import com.karlchu.book.model.Chapter;
+import com.karlchu.book.core.repository.BookRepository;
+import com.karlchu.book.model.Book;
 import com.karlchu.book.utility.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,12 +17,12 @@ import java.util.Map;
  */
 
 @Service
-public class ChapterService {
+public class BookService {
 
     @Autowired
-    private ChapterRepository repository;
+    private BookRepository repository;
 
-    public List<Chapter> getChapters() {
+    public List<Book> getChapters() {
         return repository.findAll();
     }
 
@@ -32,8 +32,8 @@ public class ChapterService {
                 Constants.SORT_ASC.equals(sortDirection)
                         ? Sort.by(sortExpression).ascending()
                         : Sort.by("sortExpression").descending());
-        Page<Chapter> chapterPage = repository.findAll(pageable);
-        List<Chapter> chapters = chapterPage.getContent();
-        return new Object[]{String.valueOf(chapterPage.getTotalElements()), chapters};
+        Page<Book> bookPage = repository.findAll(pageable);
+        List<Book> books = bookPage.getContent();
+        return new Object[]{String.valueOf(bookPage.getTotalElements()), books};
     }
 }
