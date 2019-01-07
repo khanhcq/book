@@ -1,9 +1,9 @@
 package com.karlchu.book.controller;
 
-import com.karlchu.book.domain.BookRepository;
-import com.karlchu.book.domain.BookRepositoryCustom;
-import com.karlchu.book.domain.ChapterRepository;
-import com.karlchu.book.domain.ChapterRepositoryCustom;
+import com.karlchu.book.core.repository.BookRepository;
+import com.karlchu.book.core.repository.ChapterRepository;
+import com.karlchu.book.core.repository.custom.BookRepositoryCustom;
+import com.karlchu.book.core.repository.custom.ChapterRepositoryCustom;
 import com.karlchu.book.model.Book;
 import com.karlchu.book.model.Chapter;
 import org.jsoup.Jsoup;
