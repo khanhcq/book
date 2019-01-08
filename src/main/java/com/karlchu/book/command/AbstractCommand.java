@@ -16,6 +16,7 @@ public class AbstractCommand<E> implements Serializable {
 	protected int maxPageItems = 50;
 	private int firstItem = 0;
 	private int totalItems = 0;
+	private int totalPages = 0;
 	private String sortExpression;
 	private String sortDirection;
 	private String[] checkList;
@@ -172,4 +173,12 @@ public class AbstractCommand<E> implements Serializable {
     public void setSearchTerm(String searchTerm) {
         this.searchTerm = searchTerm;
     }
+
+	public int getTotalPages() {
+		return totalPages;
+	}
+
+	public void setTotalPages(int totalPages) {
+		this.totalPages = totalPages;
+	}
 }

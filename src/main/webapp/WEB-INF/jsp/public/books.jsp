@@ -91,20 +91,22 @@
                             </div>
                         </div>
                         <div class="text-center">
-                            <ul class="pagination">
-                                <li><a href="/?page=1"><i class="ace-icon fa fa-angle-left"></i></a></li>
-                                <li><a href="/?page=196">196</a></li>
-                                <li><a href="/?page=197">197</a></li>
-                                <li><a href="/?page=198">198</a></li>
-                                <li><a href="/?page=199">199</a></li>
-                                <li class="active"><span>200</span></li>
-                                <li><a href="/?page=201">201</a></li>
-                                <li><a href="/?page=202">202</a></li>
-                                <li><a href="/?page=203">203</a></li>
-                                <li><a href="/?page=204">204</a></li>
-                                <li><a href="/?page=205">205</a></li>
+                            <c:url var="pageUrl" value="/book.html?"/>
+                                ${my:pagination(items, pageUrl)}
+                            <%--<ul class="pagination">--%>
+                                <%--<li><a href="/?page=1"><i class="ace-icon fa fa-angle-left"></i></a></li>--%>
+                                <%--<li><a href="/?page=196">196</a></li>--%>
+                                <%--<li><a href="/?page=197">197</a></li>--%>
+                                <%--<li><a href="/?page=198">198</a></li>--%>
+                                <%--<li><a href="/?page=199">199</a></li>--%>
+                                <%--<li class="active"><span>200</span></li>--%>
+                                <%--<li><a href="/?page=201">201</a></li>--%>
+                                <%--<li><a href="/?page=202">202</a></li>--%>
+                                <%--<li><a href="/?page=203">203</a></li>--%>
+                                <%--<li><a href="/?page=204">204</a></li>--%>
+                                <%--<li><a href="/?page=205">205</a></li>--%>
                                 <li><a href="/?page=797"><i class="ace-icon fa fa-angle-right"></i></a></li>
-                            </ul>
+                            <%--</ul>--%>
                         </div>
                     </div>
                 </div>

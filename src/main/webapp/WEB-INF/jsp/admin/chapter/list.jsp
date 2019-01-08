@@ -97,6 +97,9 @@
                     </div>
                 </c:if>
 
+                <c:url var="pageUrl" value="/book.html?"/>
+                    ${my:pagination(items, pageUrl)}
+
                 <input type="hidden" name="crudaction" id="crudaction"/>
             </div>
         </div>

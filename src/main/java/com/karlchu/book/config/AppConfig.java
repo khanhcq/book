@@ -37,16 +37,6 @@ public class AppConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    public FilterRegistrationBean<ResponseOverrideFilter> loggingFilter(){
-        FilterRegistrationBean<ResponseOverrideFilter> registrationBean
-                = new FilterRegistrationBean<>();
-        registrationBean.setFilter(new ResponseOverrideFilter());
-        registrationBean.addUrlPatterns("*.html");
-
-        return registrationBean;
-    }
-
-    @Bean
     public LocaleResolver localeResolver() {
 //        SessionLocaleResolver sessionLocaleResolver = new SessionLocaleResolver();
 //        sessionLocaleResolver.setDefaultLocale(Locale.ENGLISH);

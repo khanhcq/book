@@ -9,7 +9,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
 <%--<%@ taglib uri="http://jakarta.apache.org/taglibs/string-1.1" prefix="str" %>--%>
-<%--<%@ taglib uri="http://www.retirement.com/tat-taglibs" prefix="tat" %>--%>
+<%@ taglib uri="http://www.truyen.co/my-taglibs" prefix="my" %>
 
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <c:set var="datePattern"><fmt:message key="date.format"/></c:set>

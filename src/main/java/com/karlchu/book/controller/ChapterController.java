@@ -61,6 +61,7 @@ public class ChapterController extends ApplicationObjectSupport {
         Object[] results = chapterService.searchByProperties(properties, command.getSortExpression(), command.getSortDirection(), command.getPage(), command.getMaxPageItems());
         command.setListResult((List<ChapterDTO>) results[1]);
         command.setTotalItems(Integer.valueOf(results[0].toString()));
+        command.setTotalPages(Integer.valueOf(results[2].toString()));
     }
 
     private Map<String, Object> buildPropertites(ChapterCommand command) {

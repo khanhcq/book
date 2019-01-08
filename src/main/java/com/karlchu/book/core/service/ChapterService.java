@@ -34,6 +34,6 @@ public class ChapterService {
                         : Sort.by("sortExpression").descending());
         Page<Chapter> chapterPage = repository.findAll(pageable);
         List<Chapter> chapters = chapterPage.getContent();
-        return new Object[]{String.valueOf(chapterPage.getTotalElements()), chapters};
+        return new Object[]{String.valueOf(chapterPage.getTotalElements()), chapters, chapterPage.getTotalPages()};
     }
 }

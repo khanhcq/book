@@ -34,6 +34,6 @@ public class BookService {
                         : Sort.by("sortExpression").descending());
         Page<Book> bookPage = repository.findAll(pageable);
         List<Book> books = bookPage.getContent();
-        return new Object[]{String.valueOf(bookPage.getTotalElements()), books};
+        return new Object[]{String.valueOf(bookPage.getTotalElements()), books, bookPage.getTotalPages()};
     }
 }
