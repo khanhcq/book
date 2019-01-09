@@ -5,23 +5,22 @@ package com.karlchu.book.controller;
  */
 
 import com.karlchu.book.command.ChapterCommand;
-import com.karlchu.book.core.repository.BookRepository;
-import com.karlchu.book.core.repository.EmployeeRepository;
+import com.karlchu.book.core.repository.ChapterRepository;
+import com.karlchu.book.core.repository.custom.ChapterRepositoryCustomImpl;
 import com.karlchu.book.core.service.ChapterService;
 import com.karlchu.book.dto.ChapterDTO;
+import com.karlchu.book.model.Chapter;
 import com.karlchu.book.utility.Constants;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ApplicationObjectSupport;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class ChapterController extends ApplicationObjectSupport {
@@ -30,9 +29,11 @@ public class ChapterController extends ApplicationObjectSupport {
     @Autowired
     private ChapterService chapterService;
 
-//    @InitBinder
-//    public void initBinder(WebDataBinder binder){
-//    }
+    @Autowired
+    private ChapterRepository chapterRepository;
+
+    @Autowired
+    private ChapterRepositoryCustomImpl chapterRepositoryCustom;
 
     @RequestMapping(value = "/chapters")
     public ModelAndView list(@RequestParam(value = "page", required = false) Integer page, ChapterCommand command){
@@ -47,6 +48,16 @@ public class ChapterController extends ApplicationObjectSupport {
         command.setListResult((List<ChapterDTO>) results[1]);
         command.setTotalItems(Integer.valueOf(results[0].toString()));
         command.setTotalPages(Integer.valueOf(results[2].toString()));
+    }
+
+    @RequestMapping(value = "/chapter")
+    public ModelAndView htmlViewer(
+            @RequestParam(value = "Id") Long chapterId) {
+        ModelAndView mav = new ModelAndView("/viewer/html");
+        Chapter chapter = chapterRepository.findById(chapterId).get();
+        mav.addObject("content", chapter.getContent());
+        mav.addObject("chapter", chapter);
+        return mav;
     }
 
 }
