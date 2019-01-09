@@ -36,4 +36,14 @@ public class BookService {
         List<Book> books = bookPage.getContent();
         return new Object[]{String.valueOf(bookPage.getTotalElements()), books, bookPage.getTotalPages()};
     }
+
+    public Object[] searchByPageAndSize(Integer page, Integer maxPageItems) {
+        if(page == null) {
+            page = 1;
+        }
+        PageRequest pageable = PageRequest.of(page - 1, maxPageItems);
+        Page<Book> chapterPage = repository.findAll(pageable);
+        List<Book> chapters = chapterPage.getContent();
+        return new Object[]{String.valueOf(chapterPage.getTotalElements()), chapters, chapterPage.getTotalPages()};
+    }
 }

@@ -52,7 +52,7 @@
                         <div class="row">
                             <div class="col-xs-12 col-sm-6 col-md-4">
                                 <c:forEach items="${items.listResult}" var="book">
-                                    <c:url var="bookUrl" value="/book.html?code=${book.code}"/>
+                                    <c:url var="bookUrl" value="/book?code=${book.code}"/>
                                     <div class="">
                                         <div class="book-thumb-img">
                                             <a href="${bookUrl}" title="${book.title}" class="thumb">
@@ -73,7 +73,7 @@
 
                                         <div>
                                             <a class="category"
-                                               href="<c:url value="/book.html?category=${book.category}"/>">
+                                               href="<c:url value="/books?category=${book.category}"/>">
                                                 <span class="category-span"><fmt:message key="label.type"/>:</span>
                                                 <span>${book.category}</span>
                                             </a>
@@ -91,22 +91,8 @@
                             </div>
                         </div>
                         <div class="text-center">
-                            <c:url var="pageUrl" value="/book.html?"/>
+                            <c:url var="pageUrl" value="/books?"/>
                                 ${my:pagination(items, pageUrl)}
-                            <%--<ul class="pagination">--%>
-                                <%--<li><a href="/?page=1"><i class="ace-icon fa fa-angle-left"></i></a></li>--%>
-                                <%--<li><a href="/?page=196">196</a></li>--%>
-                                <%--<li><a href="/?page=197">197</a></li>--%>
-                                <%--<li><a href="/?page=198">198</a></li>--%>
-                                <%--<li><a href="/?page=199">199</a></li>--%>
-                                <%--<li class="active"><span>200</span></li>--%>
-                                <%--<li><a href="/?page=201">201</a></li>--%>
-                                <%--<li><a href="/?page=202">202</a></li>--%>
-                                <%--<li><a href="/?page=203">203</a></li>--%>
-                                <%--<li><a href="/?page=204">204</a></li>--%>
-                                <%--<li><a href="/?page=205">205</a></li>--%>
-                                <li><a href="/?page=797"><i class="ace-icon fa fa-angle-right"></i></a></li>
-                            <%--</ul>--%>
                         </div>
                     </div>
                 </div>
@@ -114,12 +100,12 @@
             <div class="col-sm-4">
                 <div class="">
                     <div class="">
-                        <h3 class=""><a href="<c:url value="/book.html?status=done"/>"><fmt:message key="label.book.done"/></a></h3>
+                        <h3 class=""><a href="<c:url value="/books?status=done"/>"><fmt:message key="label.book.done"/></a></h3>
                     </div>
                     <ul class="">
                         <c:forEach items="${items.listResult}" var="book">
                             <li class="">
-                                <a href="<c:url value="/book.html?code=${book.code}"/>">${book.title}</a>
+                                <a href="<c:url value="/book?code=${book.code}"/>">${book.title}</a>
                             </li>
                         </c:forEach>
                     </ul>

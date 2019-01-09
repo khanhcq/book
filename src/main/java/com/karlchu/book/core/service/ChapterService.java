@@ -26,12 +26,11 @@ public class ChapterService {
         return repository.findAll();
     }
 
-    public Object[] searchByProperties(Map<String, Object> properties, String sortExpression, String sortDirection, int page, int maxPageItems) {
-        PageRequest pageable = PageRequest.of(page,
-                maxPageItems,
-                Constants.SORT_ASC.equals(sortDirection)
-                        ? Sort.by(sortExpression).ascending()
-                        : Sort.by("sortExpression").descending());
+    public Object[] searchByPageAndSize(Integer page, Integer maxPageItems) {
+        if(page == null) {
+            page = 1;
+        }
+        PageRequest pageable = PageRequest.of(page - 1, maxPageItems);
         Page<Chapter> chapterPage = repository.findAll(pageable);
         List<Chapter> chapters = chapterPage.getContent();
         return new Object[]{String.valueOf(chapterPage.getTotalElements()), chapters, chapterPage.getTotalPages()};

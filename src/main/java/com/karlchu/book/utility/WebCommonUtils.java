@@ -99,23 +99,27 @@ public class WebCommonUtils {
 
         if(totalPage > 1){
             sb.append("<ul class=\"pagination\">");
-            if(currentPage - 4 > 0){
-                sb.append("<li><a href=\"").append(url).append("page=0")
-                        .append("\"><i class=\"ace-icon fa fa-angle-right\"></i></a></li>");
+            if(currentPage - 3 > 1){
+                sb.append("<li><a href=\"").append(url).append("page=1")
+                        .append("\"><i class=\"ace-icon fa fa-angle-left\"></i></a></li>");
             }
 
-            for(int i = currentPage - 4; i < currentPage + 5; i++){
-                if(i > 0 && i < totalPage){
-                    sb.append("<li><a href=\"").append(url).append("page=").append(i)
-                            .append("\">").append(i + 1).append("</a></li>");
+            for(int i = currentPage - 3; i < currentPage + 4; i++){
+                if(i > 0 && i <= totalPage){
+                    if(i != currentPage) {
+                        sb.append("<li><a href=\"").append(url).append("page=").append(i)
+                                .append("\">").append(i).append("</a></li>");
+                    } else {
+                        sb.append("<li><span class=\"active\">").append(i).append("</span></li>");
+                    }
+
                 }
             }
 
-            if(currentPage + 5 < totalPage){
-                sb.append("<li><a href=\"").append(url).append("page=").append(command.getTotalPages())
+            if(currentPage + 3 < totalPage){
+                sb.append("<li><a href=\"").append(url).append("page=").append(totalPage)
                         .append("\"><i class=\"ace-icon fa fa-angle-right\"></i></a></li>");
             }
-
             sb.append("</ul>");
         }
         return sb.toString();

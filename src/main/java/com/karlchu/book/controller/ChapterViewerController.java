@@ -117,7 +117,7 @@ public class ChapterViewerController {
         return stringBuilder.toString().toLowerCase();
     }
 
-    @RequestMapping(value = "/chapter.html")
+    @RequestMapping(value = "/chapter")
     public ModelAndView htmlViewer(
             @RequestParam(value = "bookId", required = false) Long bookId,
             @RequestParam(value = "chapterId", required = false) Long chapterId) {
