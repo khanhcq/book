@@ -67,6 +67,7 @@ public class ChapterViewerController {
 
     public void readChapter(Book book) throws IOException {
         ZipFile zip = new ZipFile("src/main/resources/unzipTest/ThonPheTinhKhong-NgaCatTayHongThi.epub");
+        int i = 1;
         for (Enumeration e = zip.entries(); e.hasMoreElements(); ) {
             ZipEntry entry = (ZipEntry) e.nextElement();
             if (!entry.isDirectory() &&
@@ -81,6 +82,7 @@ public class ChapterViewerController {
                 chapter.setBookId(book.getId());
                 chapter.setCode(computeCode(book.getTitle(), chapterTitle));
                 chapter.setContent(doc.body().html());
+                chapter.setChapterNumber(i++);
                 this.chapterRepository.insert(chapter);
             }
         }

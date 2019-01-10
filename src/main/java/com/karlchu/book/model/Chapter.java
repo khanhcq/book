@@ -22,7 +22,7 @@ public class Chapter {
     private String code;
 
     @Field(value = "ChapterNumber")
-    private String chapterNumber;
+    private Integer chapterNumber;
 
     @Field(value = "ChapterTitle")
     private String chapterTitle;
@@ -32,6 +32,13 @@ public class Chapter {
 
     @Field(value = "BookId")
     private Long bookId;
+
+    public Chapter() {
+    }
+
+    public Chapter(Long bookId) {
+        this.bookId = bookId;
+    }
 
     public Long getBookId() {
         return bookId;
@@ -57,11 +64,11 @@ public class Chapter {
         this.code = code;
     }
 
-    public String getChapterNumber() {
+    public Integer getChapterNumber() {
         return chapterNumber;
     }
 
-    public void setChapterNumber(String chapterNumber) {
+    public void setChapterNumber(Integer chapterNumber) {
         this.chapterNumber = chapterNumber;
     }
 

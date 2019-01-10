@@ -52,7 +52,7 @@
                         <div class="row">
                             <div class="col-xs-12 col-sm-6 col-md-4">
                                 <c:forEach items="${items.listResult}" var="book">
-                                    <c:url var="bookUrl" value="/book?code=${book.code}"/>
+                                    <c:url var="bookUrl" value="/book?Id=${book.id}"/>
                                     <div class="">
                                         <div class="book-thumb-img">
                                             <a href="${bookUrl}" title="${book.title}" class="thumb">
@@ -105,7 +105,7 @@
                     <ul class="">
                         <c:forEach items="${items.listResult}" var="book">
                             <li class="">
-                                <a href="<c:url value="/book?code=${book.code}"/>">${book.title}</a>
+                                <a href="<c:url value="/book?Id=${book.id}"/>">${book.title}</a>
                             </li>
                         </c:forEach>
                     </ul>

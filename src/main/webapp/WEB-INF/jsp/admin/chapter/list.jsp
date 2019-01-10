@@ -90,14 +90,17 @@
                     <div class="dataTables_wrapper form-inline no-footer">
                         <c:forEach items="${items.listResult}" var="tableList">
                             <div>
-                                ${tableList.chapterTitle}
+                                <a href="<c:url value="/chapter?Id=${bookId}&no=${tableList.chapterNumber}"/>">
+                                        ${tableList.chapterTitle}
+                                </a>
+
                             </div>
                         </c:forEach>
 
                     </div>
                 </c:if>
 
-                <c:url var="pageUrl" value="/chapters?"/>
+                <c:url var="pageUrl" value="/book?Id=${bookId}&"/>
                     ${my:pagination(items, pageUrl)}
 
                 <input type="hidden" name="crudaction" id="crudaction"/>

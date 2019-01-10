@@ -13,7 +13,7 @@
         </button>
 
         <div class="navbar-header pull-left">
-            <a href="#" class="navbar-brand">
+            <a href="/" class="navbar-brand">
                 <small>
                     <i class="fa fa-newspaper-o"></i>
                     <fmt:message key="app.name"/>
