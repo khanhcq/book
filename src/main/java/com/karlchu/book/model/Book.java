@@ -34,10 +34,6 @@ public class Book {
     private String uri;
     @Field(value = "AlterUri")
     private String alterUri;
-//    @Field(value = "BookCategory")
-//    private BookCategory bookCategory;
-//    @Field(value = "Author")
-//    private Author author;
 //    @Field(value = "CreatedBy")
 //    private Users createdBy;
     @Field(value = "CreatedDate")
@@ -48,8 +44,52 @@ public class Book {
     private Integer status;
     @Field(value = "Author")
     private String author;
+    @Field(value = "AuthorCode")
+    private String authorCode;
     @Field(value = "Category")
     private String category;
+    @Field(value = "CategoryCode")
+    private String categoryCode;
+
+    @Field(value = "View")
+    private Integer view;
+
+    public Book(String categoryCode, String authorCode) {
+        this.categoryCode = categoryCode;
+        this.authorCode = authorCode;
+    }
+
+    public Integer getView() {
+        return view;
+    }
+
+    public void setView(Integer view) {
+        this.view = view;
+    }
+
+    public Book(String categoryCode) {
+        this.categoryCode = categoryCode;
+    }
+
+    public Book() {
+
+    }
+
+    public String getAuthorCode() {
+        return authorCode;
+    }
+
+    public void setAuthorCode(String authorCode) {
+        this.authorCode = authorCode;
+    }
+
+    public String getCategoryCode() {
+        return categoryCode;
+    }
+
+    public void setCategoryCode(String categoryCode) {
+        this.categoryCode = categoryCode;
+    }
 
     public String getCategory() {
         return category;

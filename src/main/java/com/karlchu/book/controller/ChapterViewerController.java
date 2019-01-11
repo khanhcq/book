@@ -6,22 +6,19 @@ import com.karlchu.book.core.repository.custom.BookRepositoryCustom;
 import com.karlchu.book.core.repository.custom.ChapterRepositoryCustom;
 import com.karlchu.book.model.Book;
 import com.karlchu.book.model.Chapter;
+import com.karlchu.book.utility.WebCommonUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Enumeration;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -43,7 +40,6 @@ public class ChapterViewerController {
     @Autowired
     private ChapterRepository chapterRepository;
 
-
     @ResponseBody
     @RequestMapping("/addBook")
     public String testInsert() {
@@ -55,18 +51,29 @@ public class ChapterViewerController {
             book.setId(id);
             book.setCode(TPTK_NCTHT);
             book.setTitle("Thôn phệ Tinh Không");
+
+            String cate = "Huyền Huyễn";
+            book.setCategory(cate);
+            book.setCategoryCode(WebCommonUtils.normalizeTitle(cate));
+
+            String author = "Ngã Cật Tây Hồng Thị";
+            book.setAuthor(author);
+            book.setAuthorCode(WebCommonUtils.normalizeTitle(author));
+
             this.bookRepository.insert(book);
         }
-        try {
-            readChapter(book);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return "Inserted: " + book + "chapter";
+
+//        try {
+//            String bookURI = "src/main/resources/unzipTest/ThonPheTinhKhong-NgaCatTayHongThi.epub";
+//            readChapter(book, bookURI);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        return "Done";
     }
 
-    public void readChapter(Book book) throws IOException {
-        ZipFile zip = new ZipFile("src/main/resources/unzipTest/ThonPheTinhKhong-NgaCatTayHongThi.epub");
+    public void readChapter(Book book, String bookURI) throws IOException {
+        ZipFile zip = new ZipFile(bookURI);
         int i = 1;
         for (Enumeration e = zip.entries(); e.hasMoreElements(); ) {
             ZipEntry entry = (ZipEntry) e.nextElement();
@@ -103,21 +110,11 @@ public class ChapterViewerController {
     }
 
     public String computeCode(String bookTitle, String chapTitle) {
-        String bookCode = getFirstLetter(bookTitle);
-        String chapCode = getFirstLetter(chapTitle);
+        String bookCode = WebCommonUtils.getFirstLetter(bookTitle);
+        String chapCode = WebCommonUtils.getFirstLetter(chapTitle);
         return bookCode + "-" + chapCode;
     }
 
-    public String getFirstLetter(String s) {
-        StringBuilder stringBuilder = new StringBuilder();
-        Pattern p = Pattern.compile("\\b[A-Za-z]|[\\d]");
-        Matcher m = p.matcher(s);
-
-        while (m.find()) {
-            stringBuilder.append(m.group());
-        }
-        return stringBuilder.toString().toLowerCase();
-    }
 
 
 }

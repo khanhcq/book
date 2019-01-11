@@ -4,9 +4,7 @@ import com.karlchu.book.core.repository.BookRepository;
 import com.karlchu.book.model.Book;
 import com.karlchu.book.utility.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,12 +35,16 @@ public class BookService {
         return new Object[]{String.valueOf(bookPage.getTotalElements()), books, bookPage.getTotalPages()};
     }
 
-    public Object[] searchByPageAndSize(Integer page, Integer maxPageItems) {
+    public Object[] searchByPageAndSize(Integer page, Integer maxPageItems, String categoryCode, String authorCode) {
         if(page == null) {
             page = 1;
         }
+        ExampleMatcher matcher = ExampleMatcher.matching()
+                .withMatcher("CategoryCode", match -> match.exact())
+                .withMatcher("AuthorCode", match -> match.exact());
+        Example example = Example.of(new Book(categoryCode, authorCode), matcher);
         PageRequest pageable = PageRequest.of(page - 1, maxPageItems);
-        Page<Book> chapterPage = repository.findAll(pageable);
+        Page<Book> chapterPage = repository.findAll(example, pageable);
         List<Book> chapters = chapterPage.getContent();
         return new Object[]{String.valueOf(chapterPage.getTotalElements()), chapters, chapterPage.getTotalPages()};
     }

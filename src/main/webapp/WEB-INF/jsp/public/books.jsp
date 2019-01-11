@@ -3,23 +3,11 @@
 <c:url var="addUrl" value="/admin/product/edit.html"/>
 <html>
 <head>
-    <title><fmt:message key="list.product.title"/></title>
+    <title><fmt:message key="list.book"/></title>
     <meta name="menu" content="users-manage"/>
     <meta name="gmenu" content="product"/>
 </head>
 <body>
-<div class="breadcrumbs ace-save-state" id="breadcrumbs">
-    <ul class="breadcrumb">
-        <li>
-            <i class="ace-icon fa fa-home home-icon"></i>
-            <a href="#"><fmt:message key="label.home"/></a>
-        </li>
-        <li>
-            <a href="#"><fmt:message key="label.product.title"/></a>
-        </li>
-        <li class="active"><fmt:message key="list.product.title"/></li>
-    </ul><!-- /.breadcrumb -->
-</div>
 
 <div class="page-content">
     <c:if test="${not empty messageResponse}">
@@ -47,12 +35,26 @@
         <div class="row">
             <div class="col-sm-8">
                 <div class="">
-                    <div class="page-header"><h1 class=""><fmt:message key="label.book.newest"/></h1></div>
+                    <div class="page-header">
+                        <h1 class="">
+                            <c:choose>
+                                <c:when test="${!empty category}">
+                                    ${category}
+                                </c:when>
+                                <c:when test="${!empty author}">
+                                    ${author}
+                                </c:when>
+                                <c:otherwise>
+                                    <fmt:message key="label.book.newest"/>
+                                </c:otherwise>
+                            </c:choose>
+                        </h1>
+                    </div>
                     <div class="">
                         <div class="row">
                             <div class="col-xs-12 col-sm-6 col-md-4">
                                 <c:forEach items="${items.listResult}" var="book">
-                                    <c:url var="bookUrl" value="/book?Id=${book.id}"/>
+                                    <c:url var="bookUrl" value="/book?id=${book.id}"/>
                                     <div class="">
                                         <div class="book-thumb-img">
                                             <a href="${bookUrl}" title="${book.title}" class="thumb">
@@ -65,15 +67,14 @@
                                         </div>
 
                                         <div>
-                                            <a class="author" href="${bookUrl}&author=${book.author}">
+                                            <a class="author" href="<c:url value="/books?author=${book.authorCode}"/>">
                                                 <span class="category-span"><fmt:message key="label.author"/>:</span>
                                                 <span>${book.author}</span>
                                             </a>
                                         </div>
-
                                         <div>
                                             <a class="category"
-                                               href="<c:url value="/books?category=${book.category}"/>">
+                                               href="<c:url value="/books?category=${book.categoryCode}"/>">
                                                 <span class="category-span"><fmt:message key="label.type"/>:</span>
                                                 <span>${book.category}</span>
                                             </a>
@@ -105,7 +106,7 @@
                     <ul class="">
                         <c:forEach items="${items.listResult}" var="book">
                             <li class="">
-                                <a href="<c:url value="/book?Id=${book.id}"/>">${book.title}</a>
+                                <a href="<c:url value="/book?id=${book.id}"/>">${book.title}</a>
                             </li>
                         </c:forEach>
                     </ul>

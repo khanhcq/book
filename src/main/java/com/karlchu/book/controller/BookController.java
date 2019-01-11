@@ -5,8 +5,13 @@ package com.karlchu.book.controller;
  */
 
 import com.karlchu.book.command.ChapterCommand;
+import com.karlchu.book.core.repository.BookRepository;
+import com.karlchu.book.core.repository.ChapterRepository;
 import com.karlchu.book.core.service.BookService;
+import com.karlchu.book.core.service.ChapterService;
+import com.karlchu.book.core.utils.CoreUtils;
 import com.karlchu.book.dto.ChapterDTO;
+import com.karlchu.book.model.Chapter;
 import com.karlchu.book.utility.Constants;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -27,20 +32,57 @@ public class BookController extends ApplicationObjectSupport {
     @Autowired
     private BookService bookService;
 
+    @Autowired
+    private ChapterService chapterService;
+
+    @Autowired
+    private ChapterRepository chapterRepository;
+
+    @Autowired
+    private BookRepository bookRepository;
+
     @RequestMapping(value = "/books")
     public ModelAndView list(@RequestParam(value = "page", required = false) Integer page,
+                             @RequestParam(value = "category", required = false) String category,
+                             @RequestParam(value = "author", required = false) String author,
                              ChapterCommand command){
         ModelAndView mav = new ModelAndView("/public/books");
-        executeSearch(command, page);
-        mav.addObject(Constants.LIST_MODEL_KEY, command);
-        return mav;
-    }
-
-    private void executeSearch(ChapterCommand command, Integer page) {
-        Object[] results = bookService.searchByPageAndSize(page, command.getMaxPageItems());
+        Object[] results = bookService.searchByPageAndSize(page, command.getMaxPageItems(), category, author);
         command.setListResult((List<ChapterDTO>) results[1]);
         command.setTotalItems(Integer.valueOf(results[0].toString()));
         command.setTotalPages(Integer.valueOf(results[2].toString()));
+        mav.addObject(Constants.LIST_MODEL_KEY, command);
+        mav.addObject("category", category);
+        mav.addObject("author", author);
+
+        return mav;
+    }
+
+    @RequestMapping(value = "/book")
+    public ModelAndView list(@RequestParam(value = "page", required = false) Integer page,
+                             @RequestParam(value = "id") Long bookId,
+                             ChapterCommand command){
+        ModelAndView mav = new ModelAndView("/admin/chapter/list");
+        Object[] results = chapterService.searchByPageAndSize(bookId, page, command.getMaxPageItems());
+        command.setListResult((List<ChapterDTO>) results[1]);
+        command.setTotalItems(Integer.valueOf(results[0].toString()));
+        command.setTotalPages(Integer.valueOf(results[2].toString()));
+        mav.addObject(Constants.LIST_MODEL_KEY, command);
+        mav.addObject("book", bookRepository.findById(bookId).get());
+
+        return mav;
+    }
+
+    @RequestMapping(value = "/chapter")
+    public ModelAndView htmlViewer(
+            @RequestParam(value = "id") Long bookId,
+            @RequestParam(value = "no") Integer chapterNo) {
+        ModelAndView mav = new ModelAndView("/viewer/html");
+        Chapter chapter = chapterRepository.findByBookIdAndChapterNumber(bookId, chapterNo);
+        mav.addObject("chapter", chapter);
+        mav.addObject("lastChapter", chapterRepository.count(CoreUtils.getChapterExample(bookId)));
+        mav.addObject("book", bookRepository.findById(chapter.getBookId()).get());
+        return mav;
     }
 
 }

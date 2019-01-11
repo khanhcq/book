@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <%@ include file="/WEB-INF/common/meta.jsp" %>
-    <title><fmt:message key="webapp.name"/>&trade;&nbsp;-&nbsp;</title>
+    <title><fmt:message key="webapp.name"/>&trade;&nbsp;-&nbsp;<sitemesh:write property="title" /></title>
         <!-- bootstrap & fontawesome -->
         <link rel="stylesheet" href="<c:url value="/themes/ace_1.4/dist/css/bootstrap.min.css"/>">
         <link rel="stylesheet" href="<c:url value="/themes/font-awesome-4.6.3/css/font-awesome.min.css"/>">
@@ -64,7 +64,7 @@
             <div class="footer-inner">
                 <div class="footer-content">
                             <span class="bigger-120">
-                                <span class="blue bolder"><fmt:message key="copyright.text"/></span>
+                                <span class="blue bolder">&#169; 2019 <fmt:message key="copyright.text"/></span>
                             </span>
                 </div>
             </div>

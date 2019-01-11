@@ -1,6 +1,6 @@
 <%@ include file="/WEB-INF/common/taglibs.jsp" %>
 <head>
-    <title><fmt:message key="edit.product.title"/></title>
+    <title>${book.title}</title>
 </head>
 <body>
 
@@ -11,10 +11,10 @@
             <a href="<c:url value="/"/>"><fmt:message key="label.home"/></a>
         </li>
         <li>
-            <%--<a href="<c:url value="/bookCategory.html?code="/>">${bookCategory.title}</a>--%>
+            <a href="<c:url value="/books?category=${book.categoryCode}"/>">${book.category}</a>
         </li>
         <li>
-            <a href="<c:url value="/book?Id=${book.id}"/>">${book.title}</a>
+            <a href="<c:url value="/book?id=${book.id}"/>">${book.title}</a>
         </li>
         <li class="active">${chapter.chapterTitle}</li>
     </ul>
@@ -33,8 +33,8 @@
             </div>
         </div>
     </c:if>
-    <c:url var="prevUrl" value="/chapter?Id=${chapter.bookId}&no=${chapter.chapterNumber - 1}"/>
-    <c:url var="nextUrl" value="/chapter?Id=${chapter.bookId}&no=${chapter.chapterNumber + 1}"/>
+    <c:url var="prevUrl" value="/chapter?id=${chapter.bookId}&no=${chapter.chapterNumber - 1}"/>
+    <c:url var="nextUrl" value="/chapter?id=${chapter.bookId}&no=${chapter.chapterNumber + 1}"/>
     <c:if test="${chapter.chapterNumber == 1}">
         <c:url var="prevUrl" value="#"/>
     </c:if>

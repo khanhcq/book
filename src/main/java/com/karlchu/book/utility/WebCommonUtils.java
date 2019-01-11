@@ -3,6 +3,10 @@ package com.karlchu.book.utility;
 import com.karlchu.book.command.AbstractCommand;
 import org.apache.commons.lang.StringUtils;
 
+import java.text.Normalizer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Created with IntelliJ IDEA.
  * User: khanhcq
@@ -123,5 +127,49 @@ public class WebCommonUtils {
             sb.append("</ul>");
         }
         return sb.toString();
+    }
+
+    public static String seoURL(String input) {
+        if (input == null) return  "";
+        String result = Normalizer.normalize(input, Normalizer.Form.NFD);
+        result = result.replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
+        result = result.replace('đ', 'd');
+        result = result.replace('Đ', 'D');
+        result = result.replaceAll("[^a-z A-Z0-9-]", "");
+        result = result.replaceAll(" ", "-");
+        result = result.replaceAll("--", "-");
+        return result.toLowerCase();
+    }
+
+    public static String normalizeFilename(String input) {
+        String result = Normalizer.normalize(input, Normalizer.Form.NFD);
+        result = result.replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
+        result = result.replace('đ', 'd');
+        result = result.replace('Đ', 'D');
+        result = result.replaceAll("[^a-z A-Z0-9-\\.]", "");
+        result = result.replaceAll(" ", "-");
+        return result;
+    }
+
+    public static String normalizeTitle(String input) {
+        String result = Normalizer.normalize(input, Normalizer.Form.NFD);
+        result = result.replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
+        result = result.replace('đ', 'd');
+        result = result.replace('Đ', 'D');
+        result = result.replaceAll("[^a-z A-Z0-9-_\\.]", "");
+        result = result.replaceAll(" ", "-");
+        return result;
+    }
+
+
+    public static String getFirstLetter(String s) {
+        StringBuilder stringBuilder = new StringBuilder();
+        Pattern p = Pattern.compile("\\b[A-Za-z]|[\\d]");
+        Matcher m = p.matcher(s);
+
+        while (m.find()) {
+            stringBuilder.append(m.group());
+        }
+        return stringBuilder.toString().toLowerCase();
     }
 }

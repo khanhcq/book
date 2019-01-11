@@ -31,44 +31,5 @@ import java.util.List;
 public class ChapterController extends ApplicationObjectSupport {
     private transient final Log log = LogFactory.getLog(this.getClass());
 
-    @Autowired
-    private ChapterService chapterService;
-
-    @Autowired
-    private ChapterRepository chapterRepository;
-
-    @Autowired
-    private BookRepository bookRepository;
-
-    @Autowired
-    private ChapterRepositoryCustomImpl chapterRepositoryCustom;
-
-    @RequestMapping(value = "/book")
-    public ModelAndView list(@RequestParam(value = "page", required = false) Integer page,
-                             @RequestParam(value = "Id") Long bookId,
-                             ChapterCommand command){
-        ModelAndView mav = new ModelAndView("/admin/chapter/list");
-        Object[] results = chapterService.searchByPageAndSize(bookId, page, command.getMaxPageItems());
-        command.setListResult((List<ChapterDTO>) results[1]);
-        command.setTotalItems(Integer.valueOf(results[0].toString()));
-        command.setTotalPages(Integer.valueOf(results[2].toString()));
-        mav.addObject(Constants.LIST_MODEL_KEY, command);
-        mav.addObject("bookId", bookId);
-
-        return mav;
-    }
-
-    @RequestMapping(value = "/chapter")
-    public ModelAndView htmlViewer(
-            @RequestParam(value = "Id") Long bookId,
-            @RequestParam(value = "no") Integer chapterNo) {
-        ModelAndView mav = new ModelAndView("/viewer/html");
-        Chapter chapter = chapterRepository.findByBookIdAndChapterNumber(bookId, chapterNo);
-        mav.addObject("content", chapter.getContent());
-        mav.addObject("chapter", chapter);
-        mav.addObject("lastChapter", chapterRepository.count(CoreUtils.getChapterExample(bookId)));
-        mav.addObject("book", bookRepository.findById(chapter.getBookId()).get());
-        return mav;
-    }
 
 }
