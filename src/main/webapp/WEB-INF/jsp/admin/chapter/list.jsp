@@ -36,55 +36,55 @@
         </div>
     </c:if>
 
-    <div class="page-header">
-        <div class="row">
-            <h1 class="col-sm-12"><fmt:message key="list.product.title"/> </h1>
-        </div>
-    </div><!-- /.page-header -->
+    <%--<div class="page-header">--%>
+        <%--<div class="row">--%>
+            <%--<h1 class="col-sm-12"><fmt:message key="list.product.title"/> </h1>--%>
+        <%--</div>--%>
+    <%--</div>--%>
 
     <form:form action="${formUrl}" modelAttribute="items" role="form" id="listForm" cssClass="form-horizontal">
         <div class="row">
             <div class="col-xs-12">
-                <div class="widget-box table-filter">
-                    <div class="widget-header">
-                        <h4 class="widget-title"><fmt:message key="label.searchfilter"/></h4>
-                        <div class="widget-toolbar">
-                            <a href="#" data-action="collapse">
-                                <i class="ace-icon fa fa-chevron-up"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="widget-body">
-                        <div class="widget-main">
-                            <div class="form-horizontal">
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label"><fmt:message key="label.name"/></label>
-                                    <div class="col-sm-9">
-                                        <%--<form:input path="pojo.name" cssClass="form-control input-sm"/>--%>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="widget-bottom form-actions center">
-                            <button id="btnSearch" type="button" class="btn btn-sm btn-success">
-                                <fmt:message key="label.apply.search"/>
-                                <i class="ace-icon fa fa-arrow-right icon-on-right bigger-110"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="table-btn-controls">
-                    <div class="pull-right tableTools-container">
-                        <a href="${addUrl}" class="btn btn-success">
-                            <i class="ace-icon fa fa-plus"></i>
-                            <fmt:message key="label.add"/>
-                        </a>
-                        <button id="confirmDelete" class="btn btn-danger">
-                            <i class="fa fa-trash-o"></i>
-                            <fmt:message key="label.delete"/>
-                        </button>
-                    </div>
-                </div>
+                <%--<div class="widget-box table-filter">--%>
+                    <%--<div class="widget-header">--%>
+                        <%--<h4 class="widget-title"><fmt:message key="label.searchfilter"/></h4>--%>
+                        <%--<div class="widget-toolbar">--%>
+                            <%--<a href="#" data-action="collapse">--%>
+                                <%--<i class="ace-icon fa fa-chevron-up"></i>--%>
+                            <%--</a>--%>
+                        <%--</div>--%>
+                    <%--</div>--%>
+                    <%--<div class="widget-body">--%>
+                        <%--<div class="widget-main">--%>
+                            <%--<div class="form-horizontal">--%>
+                                <%--<div class="form-group">--%>
+                                    <%--<label class="col-sm-2 control-label"><fmt:message key="label.name"/></label>--%>
+                                    <%--<div class="col-sm-9">--%>
+                                        <%--&lt;%&ndash;<form:input path="pojo.name" cssClass="form-control input-sm"/>&ndash;%&gt;--%>
+                                    <%--</div>--%>
+                                <%--</div>--%>
+                            <%--</div>--%>
+                        <%--</div>--%>
+                        <%--<div class="widget-bottom form-actions center">--%>
+                            <%--<button id="btnSearch" type="button" class="btn btn-sm btn-success">--%>
+                                <%--<fmt:message key="label.apply.search"/>--%>
+                                <%--<i class="ace-icon fa fa-arrow-right icon-on-right bigger-110"></i>--%>
+                            <%--</button>--%>
+                        <%--</div>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+                <%--<div class="table-btn-controls">--%>
+                    <%--<div class="pull-right tableTools-container">--%>
+                        <%--<a href="${addUrl}" class="btn btn-success">--%>
+                            <%--<i class="ace-icon fa fa-plus"></i>--%>
+                            <%--<fmt:message key="label.add"/>--%>
+                        <%--</a>--%>
+                        <%--<button id="confirmDelete" class="btn btn-danger">--%>
+                            <%--<i class="fa fa-trash-o"></i>--%>
+                            <%--<fmt:message key="label.delete"/>--%>
+                        <%--</button>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
 
                 <c:if test="${items.totalItems > 0}">
                     <div class="dataTables_wrapper form-inline no-footer">

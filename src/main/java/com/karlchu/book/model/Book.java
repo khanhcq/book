@@ -170,4 +170,5 @@ public class Book {
     public void setModifiedDate(Timestamp modifiedDate) {
         this.modifiedDate = modifiedDate;
     }
+
 }

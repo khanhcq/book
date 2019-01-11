@@ -14,7 +14,7 @@
             <%--<a href="<c:url value="/bookCategory.html?code="/>">${bookCategory.title}</a>--%>
         </li>
         <li>
-            <%--<a href="<c:url value="/book.html?code="/>">${book.title}</a>--%>
+            <a href="<c:url value="/book?Id=${book.id}"/>">${book.title}</a>
         </li>
         <li class="active">${chapter.chapterTitle}</li>
     </ul>

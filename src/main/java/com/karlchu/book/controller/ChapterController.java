@@ -5,11 +5,13 @@ package com.karlchu.book.controller;
  */
 
 import com.karlchu.book.command.ChapterCommand;
+import com.karlchu.book.core.repository.BookRepository;
 import com.karlchu.book.core.repository.ChapterRepository;
 import com.karlchu.book.core.repository.custom.ChapterRepositoryCustomImpl;
 import com.karlchu.book.core.service.ChapterService;
 import com.karlchu.book.core.utils.CoreUtils;
 import com.karlchu.book.dto.ChapterDTO;
+import com.karlchu.book.model.Book;
 import com.karlchu.book.model.Chapter;
 import com.karlchu.book.utility.Constants;
 import org.apache.commons.logging.Log;
@@ -34,6 +36,9 @@ public class ChapterController extends ApplicationObjectSupport {
 
     @Autowired
     private ChapterRepository chapterRepository;
+
+    @Autowired
+    private BookRepository bookRepository;
 
     @Autowired
     private ChapterRepositoryCustomImpl chapterRepositoryCustom;
@@ -62,6 +67,7 @@ public class ChapterController extends ApplicationObjectSupport {
         mav.addObject("content", chapter.getContent());
         mav.addObject("chapter", chapter);
         mav.addObject("lastChapter", chapterRepository.count(CoreUtils.getChapterExample(bookId)));
+        mav.addObject("book", bookRepository.findById(chapter.getBookId()).get());
         return mav;
     }
 
