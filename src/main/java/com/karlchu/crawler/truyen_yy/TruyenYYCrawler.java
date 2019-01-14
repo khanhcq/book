@@ -1,0 +1,176 @@
+package com.karlchu.crawler.truyen_yy;/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+
+/**
+ *
+ * @author Chu Quoc Khanh
+ */
+public class TruyenYYCrawler {
+
+    public void crawl(String inputUrl) throws IOException{
+        String bookName = "";
+        if (inputUrl.endsWith("/")){
+            bookName = inputUrl.substring(0, inputUrl.length() - 1);
+        }
+        bookName = bookName.replace("https://truyenyy.com/truyen/","");
+
+        //store links that crawled
+        HashSet crawledList = new HashSet();
+        //store links that would be crawled in order
+        LinkedHashSet crawlList = new LinkedHashSet();
+        String indexFile = "C:\\CrawledFiles\\"+ bookName + "\\" +"UrlCollection.txt";
+        File f = new File(indexFile);
+        if(!f.exists()) {
+            f.getParentFile().mkdirs();
+            f.createNewFile();
+        }
+        //write file name corresponding to url to text file
+        BufferedWriter urlCollection = new BufferedWriter(new FileWriter(indexFile,true));
+
+        //read intro page
+        URL strURL = toUrl(inputUrl);
+        getPageCode(strURL, bookName, bookName);
+        urlCollection.write(bookName+".html = "+ strURL);
+        urlCollection.newLine();
+        urlCollection.flush();
+
+        //start frist chapter
+        URL firstChapURL = toUrl(inputUrl + "chuong-1.html");
+        //add given url to the crawl list
+        crawlList.add(firstChapURL);
+        //define the name of crawled pages
+        int htmlFile = 1;
+        //crawling for all URL in the crawl list
+        while(crawlList.size() > 0){
+            String fileName = Integer.toString(htmlFile);
+            if(htmlFile < 10) {
+                fileName = "0" + fileName;
+            }
+            // get link from crawl list
+            URL url =  (URL) crawlList.iterator().next();
+            // remove that crawling link from crawl list
+            crawlList.remove(url);
+            //get page code
+            String pageCode = getPageCode(url, bookName, fileName);
+            //add link that was crawled to crawled list
+            crawledList.add(url);
+            //add url to UrlCollection
+            urlCollection.write(fileName+".html = "+ url);
+            urlCollection.newLine();
+            urlCollection.flush();
+
+            //display crawling links
+            System.out.println(fileName+".html = "+ url);
+
+            //Retrive all links in the given url's page
+            ArrayList linkList = retriveLinks(url,pageCode,crawledList);
+            //add all retived links to crawl list
+            crawlList.addAll(linkList);
+            htmlFile++;
+        }
+        urlCollection.close();
+    }
+    // retrive urls from a web page
+    public ArrayList retriveLinks(URL url, String pageCode, HashSet crawledList ) throws MalformedURLException{
+        Document doc = Jsoup.parse(pageCode);
+        String chapterTitle = doc.title();
+        doc.body().html();
+        Element vipBtn = doc.select("#btn_buy").first();
+        Element linkEle = doc.select(".weui_btn_primary").first();
+        String link = linkEle != null ? linkEle.attr("href") : "";
+        if (link.isEmpty()){
+            return new ArrayList();
+        }
+
+        // list of matched links
+        ArrayList linkList = new ArrayList();
+
+        // fix link to satisfy format
+        link = url.getProtocol() + "://" + url.getHost() + link;
+
+
+        // Remove anchors from link.
+        int index = link.indexOf('#');
+        if (index != -1) {
+            link = link.substring(0, index);
+        }
+        // Replace space in link by %20 - unicode format
+        if (link.contains(" ")){
+            link = link.replaceAll(" ", "%20");
+        }
+
+
+        // Verify link and skip if invalid.
+        URL verifiedLink = toUrl(link);
+        if (verifiedLink == null) {
+            return linkList;
+        }
+
+        // limit links to those having the same host as the start URL
+        if (!url.getHost().toLowerCase().equals(
+                verifiedLink.getHost().toLowerCase())) {
+            return linkList;
+        }
+        // Skip link if it has already been crawled.
+        if (crawledList.contains(verifiedLink)) {
+            return linkList;
+        }
+        // Add link to list.
+        linkList.add(verifiedLink);
+        return linkList;
+    }
+
+    private StringBuilder getTxtFiles(InputStream in) {
+        StringBuilder out = new StringBuilder();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+        String line;
+        try {
+            while ((line = reader.readLine()) != null) {
+                out.append(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return out;
+    }
+
+    //open link and get its html code
+    public String getPageCode(URL url, String bookName, String pageName) throws IOException{
+        File file = new File("C:\\CrawledFiles\\"+ bookName +"\\" +pageName+".html");
+        PrintWriter writer =new PrintWriter(file);
+
+        HttpURLConnection httpcon = (HttpURLConnection) url.openConnection();
+        httpcon.addRequestProperty("User-Agent", "Mozilla/4.0");
+        InputStream inputStream = httpcon.getInputStream();
+        StringBuilder out = getTxtFiles(inputStream);
+        writer.println(out.toString());
+        writer.close();
+        return out.toString();
+    }
+    // convert string to URL
+    public URL toUrl(String strUrl) throws MalformedURLException{
+        URL url = null;
+        if(!strUrl.toLowerCase().startsWith("https://")){
+            return url;
+        }
+        url = new URL(strUrl);
+        return  url;
+    }
+
+
+
+}
