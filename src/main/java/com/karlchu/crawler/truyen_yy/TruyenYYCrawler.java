@@ -11,6 +11,7 @@ import org.jsoup.nodes.Element;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -91,7 +92,7 @@ public class TruyenYYCrawler {
             e.printStackTrace();
             return new Object[]{htmlFile, Boolean.FALSE};
         }
-        return new Object[]{htmlFile, Boolean.TRUE};
+        return new Object[]{htmlFile - 1, Boolean.TRUE};
     }
     // retrive urls from a web page
     public ArrayList retriveLinks(URL url, String pageCode, HashSet crawledList ) throws MalformedURLException{
@@ -147,15 +148,21 @@ public class TruyenYYCrawler {
 
     //open link and get its html code
     public String getPageCode(URL url, String bookName, String pageName) throws IOException{
+
         File file = new File("C:\\CrawledFiles\\"+ bookName +"\\" +pageName+".html");
         PrintWriter writer =new PrintWriter(file);
-
-        HttpURLConnection httpcon = (HttpURLConnection) url.openConnection();
-        httpcon.addRequestProperty("User-Agent", "Mozilla/4.0");
-        httpcon.setConnectTimeout(15000); //set timeout to 5 seconds
-
-        InputStream inputStream = httpcon.getInputStream();
-        StringBuilder out = CrawlerUtils.getTxtFiles(inputStream);
+        StringBuilder out = new StringBuilder();
+        try{
+            HttpURLConnection httpcon = (HttpURLConnection) url.openConnection();
+            httpcon.addRequestProperty("User-Agent", "Mozilla/4.0");
+            httpcon.setConnectTimeout(10000); //set timeout to 5 seconds
+            InputStream inputStream = httpcon.getInputStream();
+             out = CrawlerUtils.getTxtFiles(inputStream);
+        }catch (SocketTimeoutException e){
+            writer.println(out.toString());
+            writer.close();
+            throw new IOException("timeOut");
+        }
         writer.println(out.toString());
         writer.close();
         return out.toString();
