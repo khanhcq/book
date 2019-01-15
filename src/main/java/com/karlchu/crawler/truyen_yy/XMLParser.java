@@ -9,8 +9,7 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 
 /**
  * Created by KhanhChu on 1/14/2019.
@@ -24,7 +23,7 @@ public class XMLParser {
         parser.readXML();
     }
 
-    public static void readXML(){
+    public static void readXML() {
         TruyenYYCrawler crawler = new TruyenYYCrawler();
         try {
             File fXmlFile = new File("src\\main\\java\\com\\karlchu\\crawler\\truyen_yy\\truyenyy_sitemap.xml");
@@ -39,11 +38,33 @@ public class XMLParser {
                     Element eElement = (Element) nNode;
                     String url = eElement.getElementsByTagName("loc").item(0).getTextContent().replace("http://", "https://");
                     System.out.println(url);
-                    try {
-                        crawler.crawl(url);
-                    } catch (IOException e) {
-                        e.printStackTrace();
+
+                    String bookName = "";
+                    if (url.endsWith("/")) {
+                        bookName = url.substring(0, url.length() - 1);
                     }
+                    bookName = bookName.replace("https://truyenyy.com/truyen/", "");
+                    String indexFile = "C:\\CrawledFiles\\" + bookName + ".txt";
+                    String statusFile = indexFile.replace(".txt",".done");
+                    File fStatusFile = new File(statusFile);
+
+                    if(!fStatusFile.exists()){
+                        Integer chapter = contChapter(indexFile);
+                        Object[] crawlingResult = crawler.crawl(url, chapter, bookName);
+                        Integer stopAtChapter = (Integer) crawlingResult[0];
+                        Boolean isDone = (Boolean) crawlingResult[1];
+                        BufferedWriter urlCollection = new BufferedWriter(new FileWriter(indexFile, true));
+                        urlCollection.write(stopAtChapter.toString());
+                        urlCollection.flush();
+                        urlCollection.close();
+                        if(isDone) {
+                            File f = new File(statusFile);
+                            if (!f.exists()) {
+                                f.createNewFile();
+                            }
+                        }
+                    }
+
                 }
             }
 
@@ -54,5 +75,21 @@ public class XMLParser {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private static Integer contChapter(String indexFile) {
+        try {
+            File f = new File(indexFile);
+            if (!f.exists()) {
+                f.createNewFile();
+            } else {
+                BufferedReader reader = new BufferedReader(new FileReader(indexFile));
+                String line = reader.readLine();
+                return Integer.parseInt(line) - 1;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

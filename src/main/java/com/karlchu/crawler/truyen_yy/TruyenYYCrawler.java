@@ -3,6 +3,7 @@ package com.karlchu.crawler.truyen_yy;/*
  * and open the template in the editor.
  */
 
+import com.karlchu.crawler.utils.CrawlerUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -21,68 +22,76 @@ import java.util.LinkedHashSet;
  */
 public class TruyenYYCrawler {
 
-    public void crawl(String inputUrl) throws IOException{
-        String bookName = "";
-        if (inputUrl.endsWith("/")){
-            bookName = inputUrl.substring(0, inputUrl.length() - 1);
-        }
-        bookName = bookName.replace("https://truyenyy.com/truyen/","");
-
-        //store links that crawled
-        HashSet crawledList = new HashSet();
-        //store links that would be crawled in order
-        LinkedHashSet crawlList = new LinkedHashSet();
-        String indexFile = "C:\\CrawledFiles\\"+ bookName + "\\" +"UrlCollection.txt";
-        File f = new File(indexFile);
-        if(!f.exists()) {
-            f.getParentFile().mkdirs();
-            f.createNewFile();
-        }
-        //write file name corresponding to url to text file
-        BufferedWriter urlCollection = new BufferedWriter(new FileWriter(indexFile,true));
-
-        //read intro page
-        URL strURL = toUrl(inputUrl);
-        getPageCode(strURL, bookName, bookName);
-        urlCollection.write(bookName+".html = "+ strURL);
-        urlCollection.newLine();
-        urlCollection.flush();
-
-        //start frist chapter
-        URL firstChapURL = toUrl(inputUrl + "chuong-1.html");
-        //add given url to the crawl list
-        crawlList.add(firstChapURL);
-        //define the name of crawled pages
+    public Object[] crawl(String inputUrl, Integer chapter, String bookName){
         int htmlFile = 1;
-        //crawling for all URL in the crawl list
-        while(crawlList.size() > 0){
-            String fileName = Integer.toString(htmlFile);
-            if(htmlFile < 10) {
-                fileName = "0" + fileName;
+        try {
+            //store links that crawled
+            HashSet crawledList = new HashSet();
+            //store links that would be crawled in order
+            LinkedHashSet crawlList = new LinkedHashSet();
+
+            //write file name corresponding to url to text file
+//            BufferedWriter urlCollection = new BufferedWriter(new FileWriter(indexFile, true));
+
+
+            if (chapter != null) {
+                htmlFile = chapter;
+            } else {
+                File f = new File("C:\\CrawledFiles\\" + bookName);
+                if (!f.exists()) {
+                    f.mkdirs();
+                }
+                //read intro page
+                URL strURL = toUrl(inputUrl);
+                getPageCode(strURL, bookName, bookName);
+//            urlCollection.write(bookName+".html = "+ strURL);
+//            urlCollection.newLine();
+//            urlCollection.flush();
             }
-            // get link from crawl list
-            URL url =  (URL) crawlList.iterator().next();
-            // remove that crawling link from crawl list
-            crawlList.remove(url);
-            //get page code
-            String pageCode = getPageCode(url, bookName, fileName);
-            //add link that was crawled to crawled list
-            crawledList.add(url);
-            //add url to UrlCollection
-            urlCollection.write(fileName+".html = "+ url);
-            urlCollection.newLine();
-            urlCollection.flush();
+            //start frist chapter
+            URL firstChapURL = toUrl(inputUrl + "chuong-" + htmlFile + ".html");
+            //add given url to the crawl list
+            crawlList.add(firstChapURL);
+            //define the name of crawled pages
 
-            //display crawling links
-            System.out.println(fileName+".html = "+ url);
+            //crawling for all URL in the crawl list
+            while (crawlList.size() > 0) {
+                String fileName = Integer.toString(htmlFile);
+                if (htmlFile < 10) {
+                    fileName = "0" + fileName;
+                }
+                // get link from crawl list
+                URL url = (URL) crawlList.iterator().next();
+                // remove that crawling link from crawl list
+                crawlList.remove(url);
 
-            //Retrive all links in the given url's page
-            ArrayList linkList = retriveLinks(url,pageCode,crawledList);
-            //add all retived links to crawl list
-            crawlList.addAll(linkList);
-            htmlFile++;
+                //update latest crawling file
+//                urlCollection.write(fileName + ".html = " + url);
+//                urlCollection.newLine();
+//                urlCollection.flush();
+
+                //get page code
+                String pageCode = getPageCode(url, bookName, fileName);
+                //add link that was crawled to crawled list
+                crawledList.add(url);
+                //add url to UrlCollection
+
+
+                //display crawling links
+                System.out.println(fileName + ".html = " + url);
+
+                //Retrive all links in the given url's page
+                ArrayList linkList = retriveLinks(url, pageCode, crawledList);
+                //add all retived links to crawl list
+                crawlList.addAll(linkList);
+                htmlFile++;
+            }
+//            urlCollection.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new Object[]{htmlFile, Boolean.FALSE};
         }
-        urlCollection.close();
+        return new Object[]{htmlFile, Boolean.TRUE};
     }
     // retrive urls from a web page
     public ArrayList retriveLinks(URL url, String pageCode, HashSet crawledList ) throws MalformedURLException{
@@ -134,19 +143,7 @@ public class TruyenYYCrawler {
         return linkList;
     }
 
-    private StringBuilder getTxtFiles(InputStream in) {
-        StringBuilder out = new StringBuilder();
-        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-        String line;
-        try {
-            while ((line = reader.readLine()) != null) {
-                out.append(line);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return out;
-    }
+
 
     //open link and get its html code
     public String getPageCode(URL url, String bookName, String pageName) throws IOException{
@@ -156,11 +153,13 @@ public class TruyenYYCrawler {
         HttpURLConnection httpcon = (HttpURLConnection) url.openConnection();
         httpcon.addRequestProperty("User-Agent", "Mozilla/4.0");
         InputStream inputStream = httpcon.getInputStream();
-        StringBuilder out = getTxtFiles(inputStream);
+        StringBuilder out = CrawlerUtils.getTxtFiles(inputStream);
         writer.println(out.toString());
         writer.close();
         return out.toString();
     }
+
+
     // convert string to URL
     public URL toUrl(String strUrl) throws MalformedURLException{
         URL url = null;

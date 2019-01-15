@@ -7,6 +7,7 @@ import com.karlchu.book.core.repository.custom.ChapterRepositoryCustom;
 import com.karlchu.book.model.Book;
 import com.karlchu.book.model.Chapter;
 import com.karlchu.book.utility.WebCommonUtils;
+import com.karlchu.crawler.utils.CrawlerUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,7 +80,7 @@ public class ChapterViewerController {
             ZipEntry entry = (ZipEntry) e.nextElement();
             if (!entry.isDirectory() &&
                     (entry.getName().endsWith(".xhtml") || entry.getName().endsWith(".html"))) {
-                StringBuilder out = getTxtFiles(zip.getInputStream(entry));
+                StringBuilder out = CrawlerUtils.getTxtFiles(zip.getInputStream(entry));
                 Document doc = Jsoup.parse(out.toString());
                 String chapterTitle = doc.title();
                 Chapter chapter = new Chapter();
@@ -93,20 +94,6 @@ public class ChapterViewerController {
                 this.chapterRepository.insert(chapter);
             }
         }
-    }
-
-    private StringBuilder getTxtFiles(InputStream in) {
-        StringBuilder out = new StringBuilder();
-        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-        String line;
-        try {
-            while ((line = reader.readLine()) != null) {
-                out.append(line);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return out;
     }
 
     public String computeCode(String bookTitle, String chapTitle) {
