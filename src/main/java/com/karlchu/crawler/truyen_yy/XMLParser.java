@@ -85,7 +85,8 @@ public class XMLParser {
             } else {
                 BufferedReader reader = new BufferedReader(new FileReader(indexFile));
                 String line = reader.readLine();
-                return Integer.parseInt(line) - 1;
+                Integer chapter = Integer.parseInt(line);
+                return chapter > 1 ? chapter - 1 : chapter;
             }
         } catch (IOException e) {
             e.printStackTrace();

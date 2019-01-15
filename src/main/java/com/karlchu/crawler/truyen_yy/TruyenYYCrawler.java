@@ -152,6 +152,8 @@ public class TruyenYYCrawler {
 
         HttpURLConnection httpcon = (HttpURLConnection) url.openConnection();
         httpcon.addRequestProperty("User-Agent", "Mozilla/4.0");
+        httpcon.setConnectTimeout(15000); //set timeout to 5 seconds
+
         InputStream inputStream = httpcon.getInputStream();
         StringBuilder out = CrawlerUtils.getTxtFiles(inputStream);
         writer.println(out.toString());
