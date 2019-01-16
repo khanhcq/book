@@ -25,6 +25,8 @@ public class TruyenYYCrawler {
 
     public Object[] crawl(String inputUrl, Integer chapter, String bookName){
         int htmlFile = 0;
+        int noVipChap = 0;
+        int vipChapThreshold = 5;
         boolean haveVipChap = false;
         try {
             //store links that crawled
@@ -57,7 +59,7 @@ public class TruyenYYCrawler {
             crawlList.add(firstChapURL);
             //define the name of crawled pages
             //crawling for all URL in the crawl list
-            while (crawlList.size() > 0) {
+            while (crawlList.size() > 0 && noVipChap < vipChapThreshold) {
                 String fileName = Integer.toString(htmlFile);
                 if (htmlFile < 10) {
                     fileName = "0" + fileName;
@@ -87,6 +89,7 @@ public class TruyenYYCrawler {
 
                 //display crawling links
                 if (vipBtn != null) {
+                    noVipChap++;
                     System.out.println("VIP - " + fileName + ".html = " + url);
                 } else {
                     System.out.println(fileName + ".html = " + url);
