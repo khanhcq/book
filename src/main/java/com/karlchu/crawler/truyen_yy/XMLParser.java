@@ -44,23 +44,33 @@ public class XMLParser {
                         bookName = url.substring(0, url.length() - 1);
                     }
                     bookName = bookName.replace("https://truyenyy.com/truyen/", "");
-                    String indexFile = "C:\\CrawledFiles\\" + bookName + ".txt";
+                    String indexFile = "E:\\CrawledFiles\\" + bookName + ".txt";
                     String statusFile = indexFile.replace(".txt",".done");
                     File fStatusFile = new File(statusFile);
 
                     if(!fStatusFile.exists()){
-                        Integer chapter = contChapter(indexFile);
-                        Object[] crawlingResult = crawler.crawl(url, chapter, bookName);
-                        Integer stopAtChapter = (Integer) crawlingResult[0];
-                        Boolean isDone = (Boolean) crawlingResult[1];
-                        BufferedWriter urlCollection = new BufferedWriter(new FileWriter(indexFile, true));
-                        urlCollection.write(stopAtChapter.toString());
-                        urlCollection.flush();
-                        urlCollection.close();
-                        if(isDone) {
-                            File f = new File(statusFile);
-                            if (!f.exists()) {
-                                f.createNewFile();
+                        String statusVipFile = indexFile.replace(".txt",".done.vip");
+                        File fStatusVipFile = new File(statusVipFile);
+                        if(!fStatusVipFile.exists()){
+                            Integer chapter = contChapter(indexFile);
+                            Object[] crawlingResult = crawler.crawl(url, chapter, bookName);
+                            Integer stopAtChapter = (Integer) crawlingResult[0];
+                            Boolean isDone = (Boolean) crawlingResult[1];
+                            Boolean haveVipChap = (Boolean) crawlingResult[2];
+
+                            BufferedWriter urlCollection = new BufferedWriter(new FileWriter(indexFile, true));
+                            urlCollection.write(stopAtChapter.toString());
+                            urlCollection.flush();
+                            urlCollection.close();
+                            if(isDone) {
+                                String doneFile = statusFile;
+                                if (haveVipChap) {
+                                    doneFile = doneFile + ".vip";
+                                }
+                                File f = new File(doneFile);
+                                if (!f.exists()) {
+                                    f.createNewFile();
+                                }
                             }
                         }
                     }
@@ -84,10 +94,12 @@ public class XMLParser {
                 f.createNewFile();
             } else {
                 BufferedReader reader = new BufferedReader(new FileReader(indexFile));
-                String line = reader.readLine();
-                return Integer.parseInt(line);
+                Integer chap = Integer.parseInt(reader.readLine());
+                return chap > 0 ? chap : null;
             }
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (NumberFormatException e) {
             e.printStackTrace();
         }
         return null;

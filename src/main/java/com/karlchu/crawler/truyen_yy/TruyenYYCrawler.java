@@ -24,7 +24,8 @@ import java.util.LinkedHashSet;
 public class TruyenYYCrawler {
 
     public Object[] crawl(String inputUrl, Integer chapter, String bookName){
-        int htmlFile = 1;
+        int htmlFile = 0;
+        boolean haveVipChap = false;
         try {
             //store links that crawled
             HashSet crawledList = new HashSet();
@@ -34,27 +35,27 @@ public class TruyenYYCrawler {
             //write file name corresponding to url to text file
 //            BufferedWriter urlCollection = new BufferedWriter(new FileWriter(indexFile, true));
 
+            File f = new File("E:\\CrawledFiles\\" + bookName);
+            if (!f.exists()) {
+                f.mkdirs();
+            }
 
             if (chapter != null) {
                 htmlFile = chapter;
             } else {
-                File f = new File("C:\\CrawledFiles\\" + bookName);
-                if (!f.exists()) {
-                    f.mkdirs();
-                }
                 //read intro page
                 URL strURL = toUrl(inputUrl);
                 getPageCode(strURL, bookName, bookName);
+                htmlFile = 1;
 //            urlCollection.write(bookName+".html = "+ strURL);
 //            urlCollection.newLine();
 //            urlCollection.flush();
             }
-            //start frist chapter
+            //start first chapter
             URL firstChapURL = toUrl(inputUrl + "chuong-" + htmlFile + ".html");
             //add given url to the crawl list
             crawlList.add(firstChapURL);
             //define the name of crawled pages
-
             //crawling for all URL in the crawl list
             while (crawlList.size() > 0) {
                 String fileName = Integer.toString(htmlFile);
@@ -72,35 +73,41 @@ public class TruyenYYCrawler {
 //                urlCollection.flush();
 
                 //get page code
-                String pageCode = getPageCode(url, bookName, fileName);
+                Document document = getPageCode(url, bookName, fileName);
+                Element vipBtn = document.select("#btn_buy").first();
+                if(!haveVipChap){
+//                    vipBtn = document.select("#btn_buy").first();
+                    if (vipBtn != null) {
+                        haveVipChap = true;
+                    }
+                }
+
                 //add link that was crawled to crawled list
                 crawledList.add(url);
-                //add url to UrlCollection
-
 
                 //display crawling links
-                System.out.println(fileName + ".html = " + url);
+                if (vipBtn != null) {
+                    System.out.println("VIP - " + fileName + ".html = " + url);
+                } else {
+                    System.out.println(fileName + ".html = " + url);
+                }
 
                 //Retrive all links in the given url's page
-                ArrayList linkList = retriveLinks(url, pageCode, crawledList);
-                //add all retived links to crawl list
+                ArrayList linkList = retrieveLinks(url, document, crawledList);
+                //add all retrieved links to crawl list
                 crawlList.addAll(linkList);
                 htmlFile++;
             }
 //            urlCollection.close();
         } catch (IOException e) {
             e.printStackTrace();
-            return new Object[]{htmlFile, Boolean.FALSE};
+            return new Object[]{htmlFile, Boolean.FALSE, haveVipChap};
         }
-        return new Object[]{htmlFile - 1, Boolean.TRUE};
+        return new Object[]{htmlFile - 1, Boolean.TRUE, haveVipChap};
     }
     // retrive urls from a web page
-    public ArrayList retriveLinks(URL url, String pageCode, HashSet crawledList ) throws MalformedURLException{
-        Document doc = Jsoup.parse(pageCode);
-        String chapterTitle = doc.title();
-        doc.body().html();
-        Element vipBtn = doc.select("#btn_buy").first();
-        Element linkEle = doc.select(".weui_btn_primary").first();
+    public ArrayList retrieveLinks(URL url, Document document, HashSet crawledList ) throws MalformedURLException{
+        Element linkEle = document.select(".btn-primary").first();
         String link = linkEle != null ? linkEle.attr("href") : "";
         if (link.isEmpty()){
             return new ArrayList();
@@ -147,25 +154,26 @@ public class TruyenYYCrawler {
 
 
     //open link and get its html code
-    public String getPageCode(URL url, String bookName, String pageName) throws IOException{
-
-        File file = new File("C:\\CrawledFiles\\"+ bookName +"\\" +pageName+".html");
-        PrintWriter writer =new PrintWriter(file);
-        StringBuilder out = new StringBuilder();
-        try{
-            HttpURLConnection httpcon = (HttpURLConnection) url.openConnection();
-            httpcon.addRequestProperty("User-Agent", "Mozilla/4.0");
-            httpcon.setConnectTimeout(10000); //set timeout to 5 seconds
-            InputStream inputStream = httpcon.getInputStream();
-             out = CrawlerUtils.getTxtFiles(inputStream);
-        }catch (SocketTimeoutException e){
-            writer.println(out.toString());
-            writer.close();
-            throw new IOException("timeOut");
+    public Document getPageCode(URL url, String bookName, String pageName) throws IOException{
+//        StringBuilder out = new StringBuilder();
+//            HttpURLConnection httpcon = (HttpURLConnection) url.openConnection();
+//            httpcon.addRequestProperty("User-Agent", "Mozilla/5.0");
+//            httpcon.setConnectTimeout(10000); //set timeout to 5 seconds
+//            InputStream inputStream = httpcon.getInputStream();
+//            out = CrawlerUtils.getTxtFiles(inputStream);
+//            out = CrawlerUtils.getTxtFiles(url.openStream());
+        Document document = Jsoup.connect(url.toString()).get();
+        Element vipBtn = document.select("#btn_buy").first();
+        String filePath = "E:\\CrawledFiles\\"+ bookName +"\\" +pageName+".html";
+        if(vipBtn != null) {
+            filePath += ".vip";
         }
-        writer.println(out.toString());
+        File file = new File(filePath);
+        PrintWriter writer =new PrintWriter(file);
+        String out = document.html();
+        writer.println(out);
         writer.close();
-        return out.toString();
+        return document;
     }
 
 
