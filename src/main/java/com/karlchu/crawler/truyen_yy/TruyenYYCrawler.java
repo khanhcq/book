@@ -180,7 +180,7 @@ public class TruyenYYCrawler {
             filePath += ".vip";
         }
         Element mustLogin = document.select("#id_chap_content .inner.my-3").first();
-        if(mustLogin.text().trim().equals("Truyện này yêu cầu đăng nhập mới được xem chương. Đến trang Đăng Nhập hoặc Đăng Ký Tài Khoản.")){
+        if(mustLogin != null && mustLogin.text().trim().equals("Truyện này yêu cầu đăng nhập mới được xem chương. Đến trang Đăng Nhập hoặc Đăng Ký Tài Khoản.")){
             filePath += ".login";
         }
 
