@@ -16,7 +16,7 @@
 <meta http-equiv="Expires" content="0"/>
 <meta http-equiv="X-UA-Compatible" content="IE=8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="generator" content="Retirement Co., Ltd" />
-<link rel="icon" href="<c:url value="/favicon.ico"/>"/>
+<meta name="generator" content="Truyen.Co., Ltd" />
+<link rel="icon" href="<c:url value="/images/favicon.ico"/>"/>
 
 <meta name="viewport" content="width=device-width, user-scalable=no" />
