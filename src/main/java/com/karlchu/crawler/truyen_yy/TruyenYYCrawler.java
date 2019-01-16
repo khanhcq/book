@@ -37,7 +37,7 @@ public class TruyenYYCrawler {
             //write file name corresponding to url to text file
 //            BufferedWriter urlCollection = new BufferedWriter(new FileWriter(indexFile, true));
 
-            File f = new File("E:\\CrawledFiles\\" + bookName);
+            File f = new File("D:\\CrawledFiles\\" + bookName);
             if (!f.exists()) {
                 f.mkdirs();
             }
@@ -77,9 +77,14 @@ public class TruyenYYCrawler {
                 //get page code
                 Document document = getPageCode(url, bookName, fileName);
                 Element vipBtn = document.select("#btn_buy").first();
+                boolean needLogin = false;
+                Element mustLogin = document.select("#id_chap_content .inner.my-3").first();
+                if(mustLogin.text().trim().equals("Truyện này yêu cầu đăng nhập mới được xem chương. Đến trang Đăng Nhập hoặc Đăng Ký Tài Khoản.")){
+                    needLogin = true;
+                }
                 if(!haveVipChap){
 //                    vipBtn = document.select("#btn_buy").first();
-                    if (vipBtn != null) {
+                    if (vipBtn != null || needLogin) {
                         haveVipChap = true;
                     }
                 }
@@ -91,6 +96,9 @@ public class TruyenYYCrawler {
                 if (vipBtn != null) {
                     noVipChap++;
                     System.out.println("VIP - " + fileName + ".html = " + url);
+                } else if (needLogin){
+                    noVipChap++;
+                    System.out.println("LOGIN - " + fileName + ".html = " + url);
                 } else {
                     System.out.println(fileName + ".html = " + url);
                 }
@@ -167,10 +175,15 @@ public class TruyenYYCrawler {
 //            out = CrawlerUtils.getTxtFiles(url.openStream());
         Document document = Jsoup.connect(url.toString()).get();
         Element vipBtn = document.select("#btn_buy").first();
-        String filePath = "E:\\CrawledFiles\\"+ bookName +"\\" +pageName+".html";
+        String filePath = "D:\\CrawledFiles\\"+ bookName +"\\" +pageName+".html";
         if(vipBtn != null) {
             filePath += ".vip";
         }
+        Element mustLogin = document.select("#id_chap_content .inner.my-3").first();
+        if(mustLogin.text().trim().equals("Truyện này yêu cầu đăng nhập mới được xem chương. Đến trang Đăng Nhập hoặc Đăng Ký Tài Khoản.")){
+            filePath += ".login";
+        }
+
         File file = new File(filePath);
         PrintWriter writer =new PrintWriter(file);
         String out = document.html();

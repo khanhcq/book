@@ -32,7 +32,7 @@ public class XMLParser {
             Document doc = dBuilder.parse(fXmlFile);
             doc.getDocumentElement().normalize();
             NodeList nList = doc.getElementsByTagName("url");
-            for (int temp = 0; temp < nList.getLength(); temp++) {
+            for (int temp = nList.getLength() - 1 ; temp > -1; temp--) {
                 Node nNode = nList.item(temp);
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element eElement = (Element) nNode;
@@ -44,7 +44,7 @@ public class XMLParser {
                         bookName = url.substring(0, url.length() - 1);
                     }
                     bookName = bookName.replace("https://truyenyy.com/truyen/", "");
-                    String indexFile = "E:\\CrawledFiles\\" + bookName + ".txt";
+                    String indexFile = "D:\\CrawledFiles\\" + bookName + ".txt";
                     String statusFile = indexFile.replace(".txt",".done");
                     File fStatusFile = new File(statusFile);
 
