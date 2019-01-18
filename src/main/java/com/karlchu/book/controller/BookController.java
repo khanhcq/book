@@ -41,7 +41,7 @@ public class BookController extends ApplicationObjectSupport {
     @Autowired
     private BookRepository bookRepository;
 
-    @RequestMapping(value = "/books")
+    @RequestMapping(value = {"/books","/"})
     public ModelAndView list(@RequestParam(value = "page", required = false) Integer page,
                              @RequestParam(value = "category", required = false) String category,
                              @RequestParam(value = "author", required = false) String author,

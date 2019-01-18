@@ -1,6 +1,6 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <%--<c:choose>--%>
-    <%--<c:when test="${tat:isAndroidTablet(pageContext.request)}">--%>
+    <%--<c:when test="${my:isMobileOrTablet(pageContext.request)}">--%>
         <%--<meta name="viewport" content="width=800, user-scalable=yes"/>--%>
     <%--</c:when>--%>
     <%--<c:otherwise>--%>

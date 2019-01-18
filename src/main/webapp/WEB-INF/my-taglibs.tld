@@ -54,5 +54,34 @@
         <function-signature>java.lang.String pagination(com.karlchu.book.command.AbstractCommand, java.lang.String)</function-signature>
     </function>
 
+    <function>
+        <name>isMobile</name>
+        <function-class>com.karlchu.book.utility.MobileUtil</function-class>
+        <function-signature>boolean isMobile(javax.servlet.ServletRequest)</function-signature>
+    </function>
+
+    <function>
+        <name>isTablet</name>
+        <function-class>com.karlchu.book.utility.MobileUtil</function-class>
+        <function-signature>boolean isTablet(javax.servlet.ServletRequest)</function-signature>
+    </function>
+    <function>
+        <name>isSurfaceTablet</name>
+        <function-class>com.karlchu.book.utility.MobileUtil</function-class>
+        <function-signature>boolean isSurfaceTablet(javax.servlet.ServletRequest)</function-signature>
+    </function>
+
+    <function>
+        <name>isAndroidTablet</name>
+        <function-class>com.karlchu.book.utility.MobileUtil</function-class>
+        <function-signature>boolean isAndroidTablet(javax.servlet.ServletRequest)</function-signature>
+    </function>
+
+    <function>
+        <name>isMobileOrTablet</name>
+        <function-class>com.karlchu.book.utility.MobileUtil</function-class>
+        <function-signature>boolean isMobileOrTablet(javax.servlet.ServletRequest)</function-signature>
+    </function>
+
 
 </taglib>

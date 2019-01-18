@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.karlchu</groupId>
-	<artifactId>book</artifactId>
+	<artifactId>ROOT</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>book</name>
 	<packaging>war</packaging>
@@ -51,6 +51,12 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.mobile</groupId>
+			<artifactId>spring-mobile-device</artifactId>
+			<version>1.1.5.RELEASE</version>
 		</dependency>
 
 		<dependency>

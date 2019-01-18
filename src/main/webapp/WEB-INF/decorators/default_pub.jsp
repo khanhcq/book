@@ -14,14 +14,14 @@
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300"/>
 
         <!-- page specific plugin styles -->
-        <link rel="stylesheet" href="<c:url value="/themes/ace_1.4/components/_mod/jquery-ui.custom/jquery-ui.custom.min.css"/>">
-        <link rel="stylesheet" href="<c:url value="/themes/ace_1.4/components/fullcalendar/dist/fullcalendar.min.css"/>">
-        <link rel="stylesheet" href="<c:url value="/themes/ace_1.4/components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css"/>">
+        <%--<link rel="stylesheet" href="<c:url value="/themes/ace_1.4/components/_mod/jquery-ui.custom/jquery-ui.custom.min.css"/>">--%>
+        <%--<link rel="stylesheet" href="<c:url value="/themes/ace_1.4/components/fullcalendar/dist/fullcalendar.min.css"/>">--%>
+        <%--<link rel="stylesheet" href="<c:url value="/themes/ace_1.4/components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css"/>">--%>
         <%--<link rel="stylesheet" href="<c:url value="/themes/ace_1.4/components/bootstrap-select/dist/css/bootstrap-select.css"/>">--%>
-        <link rel="stylesheet" href="<c:url value="/themes/ace_1.4/components/chosen/chosen.min.css"/>">
+        <%--<link rel="stylesheet" href="<c:url value="/themes/ace_1.4/components/chosen/chosen.min.css"/>">--%>
 
         <%--vendor theme--%>
-        <link href="<c:url value="/themes/plugins/kartik-bootstrap-fileinput/css/fileinput.min.css"/>" rel="stylesheet" >
+        <%--<link href="<c:url value="/themes/plugins/kartik-bootstrap-fileinput/css/fileinput.min.css"/>" rel="stylesheet" >--%>
 
         <!-- ace styles -->
         <link rel="stylesheet" href="<c:url value="/themes/ace_1.4/dist/css/ace.min.css"/>">
@@ -29,7 +29,7 @@
         <link rel="stylesheet" href="<c:url value="/themes/ace_1.4/dist/css/ace-rtl.min.css"/>">
 
         <%--popup detele--%>
-        <link href="<c:url value="/themes/plugins/sweetalert/lib/sweet-alert.css"/>" rel="stylesheet">
+        <%--<link href="<c:url value="/themes/plugins/sweetalert/lib/sweet-alert.css"/>" rel="stylesheet">--%>
 
         <link rel="stylesheet" href="<c:url value="/themes/book/css/global.css"/>">
 

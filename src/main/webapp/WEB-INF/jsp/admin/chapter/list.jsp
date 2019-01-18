@@ -1,6 +1,4 @@
 <%@ include file="/WEB-INF/common/taglibs.jsp" %>
-<c:url var="formUrl" value="/admin/product/list.html"/>
-<c:url var="addUrl" value="/admin/product/edit.html"/>
 <html>
 <head>
     <title>${book.title}</title>
