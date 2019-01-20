@@ -9,8 +9,8 @@ public class ChapterDTO implements Serializable {
     private static final long serialVersionUID = -6271500581317762598L;
     private Long id;
     private String code;
-    private String chapterNumber;
-    private String chapterTitle;
+    private String number;
+    private String title;
     private String content;
     private BookDTO book;
 
@@ -30,20 +30,20 @@ public class ChapterDTO implements Serializable {
         this.code = code;
     }
 
-    public String getChapterNumber() {
-        return chapterNumber;
+    public String getNumber() {
+        return number;
     }
 
-    public void setChapterNumber(String chapterNumber) {
-        this.chapterNumber = chapterNumber;
+    public void setNumber(String number) {
+        this.number = number;
     }
 
-    public String getChapterTitle() {
-        return chapterTitle;
+    public String getTitle() {
+        return title;
     }
 
-    public void setChapterTitle(String chapterTitle) {
-        this.chapterTitle = chapterTitle;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getContent() {

@@ -1,12 +1,16 @@
 package com.karlchu.book.core.service;
 
 import com.karlchu.book.core.repository.BookRepository;
+import com.karlchu.book.model.Author;
 import com.karlchu.book.model.Book;
+import com.karlchu.book.model.Category;
 import com.karlchu.book.utility.Constants;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -39,10 +43,20 @@ public class BookService {
         if(page == null) {
             page = 1;
         }
-        ExampleMatcher matcher = ExampleMatcher.matching()
-                .withMatcher("CategoryCode", match -> match.exact())
-                .withMatcher("AuthorCode", match -> match.exact());
-        Example example = Example.of(new Book(categoryCode, authorCode), matcher);
+        ExampleMatcher matcher = ExampleMatcher.matching();
+        Book bookSample = new Book();
+        if(StringUtils.isNotEmpty(authorCode)){
+            matcher = matcher.withMatcher("author.code", match -> match.exact());
+            bookSample.setAuthor(new Author(authorCode));
+        }
+        if(StringUtils.isNotEmpty(categoryCode)){
+            matcher = matcher.withMatcher("categories.code", match -> match.exact()); //@Todo: need update this.
+            ArrayList<Category> categories = new ArrayList<>();
+            categories.add(new Category(categoryCode));
+            bookSample.setCategories(categories);
+        }
+
+        Example example = Example.of(bookSample, matcher);
         PageRequest pageable = PageRequest.of(page - 1, maxPageItems);
         Page<Book> chapterPage = repository.findAll(example, pageable);
         List<Book> chapters = chapterPage.getContent();

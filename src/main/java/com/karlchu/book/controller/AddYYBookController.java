@@ -85,11 +85,10 @@ public class AddYYBookController {
             book.setCode(bookCode);
             book.setTitle(bookTitle);
 
-            book.setCategory(cate);
-            book.setCategoryCode(WebCommonUtils.normalizeTitle(cate));
+//            book.setCategory(cate);
+//            book.setCategoryCode(WebCommonUtils.normalizeTitle(cate));
 
-            book.setAuthor(author);
-            book.setAuthorCode(WebCommonUtils.normalizeTitle(author));
+//            book.setAuthor(author);
             book.setDescription(summary);
             this.bookRepository.insert(book);
         }
@@ -125,13 +124,13 @@ public class AddYYBookController {
                 Chapter chapter = new Chapter();
                 long chpId = this.chapterRepositoryCustom.getMaxId() + 1;
                 chapter.setId(chpId);
-                chapter.setChapterTitle(chapterTitle);
+//                chapter.setChapterTitle(chapterTitle);
                 chapter.setBookId(book.getId());
                 chapter.setCode(computeCode(book.getTitle(), chapterTitle));
 
                 Element chapContentE = doc.select("#id_chap_content .inner").first();
                 chapter.setContent(chapContentE.html());
-                chapter.setChapterNumber(i++);
+//                chapter.setChapterNumber(i++);
                 this.chapterRepository.insert(chapter);
             }
         }

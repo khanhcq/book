@@ -7,56 +7,52 @@ package com.karlchu.book.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
-@Document(collection = "Book")
+@Document(collection = "book")
 public class Book {
     @Id
     private Long id;
     @Indexed(unique = true)
-    @Field(value = "Code")
     private String code;
-    @Field(value = "Title")
     private String title;
-    @Field(value = "Description")
     private String description;
-    @Field(value = "FileType")
     private String fileType;
-    @Field(value = "Tags")
     private String tags;
-    @Field(value = "Source")
     private String source;
-    @Field(value = "CoverUrl")
     private String coverUrl;
-    @Field(value = "Uri")
     private String uri;
-    @Field(value = "AlterUri")
     private String alterUri;
-//    @Field(value = "CreatedBy")
-//    private Users createdBy;
-    @Field(value = "CreatedDate")
-    private Timestamp createdDate;
-    @Field(value = "ModifiedDate")
-    private Timestamp modifiedDate;
-    @Field(value = "Status")
+    private Date createdDate;
+    private Date modifiedDate;
     private Integer status;
-    @Field(value = "Author")
-    private String author;
-    @Field(value = "AuthorCode")
-    private String authorCode;
-    @Field(value = "Category")
-    private String category;
-    @Field(value = "CategoryCode")
-    private String categoryCode;
-
-    @Field(value = "View")
+    private Author author;
+    private List<Category> categories;
+    private List<String> categoryCodes;
     private Integer view;
 
+    public Book(List<Category> categories, Author author) {
+        this.categories = categories;
+        this.author = author;
+    }
+
     public Book(String categoryCode, String authorCode) {
-        this.categoryCode = categoryCode;
-        this.authorCode = authorCode;
+        ArrayList<Category> categories = new ArrayList<>();
+        Category category = new Category(categoryCode);
+        categories.add(category);
+        this.categories = categories;
+
+        Author author = new Author(authorCode);
+        this.author = author;
+    }
+
+    public Book(String authorCode) {
+        Author author = new Author(authorCode);
+        this.author = author;
     }
 
     public Integer getView() {
@@ -67,43 +63,31 @@ public class Book {
         this.view = view;
     }
 
-    public Book(String categoryCode) {
-        this.categoryCode = categoryCode;
-    }
-
     public Book() {
 
     }
 
-    public String getAuthorCode() {
-        return authorCode;
+    public List<Category> getCategories() {
+        return categories;
     }
 
-    public void setAuthorCode(String authorCode) {
-        this.authorCode = authorCode;
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
     }
 
-    public String getCategoryCode() {
-        return categoryCode;
+    public List<String> getCategoryCodes() {
+        return categoryCodes;
     }
 
-    public void setCategoryCode(String categoryCode) {
-        this.categoryCode = categoryCode;
+    public void setCategoryCodes(List<String> categoryCodes) {
+        this.categoryCodes = categoryCodes;
     }
 
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public String getAuthor() {
+    public Author getAuthor() {
         return author;
     }
 
-    public void setAuthor(String author) {
+    public void setAuthor(Author author) {
         this.author = author;
     }
 
@@ -195,7 +179,7 @@ public class Book {
         this.alterUri = alterUri;
     }
 
-    public Timestamp getCreatedDate() {
+    public Date getCreatedDate() {
         return createdDate;
     }
 
@@ -203,7 +187,7 @@ public class Book {
         this.createdDate = createdDate;
     }
 
-    public Timestamp getModifiedDate() {
+    public Date getModifiedDate() {
         return modifiedDate;
     }
 

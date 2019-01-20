@@ -15,20 +15,20 @@
         <div class="navbar-header pull-left">
             <a href="/" class="navbar-brand">
                 <small>
-                    <i class="fa fa-newspaper-o"></i>
+                    <%--<i class="fa fa-newspaper-o"></i>--%>
                     <fmt:message key="webapp.name"/>
                 </small>
             </a>
         </div>
 
-        <div class="navbar-buttons navbar-header pull-right" role="navigation">
-            <%--<ul class="nav ace-nav">--%>
-                <%--<li class="light-blue">--%>
-                    <%--<a href="<c:url value="/login"/>">--%>
-                        <%--<i class="ace-icon fa fa-sign-in"></i><fmt:message key="label.login"/>--%>
-                    <%--</a>--%>
-                <%--</li>--%>
-            <%--</ul>--%>
-        </div>
+        <%--<div class="navbar-buttons navbar-header pull-right" role="navigation">--%>
+            <%--&lt;%&ndash;<ul class="nav ace-nav">&ndash;%&gt;--%>
+                <%--&lt;%&ndash;<li class="light-blue">&ndash;%&gt;--%>
+                    <%--&lt;%&ndash;<a href="<c:url value="/login"/>">&ndash;%&gt;--%>
+                        <%--&lt;%&ndash;<i class="ace-icon fa fa-sign-in"></i><fmt:message key="label.login"/>&ndash;%&gt;--%>
+                    <%--&lt;%&ndash;</a>&ndash;%&gt;--%>
+                <%--&lt;%&ndash;</li>&ndash;%&gt;--%>
+            <%--&lt;%&ndash;</ul>&ndash;%&gt;--%>
+        <%--</div>--%>
     </div><!-- /.navbar-container -->
 </div>

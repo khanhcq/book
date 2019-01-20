@@ -54,12 +54,11 @@ public class ChapterViewerController {
             book.setTitle("Thôn phệ Tinh Không");
 
             String cate = "Huyền Huyễn";
-            book.setCategory(cate);
-            book.setCategoryCode(WebCommonUtils.normalizeTitle(cate));
+//            book.setCategory(cate);
+//            book.setCategoryCode(WebCommonUtils.normalizeTitle(cate));
 
             String author = "Ngã Cật Tây Hồng Thị";
-            book.setAuthor(author);
-            book.setAuthorCode(WebCommonUtils.normalizeTitle(author));
+//            book.setAuthor(author);
 
             this.bookRepository.insert(book);
         }
@@ -86,11 +85,11 @@ public class ChapterViewerController {
                 Chapter chapter = new Chapter();
                 long chpId = this.chapterRepositoryCustom.getMaxId() + 1;
                 chapter.setId(chpId);
-                chapter.setChapterTitle(chapterTitle);
+//                chapter.setChapterTitle(chapterTitle);
                 chapter.setBookId(book.getId());
                 chapter.setCode(computeCode(book.getTitle(), chapterTitle));
                 chapter.setContent(doc.body().html());
-                chapter.setChapterNumber(i++);
+//                chapter.setChapterNumber(i++);
                 this.chapterRepository.insert(chapter);
             }
         }

@@ -11,12 +11,12 @@
             <a href="<c:url value="/"/>"><fmt:message key="label.home"/></a>
         </li>
         <li>
-            <a href="<c:url value="/books?category=${book.categoryCode}"/>">${book.category}</a>
+            <a href="<c:url value="/books?category=${book.categoryCodes[0]}"/>">${book.categoryies[0]}</a>
         </li>
         <li>
             <a href="<c:url value="/book?id=${book.id}"/>">${book.title}</a>
         </li>
-        <li class="active">${chapter.chapterTitle}</li>
+        <li class="active">${chapter.title}</li>
     </ul>
 </div>
 
@@ -34,29 +34,29 @@
                 </div>
             </div>
         </c:if>
-        <c:url var="prevUrl" value="/chapter?id=${chapter.bookId}&no=${chapter.chapterNumber - 1}"/>
-        <c:url var="nextUrl" value="/chapter?id=${chapter.bookId}&no=${chapter.chapterNumber + 1}"/>
-        <c:if test="${chapter.chapterNumber == 1}">
+        <c:url var="prevUrl" value="/chapter?id=${chapter.bookId}&no=${chapter.number - 1}"/>
+        <c:url var="nextUrl" value="/chapter?id=${chapter.bookId}&no=${chapter.number + 1}"/>
+        <c:if test="${chapter.number == 1}">
             <c:url var="prevUrl" value="#"/>
         </c:if>
-        <c:if test="${chapter.chapterNumber == lastChapter}">
+        <c:if test="${chapter.number == lastChapter}">
             <c:url var="nextUrl" value="#"/>
         </c:if>
         <div class="page-header">
             <div class="row">
                 <div class="col-xs-12 text-center chapter-title">
-                    ${chapter.chapterTitle}
+                    ${chapter.title}
                 </div>
             </div>
         </div>
 
         <div class="row">
             <div class="text-center nav-chapter">
-                <a href="${prevUrl}" class="btn btn-success ${chapter.chapterNumber == 1 ? "disabled" : ""}">
+                <a href="${prevUrl}" class="btn btn-success ${chapter.number == 1 ? "disabled" : ""}">
                     <i class="ace-icon fa fa-arrow-left"></i>
                     <fmt:message key="label.prev.chapter"/>
                 </a>
-                <a  href="${nextUrl}"class="btn btn-success ${chapter.chapterNumber == lastChapter ? "disabled" : ""}">
+                <a  href="${nextUrl}"class="btn btn-success ${chapter.number == lastChapter ? "disabled" : ""}">
                     <fmt:message key="label.next.chapter"/> &nbsp; <i class="ace-icon fa fa-arrow-right"></i>
                 </a>
             </div>
@@ -72,11 +72,11 @@
 
         <div class="row">
             <div class="text-center nav-chapter">
-                <a href="${prevUrl}" class="btn btn-success ${chapter.chapterNumber == 1 ? "disabled" : ""}">
+                <a href="${prevUrl}" class="btn btn-success ${chapter.number == 1 ? "disabled" : ""}">
                     <i class="ace-icon fa fa-arrow-left"></i>
                     <fmt:message key="label.prev.chapter"/>
                 </a>
-                <a  href="${nextUrl}"class="btn btn-success ${chapter.chapterNumber == lastChapter ? "disabled" : ""}">
+                <a  href="${nextUrl}"class="btn btn-success ${chapter.number == lastChapter ? "disabled" : ""}">
                     <fmt:message key="label.next.chapter"/> &nbsp; <i class="ace-icon fa fa-arrow-right"></i>
                 </a>
             </div>

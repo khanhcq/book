@@ -9,5 +9,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 public interface ChapterRepository extends MongoRepository<Chapter, Long> {
     Chapter findByCode(String code);
 
-    Chapter findByBookIdAndChapterNumber(Long bookId, Integer chapterNo);
+    Chapter findByBookIdAndNumber(Long bookId, Integer chapterNo);
 }

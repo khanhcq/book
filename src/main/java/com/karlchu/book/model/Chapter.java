@@ -7,32 +7,21 @@ package com.karlchu.book.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.Date;
 
-@Document(collection = "Chapter")
+@Document(collection = "chapter")
 public class Chapter {
-
     @Id
     private Long id;
-
     @Indexed(unique = true)
-    @Field(value = "Code")
     private String code;
-
-    @Field(value = "ChapterNumber")
-    private Integer chapterNumber;
-
-    @Field(value = "ChapterTitle")
-    private String chapterTitle;
-
-    @Field(value = "Content")
+    private Integer number;
+    private String title;
     private String content;
-
-    @Field(value = "BookId")
     private Long bookId;
-
+    private Date createdDate;
+    private Date modifiedDate;
     public Chapter() {
     }
 
@@ -64,20 +53,20 @@ public class Chapter {
         this.code = code;
     }
 
-    public Integer getChapterNumber() {
-        return chapterNumber;
+    public Integer getNumber() {
+        return number;
     }
 
-    public void setChapterNumber(Integer chapterNumber) {
-        this.chapterNumber = chapterNumber;
+    public void setNumber(Integer number) {
+        this.number = number;
     }
 
-    public String getChapterTitle() {
-        return chapterTitle;
+    public String getTitle() {
+        return title;
     }
 
-    public void setChapterTitle(String chapterTitle) {
-        this.chapterTitle = chapterTitle;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getContent() {

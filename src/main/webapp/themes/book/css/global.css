@@ -42,3 +42,17 @@
 .main-content {
     /*background: #f5f5f5;*/
 }
+.book-thumb {
+    width: 60px;
+    height: 90px;
+}
+
+a, a:hover {
+    text-decoration: none;
+}
+
+.book-list .book-title a,
+.book-list .book-title a:visited {
+    color: #111;
+    font-weight: bold;
+}

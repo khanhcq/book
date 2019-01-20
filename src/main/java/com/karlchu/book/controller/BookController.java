@@ -78,7 +78,7 @@ public class BookController extends ApplicationObjectSupport {
             @RequestParam(value = "id") Long bookId,
             @RequestParam(value = "no") Integer chapterNo) {
         ModelAndView mav = new ModelAndView("/viewer/html");
-        Chapter chapter = chapterRepository.findByBookIdAndChapterNumber(bookId, chapterNo);
+        Chapter chapter = chapterRepository.findByBookIdAndNumber(bookId, chapterNo);
         mav.addObject("chapter", chapter);
         mav.addObject("lastChapter", chapterRepository.count(CoreUtils.getChapterExample(bookId)));
         mav.addObject("book", bookRepository.findById(chapter.getBookId()).get());
