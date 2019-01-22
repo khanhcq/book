@@ -48,8 +48,8 @@ public class ChapterViewerController {
         Book book = bookRepository.findByCode(TPTK_NCTHT);
         if(book == null) {
             book = new Book();
-            long id = this.bookRepositoryCustom.getMaxId() + 1;
-            book.setId(id);
+//            long id = this.bookRepositoryCustom.getMaxId() + 1;
+//            book.setId(id);
             book.setCode(TPTK_NCTHT);
             book.setTitle("Thôn phệ Tinh Không");
 

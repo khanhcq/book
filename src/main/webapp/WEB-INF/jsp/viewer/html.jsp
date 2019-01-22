@@ -11,7 +11,7 @@
             <a href="<c:url value="/"/>"><fmt:message key="label.home"/></a>
         </li>
         <li>
-            <a href="<c:url value="/books?category=${book.categoryCodes[0]}"/>">${book.categoryies[0]}</a>
+            <a href="<c:url value="/books?category=${book.categories[0].code}"/>">${book.categories[0].name}</a>
         </li>
         <li>
             <a href="<c:url value="/book?id=${book.id}"/>">${book.title}</a>

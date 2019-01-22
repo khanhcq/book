@@ -34,11 +34,27 @@ public class MigrateTruyenYY {
     public static void main (String [] args) {
         MongoClient mongoClient = new MongoClient( "localhost" , 27017 );
         MongoDatabase db = mongoClient.getDatabase(DB_NAME);
-        testInsert(db, "thien-tai-cao-thu");
+        String rootDir = "D:\\CrawledFiles";
+        File fRootDir = new File(rootDir);
+        File[] files = fRootDir.listFiles();
+        String bookName;
+        String fileName;
+        int i = 0;
+        for(File file : fRootDir.listFiles()) {
+            fileName = file.getName();
+            if(file.isFile() && fileName.endsWith("\\.done")) {
+                bookName = fileName.replaceAll("\\.done","");
+                testInsert(db, bookName, rootDir + "\\" + bookName);
+                i++;
+            }
+
+            if(i == 10){
+                break;
+            }
+        }
     }
 
-    private static String testInsert(MongoDatabase db, String bookName) {
-        String bookDir = "D:\\" + bookName;
+    private static String testInsert(MongoDatabase db, String bookName, String bookDir) {
         String introChapDir = bookDir + "\\" + bookName + ".html";
         StringBuilder stringBuilder = new StringBuilder();
         String line;

@@ -11,7 +11,7 @@
             <a href="<c:url value="/"/>"><fmt:message key="label.home"/></a>
         </li>
         <li>
-            <a href="<c:url value="/books?category=${book.categoryCodes[0]}"/>">${book.categories[0]}</a>
+            <a href="<c:url value="/books?category=${book.categories[0].code}"/>">${book.categories[0].name}</a>
         </li>
         <li class="active">${book.title}</li>
     </ul>
@@ -47,15 +47,15 @@
                     <div>
                         <a class="author" href="<c:url value="/books?author=${book.author.code}"/>">
                             <span class="category-span"><fmt:message key="label.author"/>:</span>
-                            <span>${book.author}</span>
+                            <span>${book.author.name}</span>
                         </a>
                     </div>
                     <div>
                         <c:forEach items="${book.categories}" var="category" varStatus="index">
                             <a class="category"
-                               href="<c:url value="/books?category=${book.categoryCodes[index]}"/>">
+                               href="<c:url value="/books?category=${category.code}"/>">
                                 <span class="category-span"><fmt:message key="label.type"/>:</span>
-                                <span>${category}</span>
+                                <span>${category.name}</span>
                             </a>
                         </c:forEach>
 

@@ -80,8 +80,8 @@ public class AddYYBookController {
         Book book = bookRepository.findByCode(bookCode);
         if(book == null) {
             book = new Book();
-            long id = this.bookRepositoryCustom.getMaxId() + 1;
-            book.setId(id);
+//            long id = this.bookRepositoryCustom.getMaxId() + 1;
+//            book.setId(id);
             book.setCode(bookCode);
             book.setTitle(bookTitle);
 

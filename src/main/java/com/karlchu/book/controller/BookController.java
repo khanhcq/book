@@ -4,13 +4,17 @@ package com.karlchu.book.controller;
  * Created by Khanh Chu on 12/27/2018.
  */
 
+import com.karlchu.book.command.BookCommand;
 import com.karlchu.book.command.ChapterCommand;
 import com.karlchu.book.core.repository.BookRepository;
 import com.karlchu.book.core.repository.ChapterRepository;
+import com.karlchu.book.core.repository.custom.BookRepositoryCustom;
+import com.karlchu.book.core.repository.custom.BookRepositoryCustomImpl;
 import com.karlchu.book.core.service.BookService;
 import com.karlchu.book.core.service.ChapterService;
 import com.karlchu.book.core.utils.CoreUtils;
 import com.karlchu.book.dto.ChapterDTO;
+import com.karlchu.book.model.Book;
 import com.karlchu.book.model.Chapter;
 import com.karlchu.book.utility.Constants;
 import org.apache.commons.logging.Log;
@@ -41,14 +45,17 @@ public class BookController extends ApplicationObjectSupport {
     @Autowired
     private BookRepository bookRepository;
 
+    @Autowired
+    private BookRepositoryCustom bookRepositoryCustom;
+
     @RequestMapping(value = {"/books","/"})
     public ModelAndView list(@RequestParam(value = "page", required = false) Integer page,
                              @RequestParam(value = "category", required = false) String category,
                              @RequestParam(value = "author", required = false) String author,
-                             ChapterCommand command){
+                             BookCommand command){
         ModelAndView mav = new ModelAndView("/public/books");
-        Object[] results = bookService.searchByPageAndSize(page, command.getMaxPageItems(), category, author);
-        command.setListResult((List<ChapterDTO>) results[1]);
+        Object[] results = bookRepositoryCustom.findByAuthorOrCategory(page, command.getMaxPageItems(), category, author);
+        command.setListResult((List<Book>) results[1]);
         command.setTotalItems(Integer.valueOf(results[0].toString()));
         command.setTotalPages(Integer.valueOf(results[2].toString()));
         mav.addObject(Constants.LIST_MODEL_KEY, command);

@@ -6,8 +6,8 @@ import com.karlchu.book.model.Book;
 /**
  * Created by KhanhChu on 1/5/2019.
  */
-public class BookCommand extends AbstractCommand<BookDTO> {
+public class BookCommand extends AbstractCommand<Book> {
     public BookCommand() {
-        this.pojo = new BookDTO();
+        this.pojo = new Book();
     }
 }
