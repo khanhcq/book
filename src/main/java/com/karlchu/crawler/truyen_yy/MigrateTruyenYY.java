@@ -42,10 +42,12 @@ public class MigrateTruyenYY {
         int i = 0;
         for(File file : fRootDir.listFiles()) {
             fileName = file.getName();
-            if(file.isFile() && fileName.endsWith("\\.done")) {
+            if(file.isFile() && fileName.endsWith(".done")) {
                 bookName = fileName.replaceAll("\\.done","");
-                testInsert(db, bookName, rootDir + "\\" + bookName);
-                i++;
+                if(bookName.length() > 0) {
+                    testInsert(db, bookName, rootDir + "\\" + bookName);
+                    i++;
+                }
             }
 
             if(i == 10){
