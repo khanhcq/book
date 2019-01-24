@@ -1,9 +1,6 @@
 package com.karlchu.crawler.utils;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 
 /**
  * Created by KhanhChu on 1/15/2019.
@@ -21,5 +18,19 @@ public class CrawlerUtils {
             e.printStackTrace();
         }
         return out;
+    }
+
+    public static StringBuilder getFileContent(String path) {
+        StringBuilder stringBuilder = new StringBuilder();
+        String line;
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(path));
+            while ((line = reader.readLine()) != null) {
+                stringBuilder.append(line);
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        return stringBuilder;
     }
 }
