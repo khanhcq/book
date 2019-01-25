@@ -20,16 +20,12 @@ public class CrawlerUtils {
         return out;
     }
 
-    public static StringBuilder getFileContent(String path) {
+    public static StringBuilder getFileContent(String path) throws Exception {
         StringBuilder stringBuilder = new StringBuilder();
         String line;
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(path));
-            while ((line = reader.readLine()) != null) {
-                stringBuilder.append(line);
-            }
-        } catch(Exception e) {
-            e.printStackTrace();
+        BufferedReader reader = new BufferedReader(new FileReader(path));
+        while ((line = reader.readLine()) != null) {
+            stringBuilder.append(line);
         }
         return stringBuilder;
     }

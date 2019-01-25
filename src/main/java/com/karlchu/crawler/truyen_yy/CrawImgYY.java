@@ -11,27 +11,29 @@ import java.io.IOException;
 import java.net.URL;
 
 public class CrawImgYY {
-    private static final String root = "D:\\";
+    private static final String root = "E:\\";
     public static void main (String [] args) {
-        String rootDir = "D:\\CrawledFiles";
+        String rootDir = root + "CrawledFiles";
         File fRootDir = new File(rootDir);
         String bookName;
         String fileName;
         for(File file : fRootDir.listFiles()) {
             fileName = file.getName();
-            if(file.isFile() && fileName.endsWith("\\.done")) {
+            if(file.isFile() && fileName.endsWith(".done")) {
                 bookName = fileName.replaceAll("\\.done","");
-                try {
-                    getImg(bookName);
-                } catch (IOException e) {
-                    e.printStackTrace();
+                if(bookName.length() > 0){
+                    try {
+                        getImg(bookName);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }
     }
 
-    private static String getImg(String bookName) throws IOException {
-        String bookDir = root + bookName;
+    private static String getImg(String bookName) throws Exception {
+        String bookDir = root + "CrawledFiles\\" + bookName;
         String introChapDir = bookDir + "\\" + bookName + ".html";
         StringBuilder stringBuilder = CrawlerUtils.getFileContent(introChapDir);
         org.jsoup.nodes.Document document = Jsoup.parse(stringBuilder.toString());
