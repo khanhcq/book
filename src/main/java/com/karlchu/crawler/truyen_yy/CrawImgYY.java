@@ -44,8 +44,8 @@ public class CrawImgYY {
         URL urlInput = new URL(coverURI);
         String ext = coverURI.substring(coverURI.lastIndexOf(".") + 1, coverURI.length());
         BufferedImage bi = ImageIO.read(urlInput);
-        File outputfile = new File(root + "img\\" +bookName + "." + ext);
-        ImageIO.write(bi, ext, outputfile);
+        File imgFile = new File(root + "img\\" +bookName + "." + ext);
+        ImageIO.write(bi, ext, imgFile);
         return "Done";
     }
 }
