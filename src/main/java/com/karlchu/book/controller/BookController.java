@@ -67,10 +67,11 @@ public class BookController extends ApplicationObjectSupport {
 
     @RequestMapping(value = "/book")
     public ModelAndView list(@RequestParam(value = "page", required = false) Integer page,
+                             @RequestParam(value = "all", required = false) boolean all,
                              @RequestParam(value = "id") Long bookId,
                              ChapterCommand command){
         ModelAndView mav = new ModelAndView("/admin/chapter/list");
-        Object[] results = chapterService.searchByPageAndSize(bookId, page, command.getMaxPageItems());
+        Object[] results = chapterService.searchByPageAndSize(bookId, page, command.getMaxPageItems(), all);
         command.setListResult((List<ChapterDTO>) results[1]);
         command.setTotalItems(Integer.valueOf(results[0].toString()));
         command.setTotalPages(Integer.valueOf(results[2].toString()));

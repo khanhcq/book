@@ -24,14 +24,26 @@ public class ChapterService {
         return repository.findAll();
     }
 
-    public Object[] searchByPageAndSize(Long bookId, Integer page, Integer maxPageItems) {
+    public Object[] searchByPageAndSize(Long bookId, Integer page, Integer maxPageItems, boolean all) {
         if(page == null) {
             page = 1;
         }
         PageRequest pageable = PageRequest.of(page - 1, maxPageItems);
-        Page<Chapter> chapterPage = repository.findAll(CoreUtils.getChapterExample(bookId), pageable);
-        List<Chapter> chapters = chapterPage.getContent();
-        return new Object[]{String.valueOf(chapterPage.getTotalElements()), chapters, chapterPage.getTotalPages()};
+        Page<Chapter> chapterPage;
+        List<Chapter> chapters;
+        String total;
+        int totalPage;
+        if(all){
+            chapters = repository.findAll(CoreUtils.getChapterExample(bookId));
+            total = String.valueOf(chapters.size());
+            totalPage = 1;
+        } else{
+            chapterPage = repository.findAll(CoreUtils.getChapterExample(bookId), pageable);
+            chapters = chapterPage.getContent();
+            total = String.valueOf(chapterPage.getTotalElements());
+            totalPage = chapterPage.getTotalPages();
+        }
+        return new Object[]{total, chapters, totalPage};
     }
 
 }

@@ -18,7 +18,7 @@
 </div>
 <div class="container">
     <div class="row">
-        <div class="col-sm-8">
+        <div class="col-sm-8 books">
             <div class="page-header">
                 <h1 class="">
                     <c:choose>
@@ -34,18 +34,14 @@
                     </c:choose>
                 </h1>
             </div>
-
-            <div class="row">
-
-
-
+            <div class="row book">
                 <div class="col-xs-12 book-list">
                     <c:forEach items="${items.listResult}" var="book">
                         <c:url var="bookUrl" value="/book?id=${book.id}"/>
                         <div class="with-border media">
                             <div class="media-left">
-                                <a href="${bookUrl}" class="">
-                                    <img src="<c:url value="/themes/book/img/book-default-img.png"/>"
+                                <a href="${bookUrl}" class="book-cover-trans">
+                                    <img src="http://pic.truyen.co/img/bat-bai-thien-kieu.jpg"
                                          alt="${book.title}" class="book-thumb">
                                 </a>
                             </div>
@@ -113,21 +109,21 @@
                 ${my:pagination(items, pageUrl)}
             </div>
         </div>
-        <div class="col-sm-4">
-            <div class="">
-                <div class="">
-                    <h3 class=""><a href="<c:url value="/books?status=done"/>"><fmt:message key="label.book.done"/></a>
-                    </h3>
-                </div>
-                <ul class="list-unstyled">
-                    <c:forEach items="${items.listResult}" var="book">
-                        <li class="">
-                            <a href="<c:url value="/book?id=${book.id}"/>">${book.title}</a>
-                        </li>
-                    </c:forEach>
-                </ul>
-            </div>
-        </div>
+        <%--<div class="col-sm-4">--%>
+            <%--<div class="">--%>
+                <%--<div class="">--%>
+                    <%--<h3 class=""><a href="<c:url value="/books?status=done"/>"><fmt:message key="label.book.done"/></a>--%>
+                    <%--</h3>--%>
+                <%--</div>--%>
+                <%--<ul class="list-unstyled">--%>
+                    <%--<c:forEach items="${items.listResult}" var="book">--%>
+                        <%--<li class="">--%>
+                            <%--<a href="<c:url value="/book?id=${book.id}"/>">${book.title}</a>--%>
+                        <%--</li>--%>
+                    <%--</c:forEach>--%>
+                <%--</ul>--%>
+            <%--</div>--%>
+        <%--</div>--%>
     </div>
 </div>
 

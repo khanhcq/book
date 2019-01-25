@@ -124,8 +124,14 @@ public class WebCommonUtils {
                 sb.append("<li><a href=\"").append(url).append("page=").append(totalPage)
                         .append("\"><i class=\"ace-icon fa fa-angle-right\"></i></a></li>");
             }
+            if(totalPage > 5){
+                sb.append("<li><a href=\"").append(url).append("all=true")
+                        .append("\"> All </a></li>");
+            }
+
             sb.append("</ul>");
         }
+
         return sb.toString();
     }
 

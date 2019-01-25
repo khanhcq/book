@@ -17,7 +17,7 @@
     </ul>
 </div>
 
-<div class="page-content">
+<div class="container">
     <c:if test="${not empty messageResponse}">
         <div class="row">
             <div class="col-xs-12">
@@ -31,51 +31,55 @@
             </div>
         </div>
     </c:if>
-
-    <form:form action="${formUrl}" modelAttribute="items" role="form" id="listForm" cssClass="form-horizontal">
+    <div class="book-info page-header">
+        <%--<h1>${book.title}</h1>--%>
         <div class="row">
             <div class="col-xs-12">
-                <div class="col-xs-4">
-                    <div class="book-thumb-img">
-                        <img alt="${book.title}"
-                             src="<c:url value="/themes/book/img/book-default-img.png"/>">
+                <div class="with-border media">
+                    <div class="media-left">
+                        <div class="book-cover-trans">
+                            <img src="http://pic.truyen.co/img/bat-bai-thien-kieu.jpg"
+                                 alt="${book.title}" class="book-thumb">
+                        </div>
                     </div>
-                    <div>
-                        <span class="title">${book.title}</span>
-                    </div>
-
-                    <div>
-                        <a class="author" href="<c:url value="/books?author=${book.author.code}"/>">
-                            <span class="category-span"><fmt:message key="label.author"/>:</span>
-                            <span>${book.author.name}</span>
-                        </a>
-                    </div>
-                    <div>
-                        <c:forEach items="${book.categories}" var="category" varStatus="index">
-                            <a class="category"
-                               href="<c:url value="/books?category=${category.code}"/>">
-                                <span class="category-span"><fmt:message key="label.type"/>:</span>
-                                <span>${category.name}</span>
+                    <div class="media-body">
+                        <h4 class="media-heading book-title"><span>${book.title}</span></h4>
+                        <div class="small">
+                            <a href="<c:url value="/books?author=${book.author.code}"/>" class="text-muted author">
+                                ${book.author.name}
                             </a>
-                        </c:forEach>
+                        </div>
+
+                        <ul class="tag-list tag-small list-unstyled mt-2">
+                            <c:forEach items="${book.categories}" var="category">
+                                <li class="tag green">
+                                    <a href="<c:url value="/books?category=${category.code}"/>">${category.name}</a>
+                                </li>
+                            </c:forEach>
+                        </ul>
+
 
                     </div>
-                </div>
-                <div class="col-xs-8">
-                        ${book.description}
                 </div>
             </div>
         </div>
-        <br>
-        <c:if test="${items.totalItems > 0}">
-            <div class="row">
-                <div class="dataTables_wrapper form-inline no-footer">
-                    <c:forEach items="${items.listResult}" var="tableList">
-                        <div>
-                            <a href="<c:url value="/chapter?id=${book.id}&no=${tableList.number}"/>">
-                                    ${tableList.title}
-                            </a>
+        <div class="row">
+            <div class="col-xs-12">
+                ${book.description}
+            </div>
+        </div>
+    </div>
 
+    <br>
+    <c:if test="${items.totalItems > 0}">
+        <div class="chapters">
+            <div class="row">
+                <div class="col-xs-12">
+                    <c:forEach items="${items.listResult}" var="tableList">
+                        <div class="chap">
+                            <a href="<c:url value="/chapter?id=${book.id}&no=${tableList.number}"/>">
+                                <str:truncateNicely upper="52">${tableList.title}</str:truncateNicely>
+                            </a>
                         </div>
                     </c:forEach>
 
@@ -83,8 +87,9 @@
                 <c:url var="pageUrl" value="/book?id=${book.id}&"/>
                     ${my:pagination(items, pageUrl)}
             </div>
-        </c:if>
-    </form:form>
+        </div>
+
+    </c:if>
 </div>
 
 <script type="text/javascript">
