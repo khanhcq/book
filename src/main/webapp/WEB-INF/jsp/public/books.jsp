@@ -34,14 +34,14 @@
                     </c:choose>
                 </h1>
             </div>
-            <div class="row book">
-                <div class="col-xs-12 book-list">
+            <div class="row">
+                <div class="col-xs-12">
                     <c:forEach items="${items.listResult}" var="book">
                         <c:url var="bookUrl" value="/book?id=${book.id}"/>
-                        <div class="with-border media">
+                        <div class="with-border media book-item">
                             <div class="media-left">
                                 <a href="${bookUrl}" class="book-cover-trans">
-                                    <img src="http://pic.truyen.co/img/bat-bai-thien-kieu.jpg"
+                                    <img src="https://pic.truyen.co/img/<str:lowerCase>${my:normalizeTitle(book.title)}</str:lowerCase>.jpg"
                                          alt="${book.title}" class="book-thumb">
                                 </a>
                             </div>
@@ -106,7 +106,9 @@
             </div>
             <div class="text-center">
                 <c:url var="pageUrl" value="/books?"/>
-                ${my:pagination(items, pageUrl)}
+                <c:if test="${!empty category}"><c:url var="pageUrl" value="/books?category=${category}&"/></c:if>
+                <c:if test="${!empty author}"><c:url var="pageUrl" value="/books?author=${author}&"/></c:if>
+                ${my:pagination(items, pageUrl, false)}
             </div>
         </div>
         <%--<div class="col-sm-4">--%>

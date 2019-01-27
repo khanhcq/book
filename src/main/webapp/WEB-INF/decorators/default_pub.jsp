@@ -11,7 +11,7 @@
         <!-- page specific plugin styles -->
         <%--<link rel="stylesheet" href="<c:url value="/themes/ace_1.4/components/select2-4.0.3/dist/css/select2.min.css"/>">--%>
         <!-- text fonts -->
-        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300"/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,300"/>
 
         <!-- page specific plugin styles -->
         <%--<link rel="stylesheet" href="<c:url value="/themes/ace_1.4/components/_mod/jquery-ui.custom/jquery-ui.custom.min.css"/>">--%>
@@ -53,7 +53,7 @@
 <!-- Header -->
 <jsp:include page="/themes/ace_1.4/include/public/header.jsp"/>
 <div class="main-container ace-save-state" id="main-container">
-    <%--<jsp:include page="/themes/ace_1.4/include/public/sidebar.jsp"/>--%>
+    <jsp:include page="/themes/ace_1.4/include/public/sidebar.jsp"/>
         <div class="main-content">
             <div class="main-content-inner">
                 <sitemesh:write property="body" />

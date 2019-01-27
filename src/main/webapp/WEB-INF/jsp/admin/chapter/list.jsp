@@ -38,7 +38,7 @@
                 <div class="with-border media">
                     <div class="media-left">
                         <div class="book-cover-trans">
-                            <img src="http://pic.truyen.co/img/bat-bai-thien-kieu.jpg"
+                            <img src="https://pic.truyen.co/img/<str:lowerCase>${my:normalizeTitle(book.title)}</str:lowerCase>.jpg"
                                  alt="${book.title}" class="book-thumb">
                         </div>
                     </div>
@@ -85,7 +85,7 @@
 
                 </div>
                 <c:url var="pageUrl" value="/book?id=${book.id}&"/>
-                    ${my:pagination(items, pageUrl)}
+                    ${my:pagination(items, pageUrl, true)}
             </div>
         </div>
 

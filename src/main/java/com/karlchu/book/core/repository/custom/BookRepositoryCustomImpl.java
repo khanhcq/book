@@ -39,7 +39,7 @@ public class BookRepositoryCustomImpl implements BookRepositoryCustom {
             query = Query.query(elementMatchCriteria);
 
         }
-        query.with(pageable).with(new Sort(Sort.Direction.DESC, "id"));
+        query.with(pageable).with(new Sort(Sort.Direction.ASC, "title"));
 //        query.fields().position("categories", 1);
         List<Book> books = mongoTemplate.find(query, Book.class);
         Long total = mongoTemplate.count(query, "book");

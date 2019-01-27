@@ -51,7 +51,7 @@
     <function>
         <name>pagination</name>
         <function-class>com.karlchu.book.utility.WebCommonUtils</function-class>
-        <function-signature>java.lang.String pagination(com.karlchu.book.command.AbstractCommand, java.lang.String)</function-signature>
+        <function-signature>java.lang.String pagination(com.karlchu.book.command.AbstractCommand, java.lang.String, java.lang.Boolean)</function-signature>
     </function>
 
     <function>
@@ -83,5 +83,10 @@
         <function-signature>boolean isMobileOrTablet(javax.servlet.ServletRequest)</function-signature>
     </function>
 
+    <function>
+        <name>normalizeTitle</name>
+        <function-class>com.karlchu.book.utility.WebCommonUtils</function-class>
+        <function-signature>java.lang.String normalizeTitle( java.lang.String)</function-signature>
+    </function>
 
 </taglib>

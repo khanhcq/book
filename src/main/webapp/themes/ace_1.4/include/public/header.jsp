@@ -1,34 +1,100 @@
-<%@page trimDirectiveWhitespaces="true"%>
-<%@ include file="/WEB-INF/common/taglibs.jsp"%>
-<div id="navbar" class="navbar navbar-default ace-save-state">
+<%@page trimDirectiveWhitespaces="true" %>
+<%@ include file="/WEB-INF/common/taglibs.jsp" %>
+<div id="navbar" class="navbar navbar-default navbar-collapse h-navbar ace-save-state">
     <div class="navbar-container ace-save-state" id="navbar-container">
-        <%--<button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">--%>
-            <%--<span class="sr-only">Toggle sidebar</span>--%>
-
-            <%--<span class="icon-bar"></span>--%>
-
-            <%--<span class="icon-bar"></span>--%>
-
-            <%--<span class="icon-bar"></span>--%>
-        <%--</button>--%>
-
         <div class="navbar-header pull-left">
             <a href="/" class="navbar-brand">
                 <small>
-                    <%--<i class="fa fa-newspaper-o"></i>--%>
+                    <i class="fa fa-leaf"></i>
                     <fmt:message key="webapp.name"/>
                 </small>
             </a>
+
+            <button class="pull-right navbar-toggle navbar-toggle-img collapsed" type="button" data-toggle="collapse"
+                    data-target=".navbar-buttons,.navbar-menu">
+                <span class="sr-only">Toggle user menu</span>
+                <img src="assets/images/avatars/user.jpg" alt="Jason's Photo"/>
+            </button>
+
+            <button class="pull-right navbar-toggle collapsed" type="button" data-toggle="collapse"
+                    data-target="#sidebar">
+                <span class="sr-only">Toggle sidebar</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
         </div>
 
-        <%--<div class="navbar-buttons navbar-header pull-right" role="navigation">--%>
-            <%--&lt;%&ndash;<ul class="nav ace-nav">&ndash;%&gt;--%>
-                <%--&lt;%&ndash;<li class="light-blue">&ndash;%&gt;--%>
-                    <%--&lt;%&ndash;<a href="<c:url value="/login"/>">&ndash;%&gt;--%>
-                        <%--&lt;%&ndash;<i class="ace-icon fa fa-sign-in"></i><fmt:message key="label.login"/>&ndash;%&gt;--%>
-                    <%--&lt;%&ndash;</a>&ndash;%&gt;--%>
-                <%--&lt;%&ndash;</li>&ndash;%&gt;--%>
-            <%--&lt;%&ndash;</ul>&ndash;%&gt;--%>
-        <%--</div>--%>
+        <div class="navbar-buttons navbar-header pull-right  collapse navbar-collapse" role="navigation">
+            <ul class="nav ace-nav">
+                <li class="light-blue dropdown-modal user-min">
+                    <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                        <img class="nav-user-photo" src="assets/images/avatars/user.jpg" alt="Jason's Photo"/>
+                        <span class="user-info">
+									<small>Welcome,</small>
+									Jason
+								</span>
+
+                        <i class="ace-icon fa fa-caret-down"></i>
+                    </a>
+
+                    <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                        <li>
+                            <a href="profile.html">
+                                <i class="ace-icon fa fa-user"></i>
+                                Profile
+                            </a>
+                        </li>
+
+                        <li class="divider"></li>
+
+                        <li>
+                            <a href="#">
+                                <i class="ace-icon fa fa-power-off"></i>
+                                Logout
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <nav role="navigation" class="navbar-menu pull-left collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        Overview
+                        &nbsp;
+                        <i class="ace-icon fa fa-angle-down bigger-110"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-light-blue dropdown-caret">
+                        <li>
+                            <a href="#">
+                                <i class="ace-icon fa fa-eye bigger-110 blue"></i>
+                                Monthly Visitors
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <i class="ace-icon fa fa-envelope"></i>
+                        Messages
+                        <span class="badge badge-warning">5</span>
+                    </a>
+                </li>
+            </ul>
+
+            <form class="navbar-form navbar-left form-search" role="search">
+                <div class="form-group">
+                    <input type="text" placeholder="search"/>
+                </div>
+                <button type="button" class="btn btn-mini btn-info2">
+                    <i class="ace-icon fa fa-search icon-only bigger-110"></i>
+                </button>
+            </form>
+        </nav>
     </div><!-- /.navbar-container -->
 </div>
+

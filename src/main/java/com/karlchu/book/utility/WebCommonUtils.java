@@ -96,7 +96,7 @@ public class WebCommonUtils {
         return path;
     }
 
-    public static String pagination(AbstractCommand command, String url){
+    public static String pagination(AbstractCommand command, String url, Boolean hasAll){
         int currentPage = command.getPage();
         int totalPage = command.getTotalPages();
         StringBuilder sb = new StringBuilder();
@@ -124,7 +124,7 @@ public class WebCommonUtils {
                 sb.append("<li><a href=\"").append(url).append("page=").append(totalPage)
                         .append("\"><i class=\"ace-icon fa fa-angle-right\"></i></a></li>");
             }
-            if(totalPage > 5){
+            if(totalPage > 5 && hasAll){
                 sb.append("<li><a href=\"").append(url).append("all=true")
                         .append("\"> All </a></li>");
             }

@@ -1,0 +1,5 @@
+db.chapter.createIndex({bookId: 1}, {background: true, name: 'idx_chapter_by_bookid'});
+
+db.chapter.createIndex({ bookId: 1, number: 1 }, {  background: true, name: 'idx_chapter_by_bookId_and_number' });
+
+db.currentOp({ "msg": /Index Build/ });
