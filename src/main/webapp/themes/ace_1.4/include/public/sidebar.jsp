@@ -164,7 +164,7 @@
                 <i class="menu-icon fa fa-file-o"></i>
 
                 <span class="menu-text">
-								Other Pages
+								<fmt:message key="menu.account"/>
 
 								<span class="badge badge-primary">5</span>
 							</span>

@@ -42,7 +42,7 @@
                         <li>
                             <a href="profile.html">
                                 <i class="ace-icon fa fa-user"></i>
-                                Profile
+                                <fmt:message key="menu.account.profile"/>
                             </a>
                         </li>
 
@@ -51,7 +51,7 @@
                         <li>
                             <a href="#">
                                 <i class="ace-icon fa fa-power-off"></i>
-                                Logout
+                                <fmt:message key="label.login"/>
                             </a>
                         </li>
                     </ul>
