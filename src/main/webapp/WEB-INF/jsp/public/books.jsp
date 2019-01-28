@@ -41,8 +41,7 @@
                         <div class="with-border media book-item">
                             <div class="media-left">
                                 <a href="${bookUrl}" class="book-cover-trans">
-                                    <img src="https://pic.truyen.co/img/<str:lowerCase>${my:normalizeTitle(book.title)}</str:lowerCase>.jpg"
-                                         alt="${book.title}" class="book-thumb">
+                                    <img src="https://pic.truyen.co/img/<str:lowerCase>${my:normalizeTitle(book.title)}</str:lowerCase>.jpg" class="book-thumb">
                                 </a>
                             </div>
                             <div class="media-body">

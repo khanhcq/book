@@ -13,6 +13,6 @@ public class EPubViewerController {
 
     @RequestMapping(value = { "/epub-viewer" }, method = RequestMethod.GET)
     public String viewPersonList(Model model) {
-        return "/viewer/epub";
+        return "/public/viewer/epub";
     }
 }

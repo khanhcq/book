@@ -1,4 +1,4 @@
-package com.karlchu.book.core.service;
+package com.karlchu.book.core.service.impl;
 
 import com.karlchu.book.core.repository.ChapterRepository;
 import com.karlchu.book.core.utils.CoreUtils;
