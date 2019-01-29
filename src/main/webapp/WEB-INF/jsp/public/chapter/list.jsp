@@ -105,7 +105,7 @@
                 cancelButtonText: "<fmt:message key="label.cancel"/>",
                 confirmButtonText: "<fmt:message key="label.delete"/>"
             }, function () {
-                $('#crudaction').val('delete');
+                $('#crudAction').val('delete');
 //                $("#itemForm").submit();
             });
         });

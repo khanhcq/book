@@ -95,7 +95,7 @@
                 if(result){
                     if(id != null && id != undefined){
                         $("<input type='hidden' name='checkList' value='"+id+"'>").appendTo($("#listForm"));
-                        $("#crudaction").val("delete");
+                        $("#crudAction").val("delete");
                         $("#listForm").submit();
                     }
                 }

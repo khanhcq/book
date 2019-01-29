@@ -21,7 +21,7 @@ public class AbstractCommand<E> implements Serializable {
 	private String sortDirection;
 	private String[] checkList;
 	private List<E> listResult;
-	private String crudaction;
+	private String crudAction;
     private String searchTerm;
 	private String sessionId;
 	private String tableId = "tableList";
@@ -135,12 +135,12 @@ public class AbstractCommand<E> implements Serializable {
 		this.page = page;
 	}
 
-	public String getCrudaction() {
-		return crudaction;
+	public String getCrudAction() {
+		return crudAction;
 	}
 
-	public void setCrudaction(String crudaction) {
-		this.crudaction = crudaction;
+	public void setCrudAction(String crudAction) {
+		this.crudAction = crudAction;
 	}
 
 

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.Map;
 
 /**
  * Created by BVDEV75 on 1/28/2019.
@@ -27,5 +28,10 @@ public class FeedbackServiceImpl implements FeedbackService {
         this.repository.insert(feedback);
 
         //@TODO: emailing the feedback
+    }
+
+    @Override
+    public Object[] searchByPageAndSize(Map<String, Object> properties, int page, int maxPageItems) {
+        return new Object[0];
     }
 }

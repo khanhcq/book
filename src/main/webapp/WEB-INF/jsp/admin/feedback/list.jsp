@@ -124,7 +124,7 @@
                     </div>
                 </c:if>
 
-                <input type="hidden" name="crudaction" id="crudaction"/>
+                <input type="hidden" name="crudAction" id="crudAction"/>
             </div>
         </div>
     </form:form>
@@ -166,7 +166,7 @@
             $("#addtipFormItem").submit(function(e){
                 e.preventDefault();
 
-                $("#crudaction").val("insert-update");
+                $("#crudAction").val("insert-update");
                 var formData = new FormData($(this)[0]);
                 $.ajax({
                     cache: false,
@@ -197,7 +197,7 @@
                 cancelButtonText: "<fmt:message key="label.cancel"/>",
                 confirmButtonText: "<fmt:message key="label.delete"/>"
             }, function () {
-                $('#crudaction').val('delete');
+                $('#crudAction').val('delete');
                 $("#itemForm").submit();
             });
         });
