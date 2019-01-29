@@ -13,7 +13,6 @@ public class FeedbackDTO implements Serializable {
     private String email;
     private String content;
     private Date createdDate;
-    private Integer status;
     private String response;
     private Date responseDate;
 
@@ -55,14 +54,6 @@ public class FeedbackDTO implements Serializable {
 
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
     }
 
     public String getResponse() {

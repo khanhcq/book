@@ -175,4 +175,8 @@ public class Constants {
     //invoice status
     public static final int INVOICE_NEW = 1;
 
+    public static final String G_RECAPTCHA_RESPONSE = "g-recaptcha-response";
+    public static final String SITE_VERIFY_URL = "https://www.google.com/recaptcha/api/siteverify";
+    public static final String RECAPTCHA_SECRET = "aloha-OB5Mgx";
+
 }

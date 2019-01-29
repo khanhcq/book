@@ -76,7 +76,7 @@
                 <%--</li>--%>
 
                 <li>
-                    <a href="#">
+                    <a href="<c:url value="/feedback/edit"/>">
                         <i class="ace-icon fa fa-envelope"></i>
                         <fmt:message key="label.contact"/>
                     </a>

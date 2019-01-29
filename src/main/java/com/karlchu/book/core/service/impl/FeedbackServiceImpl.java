@@ -2,6 +2,7 @@ package com.karlchu.book.core.service.impl;
 
 import com.karlchu.book.core.repository.FeedbackRepository;
 import com.karlchu.book.core.service.FeedbackService;
+import com.karlchu.book.core.service.SequenceService;
 import com.karlchu.book.dto.FeedbackDTO;
 import com.karlchu.book.model.Feedback;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +19,13 @@ public class FeedbackServiceImpl implements FeedbackService {
     @Autowired
     private FeedbackRepository repository;
 
+    @Autowired
+    private SequenceService sequenceService;
+
     @Override
     public void save(FeedbackDTO feedbackDTO) {
         Feedback feedback = new Feedback();
+        feedback.setId(sequenceService.getNextSequence("feedback"));
         feedback.setContent(feedbackDTO.getContent());
         feedback.setName(feedbackDTO.getName());
         feedback.setEmail(feedbackDTO.getEmail());

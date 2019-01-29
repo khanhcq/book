@@ -5,18 +5,26 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.text.StrTokenizer;
 import org.apache.http.conn.util.InetAddressUtils;
 import org.apache.log4j.Logger;
+import org.bson.json.JsonReader;
 import org.displaytag.tags.TableTagParameters;
 import org.displaytag.util.ParamEncoder;
+import org.json.JSONObject;
 import org.tuckey.web.filters.urlrewrite.utils.WildcardHelper;
 
+import javax.net.ssl.HttpsURLConnection;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.InetAddress;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.net.UnknownHostException;
 import java.util.HashMap;
+
+import org.apache.commons.io.IOUtils;
 
 /**
  * Convenience class for setting and retrieving cookies.
@@ -342,5 +350,36 @@ public final class RequestUtil {
             }
         }
         return false;
+    }
+
+
+
+    public static boolean verifyCaptcha(String gRecaptchaResponse) {
+        if (gRecaptchaResponse == null || gRecaptchaResponse.length() == 0) {
+            return false;
+        }
+        try {
+            URL verifyUrl = new URL(Constants.SITE_VERIFY_URL);
+            HttpsURLConnection conn = (HttpsURLConnection) verifyUrl.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("User-Agent", "Mozilla/5.0");
+            conn.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
+            String postParams = "secret=" + Constants.RECAPTCHA_SECRET
+                    + "&response=" + gRecaptchaResponse;
+            conn.setDoOutput(true);
+            OutputStream outStream = conn.getOutputStream();
+            outStream.write(postParams.getBytes());
+            outStream.flush();
+            outStream.close();
+
+            InputStream is = conn.getInputStream();
+            String genreJson = IOUtils.toString(is);
+            JSONObject jsonObject = new JSONObject(genreJson);
+
+            return jsonObject.getBoolean("success");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }
