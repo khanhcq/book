@@ -39,16 +39,6 @@
         <div class="row">
             <%--<h1 class="col-sm-8"><fmt:message key="edit.feedback.title"/> </h1>--%>
             <h1 class="col-sm-8 page-header header green clearfix"><fmt:message key="edit.feedback.title"/></h1>
-            <div class="col-sm-3">
-                <a href="${backUrl}" class="btn btn-grey">
-                    <i class="ace-icon fa fa-arrow-left"></i>
-                    <fmt:message key="label.back"/>
-                </a>
-                <button class="btn btn-success btnSave">
-                    <i class="ace-icon fa fa-save"></i>
-                    <fmt:message key="label.send"/>
-                </button>
-            </div>
         </div>
     <%--</div>--%>
     <div class="row">
@@ -90,6 +80,15 @@
                         <div class="g-recaptcha" data-sitekey="6Lc7no0UAAAAAOwNjHyKmoCiBiCPQrI21rRAI21Y" data-callback="verifyRecaptchaCallback" data-expired-callback="expiredRecaptchaCallback"></div>
                         <input class="form-control hidden" data-recaptcha="true" required data-error="Please complete the Captcha">
                         <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right"></label>
+                    <div class="col-sm-9">
+                        <button class="btn btn-success btnSave">
+                            <i class="ace-icon fa fa-paper-plane"></i>
+                            <fmt:message key="label.send"/>
+                        </button>
                     </div>
                 </div>
                 <form:hidden path="crudAction" value="insert-update"/>
