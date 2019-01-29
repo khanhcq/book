@@ -9,8 +9,7 @@ import com.karlchu.book.command.ChapterCommand;
 import com.karlchu.book.core.repository.BookRepository;
 import com.karlchu.book.core.repository.ChapterRepository;
 import com.karlchu.book.core.repository.custom.BookRepositoryCustom;
-import com.karlchu.book.core.service.impl.BookService;
-import com.karlchu.book.core.service.impl.ChapterService;
+import com.karlchu.book.core.service.ChapterService;
 import com.karlchu.book.core.utils.CoreUtils;
 import com.karlchu.book.dto.ChapterDTO;
 import com.karlchu.book.model.Book;
@@ -30,9 +29,6 @@ import java.util.List;
 @Controller
 public class BookController extends ApplicationObjectSupport {
     private transient final Log log = LogFactory.getLog(this.getClass());
-
-    @Autowired
-    private BookService bookService;
 
     @Autowired
     private ChapterService chapterService;

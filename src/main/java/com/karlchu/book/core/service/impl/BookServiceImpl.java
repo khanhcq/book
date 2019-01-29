@@ -1,6 +1,7 @@
 package com.karlchu.book.core.service.impl;
 
 import com.karlchu.book.core.repository.BookRepository;
+import com.karlchu.book.core.service.BookService;
 import com.karlchu.book.model.Author;
 import com.karlchu.book.model.Book;
 import com.karlchu.book.model.Category;
@@ -19,14 +20,10 @@ import java.util.Map;
  */
 
 @Service
-public class BookService {
+public class BookServiceImpl implements BookService {
 
     @Autowired
     private BookRepository repository;
-
-    public List<Book> getChapters() {
-        return repository.findAll();
-    }
 
     public Object[] searchByProperties(Map<String, Object> properties, String sortExpression, String sortDirection, int page, int maxPageItems) {
         PageRequest pageable = PageRequest.of(page,

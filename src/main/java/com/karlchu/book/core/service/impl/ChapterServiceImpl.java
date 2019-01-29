@@ -1,6 +1,7 @@
 package com.karlchu.book.core.service.impl;
 
 import com.karlchu.book.core.repository.ChapterRepository;
+import com.karlchu.book.core.service.ChapterService;
 import com.karlchu.book.core.utils.CoreUtils;
 import com.karlchu.book.model.Chapter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,14 +16,10 @@ import java.util.List;
  */
 
 @Service
-public class ChapterService {
+public class ChapterServiceImpl implements ChapterService {
 
     @Autowired
     private ChapterRepository repository;
-
-    public List<Chapter> getChapters() {
-        return repository.findAll();
-    }
 
     public Object[] searchByPageAndSize(Long bookId, Integer page, Integer maxPageItems, boolean all) {
         if(page == null) {
