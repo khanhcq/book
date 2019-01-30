@@ -2,4 +2,8 @@ db.chapter.createIndex({bookId: 1}, {background: true, name: 'idx_chapter_by_boo
 
 db.chapter.createIndex({ bookId: 1, number: 1 }, {  background: true, name: 'idx_chapter_by_bookId_and_number' });
 
+db.book.createIndex({"categories.code": 1}, {  background: true, name: 'idx_book_by_cate_code' });
+
+db.book.createIndex({"author.code": 1}, {  background: true, name: 'idx_book_by_author_code' });
+
 db.currentOp({ "msg": /Index Build/ });
