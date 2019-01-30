@@ -101,7 +101,26 @@
     $(function () {
         // CKEDITOR.replace('feedback-content-editor');
         $('.btnSave').click(function(){
-            $('#itemForm').submit();
+//            $('#itemForm').submit();
+
+            var url = "<c:url value="/ajax/feedback/save"/>";
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: $(this).serialize(),
+                success: function (data) {
+                    var messageAlert = 'alert-' + data.type;
+                    var messageText = data.message;
+
+                    var alertBox = '<div class="alert ' + messageAlert + ' alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + messageText + '</div>';
+                    if (messageAlert && messageText) {
+                        $('#messages').html(alertBox);
+                        $('#itemForm')[0].reset();
+                        grecaptcha.reset();
+                    }
+                }
+            });
         });
         <%--<c:if test="${!empty item.pojo.thumbnail}">--%>
         <%--$('.ace_file_input').ace_file_input('show_file_list', ['<c:url value="/repository${item.pojo.thumbnail}"/>']);--%>
