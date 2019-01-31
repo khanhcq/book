@@ -65,55 +65,6 @@
                     <b class="arrow"></b>
                 </li>
                 <li class="hover">
-                    <a href="<c:url value="/books?category=Huyen-Huyen"/>">
-                        <i class="menu-icon fa fa-caret-right"></i>
-                        <fmt:message key="book.type.huyen.huyen"/>
-                    </a>
-                    <b class="arrow"></b>
-                </li>
-                <li class="hover">
-                    <a href="<c:url value="/books?category=Khoa-Huyen"/>">
-                        <i class="menu-icon fa fa-caret-right"></i>
-                        <fmt:message key="book.type.khoa.huyen"/>
-                    </a>
-                    <b class="arrow"></b>
-                </li>
-                <li class="hover">
-                    <a href="<c:url value="/books?category=Trong-Sinh"/>">
-                        <i class="menu-icon fa fa-caret-right"></i>
-                        <fmt:message key="book.type.trong.sinh"/>
-                    </a>
-                    <b class="arrow"></b>
-                </li>
-                <li class="hover">
-                    <a href="<c:url value="/books?category=Tien-Hiep"/>">
-                        <i class="menu-icon fa fa-caret-right"></i>
-                        <fmt:message key="book.type.tien.hiep"/>
-                    </a>
-                    <b class="arrow"></b>
-                </li>
-                <li class="hover">
-                    <a href="<c:url value="/books?category=Ngon-Tinh"/>">
-                        <i class="menu-icon fa fa-caret-right"></i>
-                        <fmt:message key="book.type.ngon.tinh"/>
-                    </a>
-                    <b class="arrow"></b>
-                </li>
-                <li class="hover">
-                    <a href="<c:url value="/books?category=Dam-My"/>">
-                        <i class="menu-icon fa fa-caret-right"></i>
-                        <fmt:message key="book.type.dam.my"/>
-                    </a>
-                    <b class="arrow"></b>
-                </li>
-                <li class="hover">
-                    <a href="<c:url value="/books?category=Hai-Huoc"/>">
-                        <i class="menu-icon fa fa-caret-right"></i>
-                        <fmt:message key="book.type.hai.huoc"/>
-                    </a>
-                    <b class="arrow"></b>
-                </li>
-                <li class="hover">
                     <a href="<c:url value="/books?category=Co-Dai"/>">
                         <i class="menu-icon fa fa-caret-right"></i>
                         <fmt:message key="book.type.co.dai"/>
@@ -128,9 +79,9 @@
                     <b class="arrow"></b>
                 </li>
                 <li class="hover">
-                    <a href="<c:url value="/books?category=He-Thong"/>">
+                    <a href="<c:url value="/books?category=Dam-My"/>">
                         <i class="menu-icon fa fa-caret-right"></i>
-                        <fmt:message key="book.type.he.thong"/>
+                        <fmt:message key="book.type.dam.my"/>
                     </a>
                     <b class="arrow"></b>
                 </li>
@@ -142,6 +93,42 @@
                     <b class="arrow"></b>
                 </li>
                 <li class="hover">
+                    <a href="<c:url value="/books?category=Doan-Van"/>">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        <fmt:message key="book.type.doan.van"/>
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+                <li class="hover">
+                    <a href="<c:url value="/books?category=Hai-Huoc"/>">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        <fmt:message key="book.type.hai.huoc"/>
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+
+                <li class="hover">
+                    <a href="<c:url value="/books?category=He-Thong"/>">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        <fmt:message key="book.type.he.thong"/>
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+                <li class="hover">
+                    <a href="<c:url value="/books?category=Huyen-Huyen"/>">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        <fmt:message key="book.type.huyen.huyen"/>
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+                <li class="hover">
+                    <a href="<c:url value="/books?category=Khoa-Huyen"/>">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        <fmt:message key="book.type.khoa.huyen"/>
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+                <li class="hover">
                     <a href="<c:url value="/books?category=Mat-The"/>">
                         <i class="menu-icon fa fa-caret-right"></i>
                         <fmt:message key="book.type.mat.the"/>
@@ -149,9 +136,9 @@
                     <b class="arrow"></b>
                 </li>
                 <li class="hover">
-                    <a href="<c:url value="/books?category=Xuyen-Khong"/>">
+                    <a href="<c:url value="/books?category=Ngon-Tinh"/>">
                         <i class="menu-icon fa fa-caret-right"></i>
-                        <fmt:message key="book.type.xuyen.khong"/>
+                        <fmt:message key="book.type.ngon.tinh"/>
                     </a>
                     <b class="arrow"></b>
                 </li>
@@ -162,7 +149,6 @@
                     </a>
                     <b class="arrow"></b>
                 </li>
-
                 <li class="hover">
                     <a href="<c:url value="/books?category=Sac"/>">
                         <i class="menu-icon fa fa-caret-right"></i>
@@ -178,19 +164,35 @@
                     <b class="arrow"></b>
                 </li>
                 <li class="hover">
+                    <a href="<c:url value="/books?category=Tien-Hiep"/>">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        <fmt:message key="book.type.tien.hiep"/>
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+                <li class="hover">
+                    <a href="<c:url value="/books?category=Trong-Sinh"/>">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        <fmt:message key="book.type.trong.sinh"/>
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+
+                <li class="hover">
+                    <a href="<c:url value="/books?category=Xuyen-Khong"/>">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        <fmt:message key="book.type.xuyen.khong"/>
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+                <li class="hover">
                     <a href="<c:url value="/books?category=Tieu-Thuyet-18"/>">
                         <i class="menu-icon fa fa-caret-right"></i>
                         <fmt:message key="book.type.18.plus"/>
                     </a>
                     <b class="arrow"></b>
                 </li>
-                <li class="hover">
-                    <a href="<c:url value="/books?category=Doan-Van"/>">
-                        <i class="menu-icon fa fa-caret-right"></i>
-                        <fmt:message key="book.type.doan.van"/>
-                    </a>
-                    <b class="arrow"></b>
-                </li>
+
             </ul>
         </li>
 

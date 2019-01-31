@@ -82,15 +82,14 @@
                     </a>
                 </li>
             </ul>
-
-            <form class="navbar-form navbar-left form-search" role="search">
-                <div class="form-group">
-                    <input type="text" placeholder="<fmt:message key="label.search"/>"/>
-                </div>
-                <button type="button" class="btn btn-mini btn-info2">
-                    <i class="ace-icon fa fa-search icon-only bigger-110"></i>
-                </button>
-            </form>
+            <%--<form class="navbar-form navbar-left form-search" role="search">--%>
+                <%--<div class="form-group">--%>
+                    <%--<input type="text" placeholder="<fmt:message key="label.search"/>"/>--%>
+                <%--</div>--%>
+                <%--<button type="button" class="btn btn-mini btn-info2">--%>
+                    <%--<i class="ace-icon fa fa-search icon-only bigger-110"></i>--%>
+                <%--</button>--%>
+            <%--</form>--%>
         </nav>
     </div><!-- /.navbar-container -->
 </div>
