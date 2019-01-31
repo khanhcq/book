@@ -1,0 +1,6 @@
+db.book.find({_id:6360})
+db.book.remove({_id:6360})
+
+
+db.chapter.find({bookId:6360})
+db.chapter.remove({bookId:6360})

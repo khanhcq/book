@@ -46,6 +46,13 @@
         <script src="<c:url value="/themes/ace_1.4/jquery/1.11.3/jquery.min.js"/>"></script>
         <![endif]-->
         <%--<script src="<c:url value='/themes/book/js/global.js'/>"></script>--%>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-7959388451620151",
+            enable_page_level_ads: true
+        });
+    </script>
         <sitemesh:write property="head" />
 </head>
 
@@ -53,6 +60,20 @@
 <!-- Header -->
 <jsp:include page="/themes/ace_1.4/include/public/header.jsp"/>
 <div class="main-container ace-save-state" id="main-container">
+    <div class="form-group">
+        <script>
+            (function() {
+                var cx = '013386194828306596408:ogtqx0ing10';
+                var gcse = document.createElement('script');
+                gcse.type = 'text/javascript';
+                gcse.async = true;
+                gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(gcse, s);
+            })();
+        </script>
+        <gcse:search></gcse:search>
+    </div>
     <jsp:include page="/themes/ace_1.4/include/public/sidebar.jsp"/>
         <div class="main-content">
             <div class="main-content-inner">
