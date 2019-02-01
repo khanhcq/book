@@ -78,20 +78,21 @@
 <!-- Header -->
 <jsp:include page="/themes/ace_1.4/include/public/header.jsp"/>
 <div class="main-container ace-save-state" id="main-container">
-    <div class="form-group">
-        <script>
-            (function () {
-                var cx = '013386194828306596408:ogtqx0ing10';
-                var gcse = document.createElement('script');
-                gcse.type = 'text/javascript';
-                gcse.async = true;
-                gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
-                var s = document.getElementsByTagName('script')[0];
-                s.parentNode.insertBefore(gcse, s);
-            })();
-        </script>
-        <gcse:search></gcse:search>
-    </div>
+    <%--<div class="form-group">--%>
+        <%--<script>--%>
+            <%--(function() {--%>
+                <%--// var cx = 'partner-pub-7959388451620151:8809436690';--%>
+                <%--var cx = '013386194828306596408:ogtqx0ing10';--%>
+                <%--var gcse = document.createElement('script');--%>
+                <%--gcse.type = 'text/javascript';--%>
+                <%--gcse.async = true;--%>
+                <%--gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;--%>
+                <%--var s = document.getElementsByTagName('script')[0];--%>
+                <%--s.parentNode.insertBefore(gcse, s);--%>
+            <%--})();--%>
+        <%--</script>--%>
+        <%--<gcse:search></gcse:search>--%>
+    <%--</div>--%>
     <jsp:include page="/themes/ace_1.4/include/public/sidebar.jsp"/>
     <div class="main-content">
         <div class="main-content-inner">

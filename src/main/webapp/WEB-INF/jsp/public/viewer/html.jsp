@@ -7,7 +7,7 @@
 <div class="breadcrumbs ace-save-state" id="breadcrumbs">
     <ul class="breadcrumb">
         <li>
-            <i class="ace-icon fa fa-home home-icon"></i>
+            <i class="ace-icon fa fa-home home-icon green"></i>
             <a href="<c:url value="/"/>"><fmt:message key="label.home"/></a>
         </li>
         <li>
@@ -44,7 +44,7 @@
         </c:if>
         <div class="page-header">
             <div class="row">
-                <div class="col-xs-12 text-center chapter-title">
+                <div class="col-xs-12 text-center chapter-title green">
                     ${chapter.title}
                 </div>
             </div>

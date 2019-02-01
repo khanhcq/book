@@ -11,7 +11,7 @@
 <div class="breadcrumbs ace-save-state" id="breadcrumbs">
     <ul class="breadcrumb">
         <li class="active">
-            <i class="ace-icon fa fa-home home-icon"></i>
+            <i class="ace-icon fa fa-home home-icon green"></i>
             <fmt:message key="label.home"/>
         </li>
     </ul>
@@ -20,7 +20,7 @@
     <div class="row">
         <div class="col-sm-8 books">
             <div class="page-header">
-                <h1 class="">
+                <h1 class="green">
                     <c:choose>
                         <c:when test="${!empty category}">
                             ${category}
@@ -29,7 +29,7 @@
                             ${author}
                         </c:when>
                         <c:otherwise>
-                            <fmt:message key="label.book.newest"/>
+                            <fmt:message key="list.book"/>
                         </c:otherwise>
                     </c:choose>
                 </h1>
@@ -45,7 +45,7 @@
                                 </a>
                             </div>
                             <div class="media-body">
-                                <h4 class="media-heading book-title"><a href="${bookUrl}">${book.title}</a></h4>
+                                <h4 class="media-heading book-title"><a class="green" href="${bookUrl}">${book.title}</a></h4>
                                 <div class="small">
                                     <a href="<c:url value="/books?author=${book.author.code}"/>" class="text-muted">
                                         <i class="iconfont icon-write icon-18"></i> ${book.author.name}
@@ -54,11 +54,12 @@
                                 <div>
                                     <str:truncateNicely upper="100">${book.description}</str:truncateNicely>
                                 </div>
-                                <ul class="tag-list tag-small list-unstyled mt-2">
+                                <ul class="list-unstyled tag-list">
                                     <c:forEach items="${book.categories}" var="category">
-                                        <li class="tag green"><a
+                                        <li class="label label-success arrowed-in-right arrowed"><a
                                                 href="<c:url value="/books?category=${category.code}"/>">${category.name}</a>
                                         </li>
+                                        <%--<span class="label label-info arrowed-in-right arrowed">Info</span>--%>
                                     </c:forEach>
                                 </ul>
 

@@ -128,3 +128,36 @@ a, a:hover {
 .nav-chapter {
     margin: 8px 0;
 }
+
+.tag-list .label a{
+    color: #FFF;
+    display: inline-block;
+}
+
+.navbar{
+    background: #55995b;
+}
+
+.no-skin .navbar .navbar-toggle {
+    background-color: #74ae54;
+}
+
+.no-skin .navbar .navbar-toggle:hover {
+    background-color: #7ab451;
+    border-color: rgba(255,255,255,.1);
+}
+
+.no-skin .navbar .navbar-toggle:hover {
+    background-color: #74ae54;
+}
+
+.no-skin .navbar .navbar-toggle.display, .no-skin .navbar .navbar-toggle[data-toggle=collapse]:not(.collapsed) {
+    background-color: #71ac56;
+    box-shadow: inset 1px 1px 2px 0 rgba(0,0,0,.25);
+    border-color: rgba(255,255,255,.35);
+}
+
+.no-skin .navbar .navbar-toggle:focus {
+    background-color: #6fab57;
+    border-color: transparent;
+}

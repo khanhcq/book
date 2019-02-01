@@ -7,7 +7,7 @@
 <div class="breadcrumbs ace-save-state" id="breadcrumbs">
     <ul class="breadcrumb">
         <li>
-            <i class="ace-icon fa fa-home home-icon"></i>
+            <i class="ace-icon fa fa-home home-icon green"></i>
             <a href="<c:url value="/"/>"><fmt:message key="label.home"/></a>
         </li>
         <li>
@@ -42,16 +42,16 @@
                         </div>
                     </div>
                     <div class="media-body">
-                        <h4 class="media-heading book-title"><span>${book.title}</span></h4>
+                        <h4 class="media-heading book-title"><span class="green">${book.title}</span></h4>
                         <div class="small">
                             <a href="<c:url value="/books?author=${book.author.code}"/>" class="text-muted author">
                                 ${book.author.name}
                             </a>
                         </div>
 
-                        <ul class="tag-list tag-small list-unstyled mt-2">
+                        <ul class="list-unstyled tag-list">
                             <c:forEach items="${book.categories}" var="category">
-                                <li class="tag green">
+                                <li class="label label-success arrowed-in-right arrowed">
                                     <a href="<c:url value="/books?category=${category.code}"/>">${category.name}</a>
                                 </li>
                             </c:forEach>

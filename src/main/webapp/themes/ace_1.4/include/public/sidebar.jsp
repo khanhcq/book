@@ -38,18 +38,43 @@
 
 
     <ul class="nav nav-list">
+        <li class="hover">
+            <a href="<c:url value="/feedback/edit"/>">
+                <i class="menu-icon fa fa-envelope green"></i>
+                <span class="menu-text"> <fmt:message key="label.contact"/> </span>
+            </a>
+            <b class="arrow"></b>
+        </li>
+
+
         <%--<li class="hover">--%>
-            <%--<a href="index.html">--%>
-                <%--<i class="menu-icon fa fa-tachometer"></i>--%>
-                <%--<span class="menu-text"> Dashboard </span>--%>
+            <%--<a href="#" class="dropdown-toggle">--%>
+                <%--<i class="menu-icon fa fa-file-o"></i>--%>
+                <%--<span class="menu-text">--%>
+                    <%--<fmt:message key="menu.account"/>--%>
+                    <%--&lt;%&ndash;<span class="badge badge-primary">5</span>&ndash;%&gt;--%>
+                <%--</span>--%>
+
+                <%--<b class="arrow fa fa-angle-down"></b>--%>
             <%--</a>--%>
 
             <%--<b class="arrow"></b>--%>
+
+            <%--<ul class="submenu">--%>
+                <%--<li class="hover">--%>
+                    <%--<a href="<c:url value="/feedback/edit"/>">--%>
+                        <%--<i class="ace-icon fa fa-envelope"></i>--%>
+                        <%--<fmt:message key="label.contact"/>--%>
+                    <%--</a>--%>
+
+                    <%--<b class="arrow"></b>--%>
+                <%--</li>--%>
+            <%--</ul>--%>
         <%--</li>--%>
 
         <li class="active open hover">
             <a href="#" class="dropdown-toggle">
-                <i class="menu-icon fa fa-desktop"></i>
+                <i class="menu-icon fa fa-desktop green"></i>
                 <span class="menu-text"><fmt:message key="book.types"/> </span>
                 <b class="arrow fa fa-angle-down"></b>
             </a>
@@ -115,6 +140,13 @@
                     <b class="arrow"></b>
                 </li>
                 <li class="hover">
+                    <a href="<c:url value="/books?category=Huyen-Ao"/>">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        <fmt:message key="book.type.huyen.ao"/>
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+                <li class="hover">
                     <a href="<c:url value="/books?category=Huyen-Huyen"/>">
                         <i class="menu-icon fa fa-caret-right"></i>
                         <fmt:message key="book.type.huyen.huyen"/>
@@ -122,9 +154,23 @@
                     <b class="arrow"></b>
                 </li>
                 <li class="hover">
+                    <a href="<c:url value="/books?category=Kiem-Hiep"/>">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        <fmt:message key="book.type.kiem.hiep"/>
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+                <li class="hover">
                     <a href="<c:url value="/books?category=Khoa-Huyen"/>">
                         <i class="menu-icon fa fa-caret-right"></i>
                         <fmt:message key="book.type.khoa.huyen"/>
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+                <li class="hover">
+                    <a href="<c:url value="/books?category=Lich-Su"/>">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        <fmt:message key="book.type.lich.su"/>
                     </a>
                     <b class="arrow"></b>
                 </li>
@@ -171,6 +217,13 @@
                     <b class="arrow"></b>
                 </li>
                 <li class="hover">
+                    <a href="<c:url value="/books?category=Trinh-Tham"/>">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        <fmt:message key="book.type.trinh.tham"/>
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+                <li class="hover">
                     <a href="<c:url value="/books?category=Trong-Sinh"/>">
                         <i class="menu-icon fa fa-caret-right"></i>
                         <fmt:message key="book.type.trong.sinh"/>
@@ -186,41 +239,41 @@
                     <b class="arrow"></b>
                 </li>
                 <%--<li class="hover">--%>
-                    <%--<a href="<c:url value="/books?category=Tieu-Thuyet-18"/>">--%>
-                        <%--<i class="menu-icon fa fa-caret-right"></i>--%>
-                        <%--<fmt:message key="book.type.18.plus"/>--%>
-                    <%--</a>--%>
-                    <%--<b class="arrow"></b>--%>
+                <%--<a href="<c:url value="/books?category=Tieu-Thuyet-18"/>">--%>
+                <%--<i class="menu-icon fa fa-caret-right"></i>--%>
+                <%--<fmt:message key="book.type.18.plus"/>--%>
+                <%--</a>--%>
+                <%--<b class="arrow"></b>--%>
                 <%--</li>--%>
 
             </ul>
         </li>
 
         <%--<li class="hover">--%>
-            <%--<a href="#" class="dropdown-toggle">--%>
-                <%--<i class="menu-icon fa fa-file-o"></i>--%>
+        <%--<a href="#" class="dropdown-toggle">--%>
+        <%--<i class="menu-icon fa fa-file-o"></i>--%>
 
-                <%--<span class="menu-text">--%>
-								<%--<fmt:message key="menu.account"/>--%>
+        <%--<span class="menu-text">--%>
+        <%--<fmt:message key="menu.account"/>--%>
 
-								<%--<span class="badge badge-primary">5</span>--%>
-							<%--</span>--%>
+        <%--<span class="badge badge-primary">5</span>--%>
+        <%--</span>--%>
 
-                <%--<b class="arrow fa fa-angle-down"></b>--%>
-            <%--</a>--%>
+        <%--<b class="arrow fa fa-angle-down"></b>--%>
+        <%--</a>--%>
 
-            <%--<b class="arrow"></b>--%>
+        <%--<b class="arrow"></b>--%>
 
-            <%--<ul class="submenu">--%>
-                <%--<li class="hover">--%>
-                    <%--<a href="faq.html">--%>
-                        <%--<i class="menu-icon fa fa-caret-right"></i>--%>
-                        <%--FAQ--%>
-                    <%--</a>--%>
+        <%--<ul class="submenu">--%>
+        <%--<li class="hover">--%>
+        <%--<a href="faq.html">--%>
+        <%--<i class="menu-icon fa fa-caret-right"></i>--%>
+        <%--FAQ--%>
+        <%--</a>--%>
 
-                    <%--<b class="arrow"></b>--%>
-                <%--</li>--%>
-            <%--</ul>--%>
+        <%--<b class="arrow"></b>--%>
+        <%--</li>--%>
+        <%--</ul>--%>
         <%--</li>--%>
     </ul><!-- /.nav-list -->
 
