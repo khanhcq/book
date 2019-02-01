@@ -185,13 +185,13 @@
                     </a>
                     <b class="arrow"></b>
                 </li>
-                <li class="hover">
-                    <a href="<c:url value="/books?category=Tieu-Thuyet-18"/>">
-                        <i class="menu-icon fa fa-caret-right"></i>
-                        <fmt:message key="book.type.18.plus"/>
-                    </a>
-                    <b class="arrow"></b>
-                </li>
+                <%--<li class="hover">--%>
+                    <%--<a href="<c:url value="/books?category=Tieu-Thuyet-18"/>">--%>
+                        <%--<i class="menu-icon fa fa-caret-right"></i>--%>
+                        <%--<fmt:message key="book.type.18.plus"/>--%>
+                    <%--</a>--%>
+                    <%--<b class="arrow"></b>--%>
+                <%--</li>--%>
 
             </ul>
         </li>

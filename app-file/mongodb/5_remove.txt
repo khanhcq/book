@@ -1,6 +1,17 @@
-db.book.find({_id:6360})
-db.book.remove({_id:6360})
+db.chapter.aggregate( [{ $group: {  _id: { bookId: "$bookId", number: "$number" }, count: { $sum:  1 }, docs: { $push: "$_id" } }}, { $match: { count: { $gt : 1 } }}],{ allowDiskUse: true} )
 
 
-db.chapter.find({bookId:6360})
-db.chapter.remove({bookId:6360})
+=================
+
+db.book.find({_id: {$in: [11,59,60,61,138,6360]}})
+db.book.remove({_id: {$in: [11,59,60,61,138,6360]}})
+
+
+
+db.chapter.count({bookId:{$in: [11,59,60,61,138,6360]}})
+db.chapter.find({bookId:{$in: [11,59,60,61,138,6360]}})
+db.chapter.remove({bookId:{$in: [11,59,60,61,138,6360]}})
+
+
+
+
