@@ -40,7 +40,7 @@ body {
 }
 
 .nav-chapter .btn {
-    margin: 0 24px;
+    margin: 0 20px;
 }
 
 .main-content {
@@ -136,6 +136,10 @@ a, a:hover {
 
 .navbar{
     background: #55995b;
+}
+
+.navbar.navbar-collapse .navbar-container {
+    background-color: #55995b;
 }
 
 .no-skin .navbar .navbar-toggle {

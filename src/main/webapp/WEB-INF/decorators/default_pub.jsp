@@ -45,7 +45,7 @@
     <%--popup detele--%>
     <%--<link href="<c:url value="/themes/plugins/sweetalert/lib/sweet-alert.css"/>" rel="stylesheet">--%>
 
-    <link rel="stylesheet" href="<c:url value="/themes/book/css/global.css"/>">
+    <link rel="stylesheet" href="<c:url value="/themes/book/css/global_v1.0.css"/>">
 
 
     <!-- inline styles related to this page -->
