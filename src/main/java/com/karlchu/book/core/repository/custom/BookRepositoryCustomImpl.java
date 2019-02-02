@@ -6,12 +6,13 @@ package com.karlchu.book.core.repository.custom;
 
 import com.karlchu.book.model.Book;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.TextCriteria;
+import org.springframework.data.mongodb.core.query.TextQuery;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public class BookRepositoryCustomImpl implements BookRepositoryCustom {
     @Autowired
     MongoTemplate mongoTemplate;
 
-    public Object[] findByAuthorOrCategory(Integer page, Integer maxPageItems, String categoryCode, String authorCode){
+    public Object[] findByAuthorOrCategory(Integer page, Integer maxPageItems, String categoryCode, String authorCode, String search){
         if(page == null) {
             page = 1;
         }
@@ -32,14 +33,20 @@ public class BookRepositoryCustomImpl implements BookRepositoryCustom {
         if(categoryCode != null) {
             elementMatchCriteria = Criteria.where("categories")
                     .elemMatch(Criteria.where("code").is(categoryCode));
-            query = Query.query(elementMatchCriteria);
+            query = Query.query(elementMatchCriteria).with(new Sort(Sort.Direction.ASC, "title"));
         }
         if(authorCode != null) {
             elementMatchCriteria = Criteria.where("author.code").is(authorCode);
-            query = Query.query(elementMatchCriteria);
+            query = Query.query(elementMatchCriteria).with(new Sort(Sort.Direction.ASC, "title"));
 
         }
-        query.with(pageable).with(new Sort(Sort.Direction.ASC, "title"));
+        if(search != null && !search.isEmpty()) {
+            TextCriteria criteria = TextCriteria.forDefaultLanguage()
+                    .matchingAny(search);
+            query = TextQuery.queryText(criteria)
+                    .sortByScore();
+        }
+        query.with(pageable);
 //        query.fields().position("categories", 1);
         List<Book> books = mongoTemplate.find(query, Book.class);
         Long total = mongoTemplate.count(query, "book");

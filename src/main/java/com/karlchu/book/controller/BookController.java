@@ -46,15 +46,17 @@ public class BookController extends ApplicationObjectSupport {
     public ModelAndView list(@RequestParam(value = "page", required = false) Integer page,
                              @RequestParam(value = "category", required = false) String category,
                              @RequestParam(value = "author", required = false) String author,
+                             @RequestParam(value = "search", required = false) String search,
                              BookCommand command){
         ModelAndView mav = new ModelAndView("/public/books");
-        Object[] results = bookRepositoryCustom.findByAuthorOrCategory(page, command.getMaxPageItems(), category, author);
+        Object[] results = bookRepositoryCustom.findByAuthorOrCategory(page, command.getMaxPageItems(), category, author, search);
         command.setListResult((List<Book>) results[1]);
         command.setTotalItems(Integer.valueOf(results[0].toString()));
         command.setTotalPages(Integer.valueOf(results[2].toString()));
         mav.addObject(Constants.LIST_MODEL_KEY, command);
         mav.addObject("category", category);
         mav.addObject("author", author);
+        mav.addObject("search", search);
 
         return mav;
     }

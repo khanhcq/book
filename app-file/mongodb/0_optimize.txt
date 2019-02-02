@@ -7,3 +7,16 @@ db.book.createIndex({"categories.code": 1}, {  background: true, name: 'idx_book
 db.book.createIndex({"author.code": 1}, {  background: true, name: 'idx_book_by_author_code' });
 
 db.currentOp({ "msg": /Index Build/ });
+
+
+
+db.book.dropIndex("title_text_author.name_text")
+db.book.createIndex({"title":"text","author.name":"text"});
+
+db.book.dropIndex("title_text_author.name_text_categories.name_text")
+db.book.createIndex({"title":"text","author.name":"text","categories.name":"text"}, {"weights": { "title": 3, "author.name": 2, "categories.name": 1 }})
+
+
+
+
+db.book.find({$text: {$search: "thon phep tinh khong"}}, {score: {$meta: "textScore"}}).sort({score:{$meta:"textScore"}})

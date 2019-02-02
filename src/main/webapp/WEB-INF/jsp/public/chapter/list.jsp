@@ -15,6 +15,7 @@
         </li>
         <li class="active">${book.title}</li>
     </ul>
+    <jsp:include page="/themes/ace_1.4/include/public/search.jsp"/>
 </div>
 
 <div class="container">

@@ -6,7 +6,9 @@ package com.karlchu.book.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.index.TextIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.TextScore;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -19,6 +21,7 @@ public class Book {
     private Long id;
     @Indexed(unique = true)
     private String code;
+    @TextIndexed(weight=3)
     private String title;
     private String description;
     private String fileType;
@@ -30,10 +33,14 @@ public class Book {
     private Date createdDate;
     private Date modifiedDate;
     private Integer status;
+    @TextIndexed(weight=2)
     private Author author;
+    @TextIndexed(weight=1)
     private List<Category> categories;
     private List<String> categoryCodes;
     private Integer view;
+    @TextScore
+    private Float score;
 
     public Book(List<Category> categories, Author author) {
         this.categories = categories;

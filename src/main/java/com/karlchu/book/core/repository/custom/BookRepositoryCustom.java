@@ -5,5 +5,5 @@ package com.karlchu.book.core.repository.custom;
  */
 
 public interface BookRepositoryCustom {
-    Object[] findByAuthorOrCategory(Integer page, Integer maxPageItems, String categoryCode, String authorCode);
+    Object[] findByAuthorOrCategory(Integer page, Integer maxPageItems, String categoryCode, String authorCode, String search);
 }

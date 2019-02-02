@@ -25,7 +25,22 @@
                         <fmt:message key="webapp.name"/>
                     </small>
                 </a>
+
         </div>
+
+
+        <%--<div class="navbar-header pull-right">--%>
+            <%--<c:url var="searchUrl" value="/books"/>--%>
+            <%--<form class="navbar-form navbar-left form-search" role="search" action="${searchUrl}">--%>
+                <%--<div class="form-group">--%>
+                    <%--<input name="search" value="${search}" type="text" placeholder="<fmt:message key="label.search"/>"/>--%>
+                <%--</div>--%>
+                <%--<button type="button" class="btn btn-mini btn-info2">--%>
+                    <%--<i class="ace-icon fa fa-search icon-only bigger-110"></i>--%>
+                <%--</button>--%>
+            <%--</form>--%>
+        <%--</div>--%>
+
 
         <%--<div class="navbar-buttons navbar-header pull-right collapse navbar-collapse" role="navigation">--%>
             <%--<ul class="nav ace-nav">--%>

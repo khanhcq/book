@@ -18,6 +18,7 @@
         </li>
         <li class="active">${chapter.title}</li>
     </ul>
+    <jsp:include page="/themes/ace_1.4/include/public/search.jsp"/>
 </div>
 
 <div class="container">

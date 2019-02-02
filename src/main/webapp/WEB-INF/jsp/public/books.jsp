@@ -1,6 +1,4 @@
 <%@ include file="/WEB-INF/common/taglibs.jsp" %>
-<c:url var="formUrl" value="/admin/product/list.html"/>
-<c:url var="addUrl" value="/admin/product/edit.html"/>
 <html>
 <head>
     <title><fmt:message key="list.book"/></title>
@@ -15,6 +13,7 @@
             <fmt:message key="label.home"/>
         </li>
     </ul>
+    <jsp:include page="/themes/ace_1.4/include/public/search.jsp"/>
 </div>
 <div class="container">
     <div class="row">
@@ -108,6 +107,7 @@
                 <c:url var="pageUrl" value="/books?"/>
                 <c:if test="${!empty category}"><c:url var="pageUrl" value="/books?category=${category}&"/></c:if>
                 <c:if test="${!empty author}"><c:url var="pageUrl" value="/books?author=${author}&"/></c:if>
+                <c:if test="${!empty search}"><c:url var="pageUrl" value="/books?search=${search}&"/></c:if>
                 ${my:pagination(items, pageUrl, false)}
             </div>
         </div>
