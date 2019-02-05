@@ -165,3 +165,7 @@ a, a:hover {
     background-color: #6fab57;
     border-color: transparent;
 }
+
+.main-content-inner {
+    margin-bottom: 36px;
+}

@@ -19,6 +19,7 @@ import java.util.List;
 public class Book {
     @Id
     private Long id;
+    @TextIndexed(weight=3)
     @Indexed(unique = true)
     private String code;
     @TextIndexed(weight=3)
@@ -33,9 +34,7 @@ public class Book {
     private Date createdDate;
     private Date modifiedDate;
     private Integer status;
-    @TextIndexed(weight=2)
     private Author author;
-    @TextIndexed(weight=1)
     private List<Category> categories;
     private List<String> categoryCodes;
     private Integer view;
