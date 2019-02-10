@@ -14,6 +14,7 @@
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <c:set var="datePattern"><fmt:message key="date.format"/></c:set>
 <c:set var="symbolDateEmpty"><fmt:message key="symbol_date_empty"/></c:set>
+<c:url var="rootURL" value="/"/>
 
 
 

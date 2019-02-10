@@ -32,7 +32,7 @@
                                 <h1 class="grey lighter smaller">
 											<span class="blue bigger-125">
 												<i class="ace-icon fa fa-random"></i>
-												<fmt:message key="error"/>
+												<%=response.getStatus() %>
 											</span>
                                     <fmt:message key="something.went.wrong"/>
                                 </h1>
@@ -57,7 +57,7 @@
 
                                         <li>
                                             <i class="ace-icon fa fa-hand-o-right blue"></i>
-                                            <a href="<c:url value="/feedback/edit"/>"><fmt:message key="give.us.info"/></a>
+                                            <a href="<c:url value="/public/feedback/edit"/>"><fmt:message key="give.us.info"/></a>
                                         </li>
                                     </ul>
                                 </div>

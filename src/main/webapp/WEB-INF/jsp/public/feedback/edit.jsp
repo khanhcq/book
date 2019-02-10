@@ -1,5 +1,5 @@
 <%@ include file="/WEB-INF/common/taglibs.jsp" %>
-<c:url var="url" value="/feedback/edit"/>
+<c:url var="url" value="/public/feedback/edit"/>
 <c:url var="backUrl" value="/"/>
 <head>
     <title><fmt:message key="edit.feedback.title"/></title>

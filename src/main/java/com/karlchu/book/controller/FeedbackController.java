@@ -40,7 +40,7 @@ public class FeedbackController extends ApplicationObjectSupport {
     @Autowired
     private FeedbackService feedbackService;
 
-    @RequestMapping(value = "/feedback/edit")
+    @RequestMapping(value = "/public/feedback/edit")
     public ModelAndView editTip(@ModelAttribute(value = Constants.FORM_MODEL_KEY) FeedbackCommand command) {
         return new ModelAndView("/public/feedback/edit");
     }
@@ -125,9 +125,9 @@ public class FeedbackController extends ApplicationObjectSupport {
 //        RequestUtil.initSearchBean(request, command);
         Map<String, Object> properties = buildProperties(command);
         Object[] results = feedbackService.searchByPageAndSize(properties, command.getPage(), command.getMaxPageItems());
-        command.setListResult((List<FeedbackDTO>) results[1]);
-        command.setTotalItems(Integer.valueOf(results[0].toString()));
-        command.setTotalPages(Integer.valueOf(results[2].toString()));
+//        command.setListResult((List<FeedbackDTO>) results[1]);
+//        command.setTotalItems(Integer.valueOf(results[0].toString()));
+//        command.setTotalPages(Integer.valueOf(results[2].toString()));
     }
 
     private Map<String, Object> buildProperties(FeedbackCommand command) {

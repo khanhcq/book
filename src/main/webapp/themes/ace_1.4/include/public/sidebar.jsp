@@ -39,7 +39,7 @@
 
     <ul class="nav nav-list">
         <li class="hover">
-            <a href="<c:url value="/feedback/edit"/>">
+            <a href="<c:url value="/public/feedback/edit"/>">
                 <i class="menu-icon fa fa-envelope green"></i>
                 <span class="menu-text"> <fmt:message key="label.contact"/> </span>
             </a>

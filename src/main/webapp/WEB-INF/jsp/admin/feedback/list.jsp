@@ -1,4 +1,4 @@
-<%@ include file="/common/taglibs.jsp" %>
+<%@ include file="/WEB-INF/common/taglibs.jsp" %>
 <c:url var="formUrl" value="/admin/tip/list.html"/>
 <c:url var="addUrl" value="/admin/tip/edit.html"/>
 <html>
@@ -42,7 +42,7 @@
         </div>
     </div><!-- /.page-header -->
 
-    <form:form action="${formUrl}" commandName="items" role="form" id="listForm" cssClass="form-horizontal">
+    <form:form action="${formUrl}" modelAttribute="items" role="form" id="listForm" cssClass="form-horizontal">
         <div class="row">
             <div class="col-xs-12">
                 <div class="widget-box table-filter">
@@ -60,7 +60,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label"><fmt:message key="label.title"/></label>
                                     <div class="col-sm-9">
-                                        <form:input path="pojo.title" cssClass="form-control input-sm"/>
+                                        <%--<form:input path="pojo.title" cssClass="form-control input-sm"/>--%>
                                     </div>
                                 </div>
                             </div>
@@ -87,43 +87,7 @@
                 </div>
 
                 <c:if test="${items.totalItems > 0}">
-                    <div class="dataTables_wrapper form-inline no-footer">
-                        <display:table name="items.listResult" cellspacing="0" cellpadding="0" requestURI="${formUrl}"
-                                       partialList="true" sort="external" size="${items.totalItems }" defaultsort="2"
-                                       id="tableList" excludedParams="checkList"
-                                       pagesize="${items.maxPageItems}" export="false"
-                                       class="table table-fcv-ace table-striped table-bordered table-hover dataTable no-footer" style="margin: 3em 0 1.5em;">
-                            <display:column headerClass="select-cell" class="select-cell" sortable="false"
-                                            title="<label class='pos-rel'><input type='checkbox' class='ace'><span class='lbl'></span></label>">
-                                <label class="pos-rel">
-                                    <input name="checkList" type="checkbox" class="ace" value="${tableList.tipId}"/>
-                                    <span class="lbl"></span>
-                                </label>
-                            </display:column>
-                            <display:column headerClass="text-left" property="title" sortName="title" sortable="true"
-                                            titleKey="tip.title"/>
-                            <display:column headerClass="col-actions" class="col-actions" titleKey="label.action">
-                                <c:url var="editUrl" value="/admin/tip/edit.html">
-                                    <c:param name="pojo.tipId" value="${tableList.tipId}"/>
-                                </c:url>
-
-                                <a href="${editUrl}" class="btn btn-xs btn-info addEditRole">
-                                    <i class="ace-icon fa fa-pencil bigger-120"></i>
-                                </a>
-
-                                <button onclick="warningBeforeDelete('${tableList.tipId}');"
-                                        type="button" class="btn btn-xs btn-danger">
-                                    <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                                </button>
-
-                            </display:column>
-                            <display:setProperty name="paging.banner.placement" value="bottom"/>
-                            <display:setProperty name="paging.banner.item_name" value="tip"/>
-                            <display:setProperty name="paging.banner.items_name" value="tips"/>
-                        </display:table>
-                    </div>
                 </c:if>
-
                 <input type="hidden" name="crudAction" id="crudAction"/>
             </div>
         </div>
@@ -134,15 +98,6 @@
     $(document).ready(function () {
         $("#btnSearch").click(function () {
             $("#itemForm").submit();
-        });
-
-        $(".addEdittip").click(function(){
-            var $modal = $('#addModel');
-            var tipId = $(this).attr("tipId");
-            $modal.load('<c:url value="/ajax/admin/tip/edit.html"/>', {'pojo.tipId' : tipId, '_': new Date().getTime()}, function(){
-                $modal.modal();
-                registerSubmitPopup();
-            });
         });
 
         function registerSubmitPopup(){
