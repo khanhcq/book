@@ -1,63 +1,253 @@
-<%@page trimDirectiveWhitespaces="true"%>
-<%@ include file="/common/taglibs.jsp"%>
+<%@ include file="/WEB-INF/common/taglibs.jsp" %>
+<c:url var="backUrl" value="/"/>
 <head>
     <title><fmt:message key="login.title"/></title>
 </head>
-<div id="content">
-    <div class="box_container">
-        <%--<h1 class="info" style="color: #ff0000;font-weight: bold;text-align: center;margin-top: 12px;font-size: 24px;"><fmt:message key="dev.server.info"/></h1>--%>
-        <div class="loginBox">
-            <div style="background: none repeat scroll 0 0 #388757; border: 1px solid #388757;margin: 100px auto; width: 500px;color:white;">
-                <form name="loginForm" action="<c:url value="/j_security_check"/>" method="post">
-                    <table width="400px" cellpadding="5" cellspacing="5" border="0" style="font-size: 13px; margin: 30px 0px 30px 50px">
-                        <tr>
-                            <td colspan="2"><fmt:message key="page.login.info"/></td>
-
-                        </tr>
-                        <tr>
-                            <td><fmt:message key="page.login.username"/></td>
-                            <td><input type="text" name="j_username" id="username"/></td>
-                        </tr>
-                        <tr>
-                            <td><fmt:message key="page.login.password"/></td>
-                            <td><input type="password" name="j_password" id="password"/></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>
-                                <fmt:message var="login" key="login"/>
-                                <input type="submit" name="buttonLogin" value="${login}" style=" border: 1px solid #B3B3B3; padding: 2px; width: 75px;" id="submit"/>
-                            </td>
-                        </tr>
-                        <c:if test="${not empty param.error}">
-                            <tr>
-                                <td colspan="2" style="color:red;">
-                                    <c:choose>
-                                        <c:when test="${param.error == 1}">
-                                            <fmt:message key="login.error.passwordmissedmatch"/>
-                                        </c:when>
-                                        <c:when test="${param.error == 2}">
-                                            <fmt:message key="login.error.sessionexpired"/>
-                                        </c:when>
-                                    </c:choose>
-                                </td>
-                            </tr>
-                        </c:if>
-                    </table>
-                </form>
+<body class="login-layout">
+<div class="row">
+    <div class="col-sm-10 col-sm-offset-1">
+        <div class="login-container">
+            <div class="center">
+                <h1>
+                    <i class="ace-icon fa fa-leaf green"></i>
+                    <span class="red">Ace</span>
+                    <span class="white" id="id-text2">Application</span>
+                </h1>
+                <h4 class="blue" id="id-company-text">&copy; Company Name</h4>
             </div>
-        </div>
-    </div>
-</div>
 
+            <div class="space-6"></div>
+
+            <div class="position-relative">
+                <div id="login-box" class="login-box visible widget-box no-border">
+                    <div class="widget-body">
+                        <div class="widget-main">
+                            <h4 class="header blue lighter bigger">
+                                <i class="ace-icon fa fa-coffee green"></i>
+                                Please Enter Your Information
+                            </h4>
+
+                            <div class="space-6"></div>
+                            <form:form id="loginForm" method="post" action="${rootURL}login"
+                                       class="form-horizontal">
+                                <fieldset>
+                                    <label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input name="username" type="text" class="form-control"
+                                                                   placeholder="Email"/>
+															<i class="ace-icon fa fa-user"></i>
+														</span>
+                                    </label>
+
+                                    <label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input name="password" type="password" class="form-control"
+                                                                   placeholder="Password"/>
+															<i class="ace-icon fa fa-lock"></i>
+														</span>
+                                    </label>
+
+                                    <div class="space"></div>
+
+                                    <div class="clearfix">
+                                        <label class="inline">
+                                            <input type="checkbox" class="ace"/>
+                                            <span class="lbl"> Remember Me</span>
+                                        </label>
+
+                                        <button type="submit"
+                                                class="width-35 pull-right btn btn-sm btn-primary" id="btn-login">
+                                            <i class="ace-icon fa fa-key"></i>
+                                            <span class="bigger-110">Login</span>
+                                        </button>
+                                    </div>
+
+                                    <div class="space-4"></div>
+                                </fieldset>
+                            </form:form>
+
+
+                            <div class="social-or-login center">
+                                <span class="bigger-110">Or Login Using</span>
+                            </div>
+
+                            <div class="space-6"></div>
+
+                            <div class="social-login center">
+                                <a class="btn btn-primary">
+                                    <i class="ace-icon fa fa-facebook"></i>
+                                </a>
+
+                                <a class="btn btn-info">
+                                    <i class="ace-icon fa fa-twitter"></i>
+                                </a>
+
+                                <a class="btn btn-danger">
+                                    <i class="ace-icon fa fa-google-plus"></i>
+                                </a>
+                            </div>
+                        </div><!-- /.widget-main -->
+
+                        <div class="toolbar clearfix">
+                            <div>
+                                <a href="#" data-target="#forgot-box" class="forgot-password-link">
+                                    <i class="ace-icon fa fa-arrow-left"></i>
+                                    I forgot my password
+                                </a>
+                            </div>
+
+                            <div>
+                                <a href="#" data-target="#signup-box" class="user-signup-link">
+                                    I want to register
+                                    <i class="ace-icon fa fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div><!-- /.widget-body -->
+                </div><!-- /.login-box -->
+
+                <div id="forgot-box" class="forgot-box widget-box no-border">
+                    <div class="widget-body">
+                        <div class="widget-main">
+                            <h4 class="header red lighter bigger">
+                                <i class="ace-icon fa fa-key"></i>
+                                Retrieve Password
+                            </h4>
+
+                            <div class="space-6"></div>
+                            <p>
+                                Enter your email and to receive instructions
+                            </p>
+
+                            <form>
+                                <fieldset>
+                                    <label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="email" class="form-control"
+                                                                   placeholder="Email"/>
+															<i class="ace-icon fa fa-envelope"></i>
+														</span>
+                                    </label>
+
+                                    <div class="clearfix">
+                                        <button type="button" class="width-35 pull-right btn btn-sm btn-danger">
+                                            <i class="ace-icon fa fa-lightbulb-o"></i>
+                                            <span class="bigger-110">Send Me!</span>
+                                        </button>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div><!-- /.widget-main -->
+
+                        <div class="toolbar center">
+                            <a href="#" data-target="#login-box" class="back-to-login-link">
+                                Back to login
+                                <i class="ace-icon fa fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div><!-- /.widget-body -->
+                </div><!-- /.forgot-box -->
+
+                <div id="signup-box" class="signup-box widget-box no-border">
+                    <div class="widget-body">
+                        <div class="widget-main">
+                            <h4 class="header green lighter bigger">
+                                <i class="ace-icon fa fa-users blue"></i>
+                                New User Registration
+                            </h4>
+
+                            <div class="space-6"></div>
+                            <p> Enter your details to begin: </p>
+                            <form:form modelAttribute="item" action="${url}" method="post" id="itemForm"
+                                       class="form-horizontal" novalidate="novalidate">
+                                <fieldset>
+                                    <label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="email" class="form-control"
+                                                                   placeholder="Email"/>
+															<i class="ace-icon fa fa-envelope"></i>
+														</span>
+                                    </label>
+
+                                    <label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="text" class="form-control"
+                                                                   placeholder="Username"/>
+															<i class="ace-icon fa fa-user"></i>
+														</span>
+                                    </label>
+
+                                    <label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="password" class="form-control"
+                                                                   placeholder="Password"/>
+															<i class="ace-icon fa fa-lock"></i>
+														</span>
+                                    </label>
+
+                                    <label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="password" class="form-control"
+                                                                   placeholder="Repeat password"/>
+															<i class="ace-icon fa fa-retweet"></i>
+														</span>
+                                    </label>
+
+                                    <label class="block">
+                                        <input type="checkbox" class="ace"/>
+                                        <span class="lbl">
+															I accept the
+															<a href="#">User Agreement</a>
+														</span>
+                                    </label>
+
+                                    <div class="space-24"></div>
+
+                                    <div class="clearfix">
+                                        <button type="reset" class="width-30 pull-left btn btn-sm">
+                                            <i class="ace-icon fa fa-refresh"></i>
+                                            <span class="bigger-110">Reset</span>
+                                        </button>
+
+                                        <button type="button"
+                                                class="width-65 pull-right btn btn-sm btn-success">
+                                            <span class="bigger-110">Register</span>
+
+                                            <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
+                                        </button>
+                                    </div>
+                                </fieldset>
+                            </form:form>
+
+                        </div>
+
+                        <div class="toolbar center">
+                            <a href="#" data-target="#login-box" class="back-to-login-link">
+                                <i class="ace-icon fa fa-arrow-left"></i>
+                                Back to login
+                            </a>
+                        </div>
+                    </div><!-- /.widget-body -->
+                </div><!-- /.signup-box -->
+            </div><!-- /.position-relative -->
+        </div>
+    </div><!-- /.col -->
+</div><!-- /.row -->
+
+
+<!-- inline scripts related to this page -->
 <script type="text/javascript">
-    $(document).ready(function(){
-        $('#submit').click(function(){
-            if($('#username').val() == '' || $('#password').val() == '') {
-                alert('<fmt:message key="login.error.empty.username.or.password"/>');
-                return false;
-            }
-            return true;
+    $(function ($) {
+        $(document).on('click', '.toolbar a[data-target]', function (e) {
+            e.preventDefault();
+            var target = $(this).data('target');
+            $('.widget-box.visible').removeClass('visible');//hide others
+            $(target).addClass('visible');//show target
         });
     });
 </script>
+</body>
+
+
+
+
