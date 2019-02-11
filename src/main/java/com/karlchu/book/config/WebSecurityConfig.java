@@ -33,7 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers(
+                    .antMatchers(
                         "/",
                         "/login**",
                         "/favicon**",
@@ -45,18 +45,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/books/**",
                         "/book**",
                         "/chapter**").permitAll()
-                .antMatchers("/admin/**").hasRole(Constants.LOGON_DEFAULT_PERMISSION)
-                .anyRequest().authenticated()
-                .and()
+                    .antMatchers("/admin/**").hasRole(Constants.ADMIN_ROLE)
+                    .anyRequest().authenticated()
+                    .and()
                 .formLogin()
-                .loginPage("/login")
-//                .loginProcessingUrl("/login")// this is default value
-//                .defaultSuccessUrl("/") // this is default value
-//                .failureUrl("/login?error") // this is default value
-                .permitAll()
-                .and()
+                    .loginPage("/login")
+                    .permitAll()
+                    .and()
+                .logout()
+                    .permitAll()
+                    .and()
                 .exceptionHandling() // This is automatically applied when using WebSecurityConfigurerAdapter
-                .accessDeniedPage("/403"); // @TODO: Not return 403 yet
+                    .accessDeniedPage("/403"); // @TODO: Not return 403 yet
     }
 
 }
