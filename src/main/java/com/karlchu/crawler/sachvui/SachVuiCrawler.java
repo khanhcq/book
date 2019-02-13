@@ -52,14 +52,14 @@ public class SachVuiCrawler {
                 firstChap = (String) objects[1];
                 isEpub = (Boolean) objects[2];
                 htmlFile = 1;
-                haveVipChap = true;
+                haveVipChap = isEpub;
 //            urlCollection.write(bookName+".html = "+ strURL);
 //            urlCollection.newLine();
 //            urlCollection.flush();
             }
             if(!firstChap.isEmpty() && !isEpub){
                 //start first chapter
-                URL firstChapURL = toUrl(inputUrl);
+                URL firstChapURL = toUrl(firstChap);
                 //add given url to the crawl list
                 crawlList.add(firstChapURL);
             }
@@ -185,7 +185,9 @@ public class SachVuiCrawler {
         }
         if(getEPubBtn != null && "EPUB".equals(getEPubBtn.text().trim())) {
 //            filePath += ".epub";
-            isEpub = true;
+            if(firstChap.isEmpty()){
+                isEpub = true;
+            }
             //TODO down EPUB file
         }
         File file = new File(filePath);
@@ -208,7 +210,7 @@ public class SachVuiCrawler {
 //            out = CrawlerUtils.getTxtFiles(url.openStream());
         Document document = Jsoup.connect(url.toString()).get();
         Element vipBtn = document.select("#btn_buy").first();
-        String filePath = "D:\\CrawledFiles\\"+ bookName +"\\" +pageName+".html";
+        String filePath = "D:\\CrawledFilesSV\\"+ bookName +"\\" +pageName+".html";
         if(vipBtn != null) {
             filePath += ".vip";
         }
