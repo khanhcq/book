@@ -65,20 +65,20 @@ public class MigrateSV {
         org.jsoup.nodes.Document document = Jsoup.parse(stringBuilder.toString());
         Element bookNameE = document.select(".thong_tin_ebook .ebook_title").first();
         String bookTitle = bookNameE.text().trim();
-        Element authorE = document.select(".thong_tin_ebook .h5").first();
+        Element authorE = document.select(".thong_tin_ebook h5").first();
         String sAuthor = authorE.text().replace("Tác giả :","").trim();
         Author author = new Author(sAuthor, WebCommonUtils.normalizeTitle(sAuthor));
-        Element cateE = document.select(".thong_tin_ebook .h5").get(1);
+        Element cateE = document.select(".thong_tin_ebook h5").get(1);
         List<Category> categories = new ArrayList<>();
         String tag;
-        for(Element e : cateE.select(".a")){
+        for(Element e : cateE.select("a")){
             tag = e.text().trim();
             Category category = new Category(tag, WebCommonUtils.normalizeTitle(tag));
             categories.add(category);
         }
 
         Element summaryE = document.select(".gioi_thieu_sach").first();
-        String summary = summaryE.text().trim();
+        String summary = summaryE.html();
 
         MongoCollection<Document> bookCollection = db.getCollection(BOOK_COLLECTION);
         String bookCode = computeCode(author.getName(), bookTitle);
@@ -92,7 +92,6 @@ public class MigrateSV {
             book.setCategories(categories);
             book.setAuthor(author);
             book.setDescription(summary);
-            bookCollection.insertOne(createBookDocument(book));
         } else {
             return "";
 //            book = getBookFromDocument(dBook);
@@ -145,10 +144,14 @@ public class MigrateSV {
     }
 
     private static void readChapter(MongoDatabase db, Book book, String bookDir, String bookMainDir) throws IOException {
+        MongoCollection<Document> bookCollection = db.getCollection(BOOK_COLLECTION);
         MongoCollection<Document> chapterCollection = db.getCollection(CHAPTER_COLLECTION);
         Pattern letter = Pattern.compile("[a-zA-z]");
         File fBookDir = new File(bookDir);
         File[] files = fBookDir.listFiles();
+        if(files.length < 3) {
+            return;
+        }
         List<File> fileList = Arrays.asList(files);
         Collections.sort(fileList, new Comparator<File>() {
             @Override
@@ -169,6 +172,8 @@ public class MigrateSV {
                 return res;
             }
         });
+        bookCollection.insertOne(createBookDocument(book));
+
         int no = 1;
         for (File fileEntry : fileList) {
             if (fileEntry.isFile() && !fileEntry.getName().equals(bookMainDir + ".html")) {
@@ -197,13 +202,25 @@ public class MigrateSV {
                     chapter.setBookId(book.getId());
                     chapter.setCode(chapterCode);
 
-                    Element chapContentE = doc.select(".doc-online . noi_dung_online").first().nextElementSibling();
-                    chapter.setContent(chapContentE.html());
+                    Element chapContentE = doc.select(".doc-online .noi_dung_online").first().nextElementSibling();
+                    StringBuilder contentBuilder = new StringBuilder();
+                    contentBuilder.append(chapContentE.html());
+
+                    Element endContentE = chapContentE.nextElementSibling().select("div .btn-group button.dropdown-toggle").first();
+                    if(endContentE == null) {
+
+                    }
+                    chapter.setContent(contentBuilder.toString());
                     chapter.setNumber(no++);
                     chapterCollection.insertOne(createChapterDocument(chapter));
                 }
             }
         }
+    }
+
+    private String getChapterContent(){
+
+        return "";
     }
 
     private static Document createChapterDocument(Chapter chapter) {
