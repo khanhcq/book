@@ -205,10 +205,11 @@ public class MigrateSV {
                     Element chapContentE = doc.select(".doc-online .noi_dung_online").first().nextElementSibling();
                     StringBuilder contentBuilder = new StringBuilder();
                     contentBuilder.append(chapContentE.html());
-
-                    Element endContentE = chapContentE.nextElementSibling().select("div .btn-group button.dropdown-toggle").first();
-                    if(endContentE == null) {
-
+                    Element endContentE = chapContentE.nextElementSibling().select(".btn-group button.dropdown-toggle").first();
+                    while(endContentE == null){
+                        chapContentE = chapContentE.nextElementSibling();
+                        contentBuilder.append(chapContentE.html());
+                        endContentE = chapContentE.nextElementSibling().select(".btn-group button.dropdown-toggle").first();
                     }
                     chapter.setContent(contentBuilder.toString());
                     chapter.setNumber(no++);
