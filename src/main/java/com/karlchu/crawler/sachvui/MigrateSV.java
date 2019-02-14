@@ -73,6 +73,9 @@ public class MigrateSV {
         String tag;
         for(Element e : cateE.select("a")){
             tag = e.text().trim();
+            if("Truyện Tranh".equals(tag)){
+                return "";
+            }
             Category category = new Category(tag, WebCommonUtils.normalizeTitle(tag));
             categories.add(category);
         }
