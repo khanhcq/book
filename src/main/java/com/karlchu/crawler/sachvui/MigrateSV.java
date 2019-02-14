@@ -38,11 +38,19 @@ public class MigrateSV {
         File fRootDir = new File(rootDir);
         String bookName;
         String fileName;
+        int i = 1;
+        int j = 1;
         for(File file : fRootDir.listFiles()) {
             fileName = file.getName();
+            System.out.println(j++ + " = file: " + fileName);
+
             if(file.isFile() && fileName.endsWith(".done")) {
                 bookName = fileName.replaceAll("\\.done","");
                 if(bookName.length() > 0) {
+                    System.out.println(i++ + " = checking: " + bookName);
+                    if(i == 81){
+                        int a = 0;
+                    }
                     testInsert(db, bookName, rootDir + "\\" + bookName);
                 }
             }
@@ -64,6 +72,9 @@ public class MigrateSV {
 
         org.jsoup.nodes.Document document = Jsoup.parse(stringBuilder.toString());
         Element bookNameE = document.select(".thong_tin_ebook .ebook_title").first();
+        if(bookNameE == null) {
+            return "";
+        }
         String bookTitle = bookNameE.text().trim();
         Element authorE = document.select(".thong_tin_ebook h5").first();
         String sAuthor = authorE.text().replace("Tác giả :","").trim();
@@ -73,6 +84,9 @@ public class MigrateSV {
         String tag;
         for(Element e : cateE.select("a")){
             tag = e.text().trim();
+            if("Truyện Tranh".equals(tag)){
+                return "";
+            }
             Category category = new Category(tag, WebCommonUtils.normalizeTitle(tag));
             categories.add(category);
         }
@@ -191,7 +205,6 @@ public class MigrateSV {
 
                 org.jsoup.nodes.Document doc = Jsoup.parse(out.toString());
                 String chapterTitle = doc.select(".doc-online h3").get(1).select("a.link-tap").text().trim();
-
                 String chapterCode = computeCode(book.getTitle(), chapterTitle);
                 Document dChapter = chapterCollection.find(Filters.eq("code", chapterCode)).first();
                 Chapter chapter;
@@ -201,15 +214,21 @@ public class MigrateSV {
                     chapter.setTitle(chapterTitle);
                     chapter.setBookId(book.getId());
                     chapter.setCode(chapterCode);
-
+                    System.out.println(chapterTitle);
                     Element chapContentE = doc.select(".doc-online .noi_dung_online").first().nextElementSibling();
                     StringBuilder contentBuilder = new StringBuilder();
-                    contentBuilder.append(chapContentE.html());
-                    Element endContentE = chapContentE.nextElementSibling().select(".btn-group button.dropdown-toggle").first();
+                    contentBuilder.append(chapContentE.toString());
+                    Element endContentE = chapContentE.nextElementSibling() == null ? null : chapContentE.nextElementSibling().select(".btn-group button.dropdown-toggle").first();
                     while(endContentE == null){
                         chapContentE = chapContentE.nextElementSibling();
-                        contentBuilder.append(chapContentE.html());
-                        endContentE = chapContentE.nextElementSibling().select(".btn-group button.dropdown-toggle").first();
+                        if(chapContentE != null){
+                            contentBuilder.append(chapContentE.toString());
+                            if(chapContentE.nextElementSibling() != null){
+                                endContentE = chapContentE.nextElementSibling().select(".btn-group button.dropdown-toggle").first();
+                            }
+                        } else {
+                            break;
+                        }
                     }
                     chapter.setContent(contentBuilder.toString());
                     chapter.setNumber(no++);
