@@ -167,6 +167,15 @@ public class WebCommonUtils {
         return result;
     }
 
+    public static String normalizeKeyword(String input) {
+        String result = Normalizer.normalize(input, Normalizer.Form.NFD);
+        result = result.replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
+        result = result.replace('đ', 'd');
+        result = result.replace('Đ', 'D');
+        result = result.replaceAll("[^a-z A-Z0-9-_\\.]", "");
+        return result;
+    }
+
 
     public static String getFirstLetter(String s) {
         StringBuilder stringBuilder = new StringBuilder();

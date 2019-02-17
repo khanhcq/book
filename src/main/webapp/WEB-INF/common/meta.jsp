@@ -20,3 +20,5 @@
 <link rel="icon" href="<c:url value="/favicon.ico"/>"/>
 
 <meta name="viewport" content="width=device-width, user-scalable=no" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+

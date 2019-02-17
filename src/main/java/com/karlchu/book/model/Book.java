@@ -38,6 +38,9 @@ public class Book {
     private List<Category> categories;
     private List<String> categoryCodes;
     private Integer view;
+    private Integer like;
+    private Integer vote;
+    private Rate rate;
     @TextScore
     private Float score;
 
@@ -189,7 +192,7 @@ public class Book {
         return createdDate;
     }
 
-    public void setCreatedDate(Timestamp createdDate) {
+    public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
     }
 
@@ -197,8 +200,31 @@ public class Book {
         return modifiedDate;
     }
 
-    public void setModifiedDate(Timestamp modifiedDate) {
+    public void setModifiedDate(Date modifiedDate) {
         this.modifiedDate = modifiedDate;
     }
 
+    public Integer getLike() {
+        return like;
+    }
+
+    public void setLike(Integer like) {
+        this.like = like;
+    }
+
+    public Integer getVote() {
+        return vote;
+    }
+
+    public void setVote(Integer vote) {
+        this.vote = vote;
+    }
+
+    public Rate getRate() {
+        return rate;
+    }
+
+    public void setRate(Rate rate) {
+        this.rate = rate;
+    }
 }

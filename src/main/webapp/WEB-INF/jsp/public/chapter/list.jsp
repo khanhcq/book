@@ -2,6 +2,11 @@
 <html>
 <head>
     <title>${book.title}</title>
+    <meta name="keywords"
+          content="${book.title}, <str:lowerCase>${my:normalizeKeyword(book.title)}</str:lowerCase>,
+          doc truyen <str:lowerCase>${my:normalizeKeyword(book.title)}</str:lowerCase>, <str:lowerCase>${my:normalizeKeyword(book.title)}</str:lowerCase> full,
+          <str:lowerCase>${my:normalizeKeyword(book.title)}</str:lowerCase> prc, <str:lowerCase>${my:normalizeKeyword(book.title)}</str:lowerCase> epub,
+            <str:lowerCase>${my:normalizeKeyword(book.title)}</str:lowerCase> online">
 </head>
 <body>
 <div class="breadcrumbs ace-save-state" id="breadcrumbs">
@@ -39,11 +44,26 @@
                 <div class="with-border media">
                     <div class="media-left">
                         <div class="book-cover-trans">
-                            <img src="https://pic.truyen.co/img/<str:lowerCase>${my:normalizeTitle(book.title)}</str:lowerCase>.jpg" class="book-thumb">
+                            <img src="https://pic.truyen.co/img/<str:lowerCase>${my:normalizeTitle(book.title)}</str:lowerCase>.jpg"
+                                 class="book-thumb">
                         </div>
                     </div>
                     <div class="media-body">
                         <h4 class="media-heading book-title"><span class="green">${book.title}</span></h4>
+                        <div class="rate" itemscope="" itemtype="https://schema.org/Book">
+                            <div class="small" itemprop="aggregateRating" itemscope=""
+                                 itemtype="https://schema.org/AggregateRating">
+                                <em>
+                                    <fmt:message key="label.rate"/>
+                                    <strong><span itemprop="ratingValue">${!empty book.rate ? book.rate.point : "60"}</span></strong>/<span class="text-muted" itemprop="bestRating">100</span>
+                                    <fmt:message key="label.rate.by"/>
+                                    <strong>
+                                        <span itemprop="ratingCount">${!empty book.rate ? book.rate.no : "1"}</span>
+                                        <fmt:message key="label.rate.count"/>
+                                    </strong>
+                                </em>
+                            </div>
+                        </div>
                         <div class="small">
                             <a href="<c:url value="/books?author=${book.author.code}"/>" class="text-muted author">
                                 ${book.author.name}

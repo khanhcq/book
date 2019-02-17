@@ -89,4 +89,10 @@
         <function-signature>java.lang.String normalizeTitle( java.lang.String)</function-signature>
     </function>
 
+    <function>
+        <name>normalizeKeyword</name>
+        <function-class>com.karlchu.book.utility.WebCommonUtils</function-class>
+        <function-signature>java.lang.String normalizeKeyword( java.lang.String)</function-signature>
+    </function>
+
 </taglib>
