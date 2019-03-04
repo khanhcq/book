@@ -7,6 +7,11 @@
           doc truyen <str:lowerCase>${my:normalizeKeyword(book.title)}</str:lowerCase>, <str:lowerCase>${my:normalizeKeyword(book.title)}</str:lowerCase> full,
           <str:lowerCase>${my:normalizeKeyword(book.title)}</str:lowerCase> prc, <str:lowerCase>${my:normalizeKeyword(book.title)}</str:lowerCase> epub,
             <str:lowerCase>${my:normalizeKeyword(book.title)}</str:lowerCase> online">
+
+    <link rel="stylesheet"  media="all" type="text/css" href="<c:url value="/themes/star-rating-v4.0.5-3/css/star-rating.min.css"/>">
+    <script src="<c:url value="/themes/star-rating-v4.0.5-3/js/star-rating.min.js"/>"></script>
+    <script src="<c:url value="/themes/star-rating-v4.0.5-3/js/locales/vi.js"/>"></script>
+
 </head>
 <body>
 <div class="breadcrumbs ace-save-state" id="breadcrumbs">
@@ -37,6 +42,7 @@
             </div>
         </div>
     </c:if>
+    <div id="messages"></div>
     <div class="book-info page-header">
         <%--<h1>${book.title}</h1>--%>
         <div class="row">
@@ -51,11 +57,16 @@
                     <div class="media-body">
                         <h4 class="media-heading book-title"><span class="green">${book.title}</span></h4>
                         <div class="rate" itemscope="" itemtype="https://schema.org/Book">
+                            <c:set var="ratePoint" value="${!empty book.rate ? book.rate.point : 60}"/>
+                            <div class="rate-holder" style="cursor: pointer;">
+                                <input id="rating-input" name="input-name" type="number" class="kv-fa rating"  data-language="vi" value="${ratePoint}" min=0 max=100 step=10 data-size="sm">
+                            </div>
+
                             <div class="small" itemprop="aggregateRating" itemscope=""
                                  itemtype="https://schema.org/AggregateRating">
                                 <em>
                                     <fmt:message key="label.rate"/>
-                                    <strong><span itemprop="ratingValue">${!empty book.rate ? book.rate.point : "60"}</span></strong>/<span class="text-muted" itemprop="bestRating">100</span>
+                                    <strong><span itemprop="ratingValue">${ratePoint}</span></strong>/<span class="text-muted" itemprop="bestRating">100</span>
                                     <fmt:message key="label.rate.by"/>
                                     <strong>
                                         <span itemprop="ratingCount">${!empty book.rate ? book.rate.no : "1"}</span>
@@ -129,6 +140,28 @@
                 $('#crudAction').val('delete');
 //                $("#itemForm").submit();
             });
+        });
+
+        $('#rating-input').on('rating:change', function(event, value, caption) {
+            $.ajax({
+                type: "GET",
+                url: "<c:url value="/ajax/rating/save"/>",
+                data: {
+                    id: ${book.id},
+                    point: value
+                },
+                success: function (data) {
+                    var messageAlert = 'alert-' + data.type;
+                    var messageText = data.message;
+
+                    var alertBox = '<div class="alert ' + messageAlert + ' alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + messageText + '</div>';
+                    if (messageAlert && messageText) {
+                        $('#messages').html(alertBox);
+                        $('#itemForm')[0].reset();
+                    }
+                }
+            });
+
         });
     });
 </script>

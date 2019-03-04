@@ -5,6 +5,7 @@ import com.karlchu.book.core.service.BookService;
 import com.karlchu.book.model.Author;
 import com.karlchu.book.model.Book;
 import com.karlchu.book.model.Category;
+import com.karlchu.book.model.Rate;
 import com.karlchu.book.utility.Constants;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * Created by Khanh Chu on 12/27/2018.
@@ -58,5 +60,25 @@ public class BookServiceImpl implements BookService {
         Page<Book> chapterPage = repository.findAll(example, pageable);
         List<Book> chapters = chapterPage.getContent();
         return new Object[]{String.valueOf(chapterPage.getTotalElements()), chapters, chapterPage.getTotalPages()};
+    }
+
+    @Override
+    public Object[] updateRating(Long bookId, Integer point) {
+        Optional bookOpt = repository.findById(bookId);
+        if (bookOpt.isPresent()) {
+            Book book = (Book) bookOpt.get();
+            Rate rate = book.getRate();
+            if(rate == null) {
+                rate = new Rate();
+            }
+            Integer no = rate.getNo() != null ?  rate.getNo() + 1 : 2;
+            rate.setNo(no);
+            Integer newPoint = rate.getPoint() != null ? (rate.getPoint() * (no - 1) + point) / no : (60 + point) / no;
+            rate.setPoint(newPoint);
+            book.setRate(rate);
+            repository.save(book);
+            return new Object[] {no, newPoint};
+        }
+        return null;
     }
 }

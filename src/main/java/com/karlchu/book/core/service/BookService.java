@@ -8,4 +8,5 @@ public interface BookService {
 
     Object[] searchByPageAndSize(Integer page, Integer maxPageItems, String categoryCode, String authorCode);
 
+    Object[] updateRating(Long bookId, Integer point);
 }
